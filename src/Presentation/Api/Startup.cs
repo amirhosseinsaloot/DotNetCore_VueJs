@@ -72,7 +72,7 @@ public class Startup
     {
         app.IntializeDatabase();
 
-        app.UseCustomExceptionHandler();
+        app.UseGlobalExceptionHandler();
 
         app.UseRouting();
 
