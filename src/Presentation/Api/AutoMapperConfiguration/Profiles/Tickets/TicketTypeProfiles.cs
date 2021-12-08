@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Data.Entities;
-using Services.Domain;
+using Data.Entities.Tickets;
+using Service.Domain.Tickets.Models;
 
-namespace Api.AutoMapperConfiguration;
+namespace Api.AutoMapperConfiguration.Profiles.Tickets;
 
 public class TicketTypeProfiles : Profile
 {

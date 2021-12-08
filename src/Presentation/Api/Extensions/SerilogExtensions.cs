@@ -1,5 +1,4 @@
-﻿using Core.Enums;
-using Core.Setting;
+﻿using Core.Setting;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.MSSqlServer;

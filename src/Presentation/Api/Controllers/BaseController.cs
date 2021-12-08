@@ -1,6 +1,4 @@
-﻿using Core.Enums;
-using Microsoft.AspNetCore.Mvc;
-using Service.Domain.Users.Models;
+﻿using Service.Domain.Users.Models;
 
 namespace Api.Controllers;
 

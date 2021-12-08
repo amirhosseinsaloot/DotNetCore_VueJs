@@ -1,6 +1,4 @@
-﻿using Core.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Data.Entities.Identity;
 
 namespace Data.Entities.Logging;
 

@@ -1,4 +1,4 @@
-﻿namespace Core.Interfaces;
+﻿namespace Core.Interfaces.ViewModels;
 
 /// <summary>
 ///  Marks a Data Transfer Object.

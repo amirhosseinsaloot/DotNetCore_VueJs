@@ -1,8 +1,4 @@
-using Core.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace Data.Entities;
+namespace Data.Entities.Tickets;
 
 public class TicketType : IBaseEntity, ICreatedOn
 {

@@ -1,6 +1,4 @@
-﻿using Core.Enums;
-using Core.Exceptions;
-using Core.Response;
+﻿using Core.Exceptions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Serilog;

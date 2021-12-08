@@ -1,7 +1,4 @@
-﻿using Core.Enums;
-using Core.Interfaces;
-
-namespace Services.Domain;
+﻿namespace Service.Domain.Users.Models;
 
 public class UserViewModel : IViewModel
 {

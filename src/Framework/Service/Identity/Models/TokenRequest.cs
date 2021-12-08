@@ -1,8 +1,4 @@
-﻿using Core.Interfaces;
-using Core.Validations;
-using FluentValidation;
-
-namespace Services.Domain;
+﻿namespace Service.Identity.Models;
 
 public record class TokenRequest : IDto
 {

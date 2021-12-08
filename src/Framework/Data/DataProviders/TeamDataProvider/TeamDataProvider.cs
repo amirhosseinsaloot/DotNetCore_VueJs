@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
-using Core.Interfaces;
-using Data.DbObjects;
-using Data.Entities;
+using Data.DbObjects.TeamDbObject;
+using Data.Entities.Teams;
 
-namespace Data.DataProviders;
+namespace Data.DataProviders.TeamDataProvider;
 
 public class TeamDataProvider : DataProvider<Team>, ITeamDataProvider
 {

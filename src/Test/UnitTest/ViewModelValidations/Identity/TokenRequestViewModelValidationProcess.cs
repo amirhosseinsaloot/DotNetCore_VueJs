@@ -1,6 +1,4 @@
-﻿using FluentAssertions;
-using Services.Domain;
-using Xunit;
+﻿using Service.Identity.Models;
 
 namespace UnitTest.ViewModelValidations.Identity;
 

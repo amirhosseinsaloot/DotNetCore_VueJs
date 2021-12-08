@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
-using Core.Exceptions;
-using Data.Entities;
+using Data.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
-using Services.Jwt;
+using Service.Domain.Users.Models;
+using Service.Identity.Models;
+using Service.Jwt.Models;
+using Service.Jwt.Services;
 using System.Security.Claims;
 
-namespace Services.Domain;
+namespace Service.Identity.Services;
 
 public class AuthService : IAuthService
 {

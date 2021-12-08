@@ -1,7 +1,4 @@
-﻿using Core.Enums;
-using System.Net;
-
-namespace Core.Exceptions;
+﻿namespace Core.Exceptions;
 
 /// <summary>
 /// Represents errors that occur during execution of application with appropriate status code.

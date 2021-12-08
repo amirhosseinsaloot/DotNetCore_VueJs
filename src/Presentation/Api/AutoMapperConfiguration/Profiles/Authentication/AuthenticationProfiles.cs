@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
-using Data.Entities;
-using Services.Domain;
+using Data.Entities.Identity;
+using Service.Domain.Roles.Models;
+using Service.Domain.Users.Models;
 
-namespace Api.AutoMapperConfiguration;
+namespace Api.AutoMapperConfiguration.Profiles.Authentication;
 
 public class AuthenticationProfiles : Profile
 {

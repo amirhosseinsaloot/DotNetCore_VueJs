@@ -1,7 +1,6 @@
-﻿using Data.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Data.Entities.Teams;
 
-namespace Data.DbObjects;
+namespace Data.DbObjects.TeamDbObject;
 
 public class TeamDbObjectSqlServer : ITeamDbObject
 {

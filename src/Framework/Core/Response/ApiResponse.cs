@@ -1,5 +1,4 @@
-﻿using Core.Enums;
-using Core.Utilities;
+﻿using Core.Utilities;
 
 namespace Core.Response;
 

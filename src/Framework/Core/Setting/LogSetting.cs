@@ -1,6 +1,4 @@
-﻿using Core.Enums;
-
-namespace Core.Setting;
+﻿namespace Core.Setting;
 
 public sealed record class LogSetting
 {

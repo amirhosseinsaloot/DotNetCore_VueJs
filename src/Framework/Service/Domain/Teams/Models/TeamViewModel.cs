@@ -1,6 +1,4 @@
-﻿using Core.Interfaces;
-
-namespace Services.Domain;
+﻿namespace Service.Domain.Teams.Models;
 
 public record class TeamViewModel : IViewModel
 {

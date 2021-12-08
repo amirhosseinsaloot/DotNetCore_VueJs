@@ -1,4 +1,4 @@
-﻿namespace Services.Files;
+﻿namespace Service.Files.Models;
 
 public class FileStreamResultInput
 {

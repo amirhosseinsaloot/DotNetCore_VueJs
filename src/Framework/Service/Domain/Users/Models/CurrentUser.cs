@@ -1,6 +1,4 @@
-﻿using Core.Enums;
-
-namespace Service.Domain.Users.Models;
+﻿namespace Service.Domain.Users.Models;
 
 public record class CurrentUser
 {

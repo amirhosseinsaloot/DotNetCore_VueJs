@@ -1,9 +1,6 @@
-﻿using Core.Interfaces;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.AspNetCore.Identity;
 
-namespace Data.Entities;
+namespace Data.Entities.Identity;
 
 public class UserRole : IdentityUserRole<int>, IEntity, ICreatedOn
 {

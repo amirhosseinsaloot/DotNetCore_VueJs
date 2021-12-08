@@ -1,7 +1,4 @@
-﻿using Core.Enums;
-using FluentAssertions;
-using Services.Domain;
-using Xunit;
+﻿using Service.Domain.Users.Models;
 
 namespace UnitTest.ViewModelValidations.Identity;
 

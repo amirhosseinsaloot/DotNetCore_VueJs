@@ -1,9 +1,7 @@
-﻿using Core.Interfaces;
-using Data.Entities;
+﻿using Data.Entities.Identity;
 using Data.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace Data;

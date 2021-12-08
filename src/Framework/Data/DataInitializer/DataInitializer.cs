@@ -1,9 +1,7 @@
-﻿using Core.Enums;
-using Core.StaticData;
-using Data.Entities;
+﻿using Core.StaticData;
 using Data.Entities.Identity;
+using Data.Entities.Teams;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace Data.DataInitializer;
 

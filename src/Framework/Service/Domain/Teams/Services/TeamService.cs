@@ -1,7 +1,7 @@
-﻿using Data.DataProviders;
-using Data.Entities;
+﻿using Data.Entities.Teams;
+using Service.Domain.Teams.Models;
 
-namespace Services.Domain;
+namespace Service.Domain.Teams.Services;
 
 public class TeamService
 {

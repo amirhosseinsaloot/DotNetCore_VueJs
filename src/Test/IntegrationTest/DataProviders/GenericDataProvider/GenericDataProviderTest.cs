@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
 using Data;
 using Data.DataProviders;
-using Data.Entities;
+using Data.Entities.Tickets;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using Services.Domain;
+using Service.Domain.Tickets.Models;
 using Xunit;
 
-namespace IntegrationTest.DataProviders;
+namespace IntegrationTest.DataProviders.GenericDataProvider;
 
 public class GenericDataProviderTest
 {

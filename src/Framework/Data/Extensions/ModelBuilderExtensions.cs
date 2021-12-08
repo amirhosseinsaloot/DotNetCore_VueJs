@@ -1,7 +1,6 @@
 ﻿using Core.Utilities;
-using Data.Entities;
 using Data.Entities.Logging;
-using Microsoft.EntityFrameworkCore;
+using Data.Entities.Teams;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System.Reflection;

@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Core.Exceptions;
-using Data.Entities;
+using Data.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+using Service.Domain.Users.Models;
 
-namespace Services.Domain;
+namespace Service.Domain.Users.Services;
 
 public class UserService
 {

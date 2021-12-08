@@ -1,9 +1,7 @@
-﻿using Core.Enums;
-using Core.Response;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Services.Domain;
-using Services.Jwt;
+﻿using Service.Domain.Users.Models;
+using Service.Identity.Models;
+using Service.Identity.Services;
+using Service.Jwt.Models;
 
 namespace Api.Controllers;
 

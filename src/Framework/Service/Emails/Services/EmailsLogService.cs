@@ -1,8 +1,8 @@
-﻿using Data.DataProviders;
-using Data.Entities.Logging;
-using Services.Files.Services;
+﻿using Data.Entities.Logging;
+using Service.Emails.Models;
+using Service.Files.Services;
 
-namespace Services.Emails;
+namespace Service.Emails.Services;
 
 public class EmailsLogService : IEmailsLogService
 {

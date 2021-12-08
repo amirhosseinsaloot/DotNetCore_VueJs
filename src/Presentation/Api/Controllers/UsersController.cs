@@ -1,9 +1,5 @@
-﻿using Core.Enums;
-using Core.Response;
-using Core.StaticData;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Services.Domain;
+﻿using Service.Domain.Users.Models;
+using Service.Domain.Users.Services;
 
 namespace Api.Controllers;
 

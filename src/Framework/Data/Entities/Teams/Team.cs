@@ -1,9 +1,7 @@
-using Core.Interfaces;
 using Data.Entities.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Data.Entities.Tickets;
 
-namespace Data.Entities;
+namespace Data.Entities.Teams;
 
 public class Team : IBaseEntity, ICreatedOn
 {

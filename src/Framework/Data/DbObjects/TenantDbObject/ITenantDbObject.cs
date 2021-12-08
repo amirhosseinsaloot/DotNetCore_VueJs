@@ -1,6 +1,6 @@
 ﻿using Data.Entities.Identity;
 
-namespace Data.DbObjects;
+namespace Data.DbObjects.TenantDbObject;
 
 public interface ITenantDbObject
 {

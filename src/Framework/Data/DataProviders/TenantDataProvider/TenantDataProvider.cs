@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
-using Core.Interfaces;
-using Data.DbObjects;
+using Data.DbObjects.TenantDbObject;
 using Data.Entities.Identity;
 
-namespace Data.DataProviders;
+namespace Data.DataProviders.TenantDataProvider;
 
 public class TenantDataProvider : DataProvider<Tenant>, ITenantDataProvider
 {

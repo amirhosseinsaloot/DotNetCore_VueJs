@@ -1,4 +1,4 @@
-namespace Core.Interfaces;
+namespace Core.Interfaces.Entities;
 
 /// <summary>
 /// Provides properties that need implement in entities. 

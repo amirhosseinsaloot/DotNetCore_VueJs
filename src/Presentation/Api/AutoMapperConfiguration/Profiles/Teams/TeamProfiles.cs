@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Data.Entities;
-using Services.Domain;
+using Data.Entities.Teams;
+using Service.Domain.Teams.Models;
 
-namespace Api.AutoMapperConfiguration;
+namespace Api.AutoMapperConfiguration.Profiles.Teams;
 
 public class TeamProfiles : Profile
 {

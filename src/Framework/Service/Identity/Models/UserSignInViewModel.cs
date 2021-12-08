@@ -1,6 +1,7 @@
-﻿using Services.Jwt;
+﻿using Service.Domain.Users.Models;
+using Service.Jwt.Models;
 
-namespace Services.Domain;
+namespace Service.Identity.Models;
 
 public record class UserSignInViewModel
 {

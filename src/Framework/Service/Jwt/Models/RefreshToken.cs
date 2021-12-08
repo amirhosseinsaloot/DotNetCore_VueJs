@@ -1,4 +1,4 @@
-﻿namespace Services.Jwt;
+﻿namespace Service.Jwt.Models;
 
 public class RefreshToken
 {

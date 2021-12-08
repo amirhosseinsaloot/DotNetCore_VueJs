@@ -1,7 +1,7 @@
-﻿using Data.DataProviders;
-using Data.Entities;
+﻿using Data.Entities.Tickets;
+using Service.Domain.Tickets.Models;
 
-namespace Services.Domain;
+namespace Service.Domain.Tickets.Services;
 
 public class TicketTypeService
 {

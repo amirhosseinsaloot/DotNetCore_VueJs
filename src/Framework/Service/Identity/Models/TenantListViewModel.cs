@@ -1,6 +1,4 @@
-﻿using Core.Interfaces;
-
-namespace Services.Domain;
+﻿namespace Service.Identity.Models;
 
 public record class TenantListViewModel : IListViewModel
 {

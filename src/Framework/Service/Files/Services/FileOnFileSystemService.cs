@@ -1,9 +1,7 @@
-﻿using Core.Exceptions;
-using Data.DataProviders;
-using Data.Entities.Files;
-using Microsoft.AspNetCore.Http;
+﻿using Data.Entities.Files;
+using Service.Files.Models;
 
-namespace Services.Files.Services;
+namespace Service.Files.Services;
 
 public class FileOnFileSystemService : IFileService
 {

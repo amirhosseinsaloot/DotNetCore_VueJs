@@ -1,8 +1,7 @@
-using Core.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Data.Entities.Identity;
+using Data.Entities.Teams;
 
-namespace Data.Entities;
+namespace Data.Entities.Tickets;
 
 public class TicketProcess : IBaseEntity, ICreatedOn
 {

@@ -1,6 +1,4 @@
-﻿using Core.Interfaces;
-
-namespace Services.Domain;
+﻿namespace Service.Domain.Roles.Models;
 
 public record class RoleListViewModel : IListViewModel
 {

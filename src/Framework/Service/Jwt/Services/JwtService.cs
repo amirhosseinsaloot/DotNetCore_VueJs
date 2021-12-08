@@ -1,18 +1,16 @@
-﻿using Core.Enums;
-using Core.Setting;
-using Data.DataProviders;
-using Data.Entities;
-using Microsoft.AspNetCore.Http;
+﻿using Data.DataProviders.TenantDataProvider;
+using Data.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Service.Domain.Users.Models;
+using Service.Jwt.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Services.Jwt;
+namespace Service.Jwt.Services;
 
 public class JwtService
 {

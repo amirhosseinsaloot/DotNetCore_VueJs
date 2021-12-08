@@ -1,6 +1,4 @@
-﻿using FluentAssertions;
-using Services.Domain;
-using Xunit;
+﻿using Service.Domain.Teams.Models;
 
 namespace UnitTest.ViewModelValidations.Teams;
 

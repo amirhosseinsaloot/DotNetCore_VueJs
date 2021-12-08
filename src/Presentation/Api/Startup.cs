@@ -1,7 +1,7 @@
 using Api.Extensions;
 using Core.Setting;
 using FluentValidation.AspNetCore;
-using Services.Domain;
+using Service.Identity.Models;
 
 namespace Api;
 

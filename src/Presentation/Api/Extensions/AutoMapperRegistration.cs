@@ -1,4 +1,7 @@
-﻿using Api.AutoMapperConfiguration;
+﻿using Api.AutoMapperConfiguration.Profiles.Authentication;
+using Api.AutoMapperConfiguration.Profiles.Identity;
+using Api.AutoMapperConfiguration.Profiles.Teams;
+using Api.AutoMapperConfiguration.Profiles.Tickets;
 using AutoMapper;
 using System.Reflection;
 

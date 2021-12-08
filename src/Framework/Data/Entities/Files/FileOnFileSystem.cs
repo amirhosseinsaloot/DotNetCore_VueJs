@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace Data.Entities.Files;
+﻿namespace Data.Entities.Files;
 
 public class FileOnFileSystem : FileModel
 {

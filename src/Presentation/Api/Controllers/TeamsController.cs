@@ -1,10 +1,5 @@
-﻿using Core.Enums;
-using Core.Response;
-using Core.StaticData;
-using Data.DataProviders;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Services.Domain;
+﻿using Service.Domain.Teams.Models;
+using Service.Domain.Teams.Services;
 
 namespace Api.Controllers;
 
@@ -18,7 +13,7 @@ public class TeamsController : BaseController
 
     #region Ctor
 
-    public TeamsController(TeamService teamService, ITeamDataProvider teamDataProvider, ITenantDataProvider tenantDataProvider)
+    public TeamsController(TeamService teamService)
     {
         _teamService = teamService;
     }

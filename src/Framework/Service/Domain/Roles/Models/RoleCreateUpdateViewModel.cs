@@ -1,8 +1,4 @@
-﻿using Core.Interfaces;
-using Core.Validations;
-using FluentValidation;
-
-namespace Services.Domain;
+﻿namespace Service.Domain.Roles.Models;
 
 public record class RoleCreateUpdateViewModel : ICreateViewModel, IUpdateViewModel
 {

@@ -1,7 +1,4 @@
-﻿using Core.Enums;
-using System.Net;
-
-namespace Core.Exceptions;
+﻿namespace Core.Exceptions;
 
 /// <summary>
 /// Represents errors that occur when server understands the request but refuses to authorize it (unauthorized to access intended resource).

@@ -1,6 +1,4 @@
-﻿using Core.Enums;
-
-namespace Core.Response;
+﻿namespace Core.Response;
 
 public class PagedResponse<TData> : ApiResponse<TData> where TData : class
 {

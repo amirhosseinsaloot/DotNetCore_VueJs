@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace Services.Emails;
+﻿namespace Service.Emails.Models;
 
 public record class EmailRequest
 {

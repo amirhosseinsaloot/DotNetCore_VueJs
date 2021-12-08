@@ -1,7 +1,6 @@
-﻿using Core.Interfaces;
-using Data.Entities.Identity;
+﻿using Data.Entities.Identity;
 
-namespace Data.DataProviders;
+namespace Data.DataProviders.TenantDataProvider;
 
 public interface ITenantDataProvider : IDataProvider<Tenant>
 {

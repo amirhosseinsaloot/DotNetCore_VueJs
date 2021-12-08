@@ -1,7 +1,6 @@
-﻿using Core.Interfaces;
-using Data.Entities;
+﻿using Data.Entities.Teams;
 
-namespace Data.DataProviders;
+namespace Data.DataProviders.TeamDataProvider;
 
 public interface ITeamDataProvider : IDataProvider<Team>
 {

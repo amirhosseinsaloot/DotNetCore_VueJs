@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Core.Exceptions;
-using Data.Entities;
+using Data.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+using Service.Domain.Roles.Models;
 
-namespace Services.Domain;
+namespace Service.Domain.Roles.Services;
 
 public class RoleService
 {

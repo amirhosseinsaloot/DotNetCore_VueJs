@@ -1,6 +1,4 @@
-﻿using Core.Interfaces;
-
-namespace Services.Domain;
+﻿namespace Service.Domain.Tickets.Models;
 
 public record class TicketTypeViewModel : IViewModel
 {

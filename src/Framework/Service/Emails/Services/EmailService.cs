@@ -1,13 +1,11 @@
-﻿using Core.Exceptions;
-using Core.Setting;
-using Data.DataProviders;
-using Data.Entities;
+﻿using Data.Entities.Identity;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
+using Service.Emails.Models;
 
-namespace Services.Emails;
+namespace Service.Emails.Services;
 
 public class EmailService : IEmailService
 {

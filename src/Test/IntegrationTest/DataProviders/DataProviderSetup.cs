@@ -1,4 +1,4 @@
-﻿using Api.AutoMapperConfiguration;
+﻿using Api.AutoMapperConfiguration.Profiles.Tickets;
 using AutoMapper;
 using Data;
 using Microsoft.EntityFrameworkCore;

@@ -1,12 +1,10 @@
-﻿using Core.Enums;
-using Core.Interfaces;
-using Data.Entities.Files;
+﻿using Data.Entities.Files;
 using Data.Entities.Logging;
+using Data.Entities.Teams;
+using Data.Entities.Tickets;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Data.Entities;
+namespace Data.Entities.Identity;
 
 public class User : IdentityUser<int>, IBaseEntity, ICreatedOn
 {

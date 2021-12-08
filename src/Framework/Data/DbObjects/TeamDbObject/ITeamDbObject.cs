@@ -1,6 +1,6 @@
-﻿using Data.Entities;
+﻿using Data.Entities.Teams;
 
-namespace Data.DbObjects;
+namespace Data.DbObjects.TeamDbObject;
 
 public interface ITeamDbObject
 {

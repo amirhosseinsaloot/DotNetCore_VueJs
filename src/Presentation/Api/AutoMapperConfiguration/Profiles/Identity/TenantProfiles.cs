@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Data.Entities.Identity;
-using Services.Domain;
+using Service.Identity.Models;
 
-namespace Api.AutoMapperConfiguration;
+namespace Api.AutoMapperConfiguration.Profiles.Identity;
 
 public class TenantProfiles : Profile
 {

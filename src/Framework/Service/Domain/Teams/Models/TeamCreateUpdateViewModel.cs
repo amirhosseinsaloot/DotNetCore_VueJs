@@ -1,8 +1,4 @@
-﻿using Core.Interfaces;
-using Core.Validations;
-using FluentValidation;
-
-namespace Services.Domain;
+﻿namespace Service.Domain.Teams.Models;
 
 public record class TeamCreateUpdateViewModel : ICreateViewModel, IUpdateViewModel
 {

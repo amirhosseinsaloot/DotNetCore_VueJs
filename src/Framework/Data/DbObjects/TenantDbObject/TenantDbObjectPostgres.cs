@@ -1,7 +1,6 @@
 ﻿using Data.Entities.Identity;
-using Microsoft.EntityFrameworkCore;
 
-namespace Data.DbObjects;
+namespace Data.DbObjects.TenantDbObject;
 
 public class TenantDbObjectPostgres : ITenantDbObject
 {

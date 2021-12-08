@@ -1,6 +1,4 @@
-﻿using Core.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Data.Entities.Teams;
 
 namespace Data.Entities.Identity;
 

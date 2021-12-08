@@ -1,4 +1,4 @@
-﻿using Services.Domain;
+﻿using Service.Domain.Teams.Models;
 
 namespace UnitTest.ViewModelValidations.Teams;
 

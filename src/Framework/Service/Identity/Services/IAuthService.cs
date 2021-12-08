@@ -1,7 +1,9 @@
-﻿using Services.Jwt;
+﻿using Service.Domain.Users.Models;
+using Service.Identity.Models;
+using Service.Jwt.Models;
 using System.Security.Claims;
 
-namespace Services.Domain;
+namespace Service.Identity.Services;
 
 public interface IAuthService
 {
