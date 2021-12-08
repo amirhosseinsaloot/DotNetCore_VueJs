@@ -26,5 +26,5 @@ public enum ApiResultBodyCode : byte
     Forbidden = 6,
 
     [Display(Name = "Duplication error")]
-    Duplication = 7,
+    Duplication = 7
 }

@@ -22,6 +22,7 @@ public static class EnumExtensions
                 displayName = ((DisplayAttribute)attrs[0]).Name;
             }
         }
+
         return displayName;
     }
 }

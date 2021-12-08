@@ -10,18 +10,24 @@ public static class SerilogExtensions
 {
     public static void Register(IConfigurationRoot configuration)
     {
-        var applicationSettings = configuration.GetSection(nameof(ApplicationSettings)).Get<ApplicationSettings>();
+        var applicationSettings = configuration
+                                  .GetSection(nameof(ApplicationSettings))
+                                  .Get<ApplicationSettings>();
         var databaseSetting = applicationSettings.DatabaseSetting;
         var logSetting = applicationSettings.LogSetting;
 
-        if (databaseSetting.DatabaseProvider == DatabaseProvider.Postgres)
+        switch (databaseSetting.DatabaseProvider)
         {
-            PostgresRegistration(logSetting, databaseSetting.ConnectionStrings.Postgres);
-        }
+            case DatabaseProvider.Postgres:
+                PostgresRegistration(logSetting, databaseSetting.ConnectionStrings.Postgres);
+                break;
 
-        else
-        {
-            SqlServerRegistration(logSetting, databaseSetting.ConnectionStrings.SqlServer);
+            case DatabaseProvider.SqlServer:
+                SqlServerRegistration(logSetting, databaseSetting.ConnectionStrings.SqlServer);
+                break;
+
+            default:
+                throw new Exception("Database provider not found.");
         }
     }
 

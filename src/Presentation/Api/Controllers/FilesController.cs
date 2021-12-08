@@ -39,7 +39,6 @@ public class FilesController : BaseController
         return File(file.FileStream, file.ContentType, file.FileDownloadName);
     }
 
-
     [HttpDelete("{id:int:min(1)}"), Authorize(Roles = ApplicationRoles.TeamMember_ToTheTop)]
     public async Task<ApiResponse> DeleteFile(int id, CancellationToken cancellationToken)
     {

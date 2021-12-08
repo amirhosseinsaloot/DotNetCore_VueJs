@@ -46,7 +46,7 @@ public class GlobalExceptionHandlerMiddleware
             await _next(context);
         }
 
-        catch (BaseWebException exception)
+        catch (BaseWebApiException exception)
         {
             Log.Error(exception, $"Middleware ---> AppException : {exception.Message}");
 

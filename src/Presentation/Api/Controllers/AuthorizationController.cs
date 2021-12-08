@@ -26,32 +26,32 @@ public class AuthorizationController : BaseController
 
     #region Action
 
-    [HttpPost("[action]"), AllowAnonymous]
+    [HttpPost("Login"), AllowAnonymous]
     public async Task<ApiResponse<UserSignInViewModel>> Login(TokenRequest tokenRequest)
     {
         var token = await _authService.SignInAsync(tokenRequest);
         return new ApiResponse<UserSignInViewModel>(true, ApiResultBodyCode.Success, token);
     }
 
-    [HttpPost("[action]"), AllowAnonymous]
+    [HttpPost("Register"), AllowAnonymous]
     public async Task<ApiResponse<UserSignInViewModel>> Register(UserCreateViewModel userDto)
     {
         return new ApiResponse<UserSignInViewModel>(true, ApiResultBodyCode.Success, await _authService.RegisterAsync(userDto));
     }
 
-    [HttpPost("[action]"), Authorize]
-    public async Task<ApiResponse> Logout()
-    {
-        await _authService.LogoutAsync(User);
-        return new ApiResponse(true, ApiResultBodyCode.Success);
-    }
-
-    [HttpPost("[action]"), AllowAnonymous]
+    [HttpPost("RefreshToken"), AllowAnonymous]
     public async Task<ApiResponse<Token>> RefreshToken(TokenRequest tokenRequest)
     {
         var token = await _authService.RefreshTokenAsync(tokenRequest);
         return new ApiResponse<Token>(true, ApiResultBodyCode.Success, token);
     }
+
+    // If really you need to implement the logout on jwt
+    //[HttpPost("Logout"), Authorize]
+    //public async Task<ApiResponse> Logout()
+    //{
+    //    // Add Token to blackList
+    //}
 
     #endregion Action
 }

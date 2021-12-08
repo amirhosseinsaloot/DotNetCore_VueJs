@@ -25,15 +25,20 @@ public static class ServiceCollectionExtensions
     {
         services.AddDbContext<ApplicationDbContext>(options =>
         {
-            if (databaseSetting.DatabaseProvider == DatabaseProvider.SqlServer)
+            switch (databaseSetting.DatabaseProvider)
             {
-                options
-                    .UseSqlServer(databaseSetting.ConnectionStrings.SqlServer);
-            }
-            else
-            {
-                options
+                case DatabaseProvider.Postgres:
+                    options
                     .UseNpgsql(databaseSetting.ConnectionStrings.Postgres);
+                    break;
+
+                case DatabaseProvider.SqlServer:
+                    options
+                    .UseSqlServer(databaseSetting.ConnectionStrings.SqlServer);
+                    break;
+
+                default:
+                    throw new Exception("Database provider not found.");
             }
         });
     }

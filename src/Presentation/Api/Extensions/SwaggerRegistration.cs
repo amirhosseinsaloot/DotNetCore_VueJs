@@ -38,7 +38,6 @@ public static class SwaggerRegistration
     {
         app.UseSwagger();
         app.UseSwaggerUI(p => p.SwaggerEndpoint("/swagger/v1/swagger.json", "DotNetCore_VueJs"));
-
         return app;
     }
 }

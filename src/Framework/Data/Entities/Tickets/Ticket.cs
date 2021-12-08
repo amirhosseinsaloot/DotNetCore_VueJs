@@ -23,7 +23,6 @@ public class Ticket : IBaseEntity, ICreatedOn
 
     public DateTime CreatedOn { get; set; }
 
-
     // Navigation properties
     public TicketType TicketType { get; set; }
 

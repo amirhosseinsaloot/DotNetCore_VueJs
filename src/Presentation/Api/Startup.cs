@@ -22,7 +22,9 @@ public class Startup
     public Startup(IConfiguration configuration)
     {
         _configuration = configuration;
-        _applicationSettings = configuration.GetSection(nameof(ApplicationSettings)).Get<ApplicationSettings>();
+        _applicationSettings = configuration
+                               .GetSection(nameof(ApplicationSettings))
+                               .Get<ApplicationSettings>();
     }
 
     #endregion Ctor
@@ -61,7 +63,8 @@ public class Startup
         });
 
         services.AddMvc();
-        services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<TokenRequestValidator>());
+        services.AddControllers()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<TokenRequestValidator>());
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

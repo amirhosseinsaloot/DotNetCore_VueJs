@@ -22,7 +22,6 @@ public class TicketProcess : IBaseEntity, ICreatedOn
 
     public DateTime CreatedOn { get; set; }
 
-
     // Navigation properties
     public TicketProcess ParentTicketProcess { get; set; }
 
