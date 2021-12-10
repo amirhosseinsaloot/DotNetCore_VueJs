@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Validations;
 
-public class BaseValidator<TDto> : AbstractValidator<TDto>, IValidatorInterceptor
+public abstract class BaseValidator<TDto> : AbstractValidator<TDto>, IValidatorInterceptor
     where TDto : IDto
 {
     public ValidationResult AfterAspNetValidation(ActionContext actionContext, IValidationContext validationContext, ValidationResult result)
