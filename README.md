@@ -77,20 +77,25 @@ Frontend :
 This application uses Onion architecture.
 
 ### Core Layer
-This will contains Enums , Exception classes , Setting classes , and Utilities will be used in above layers .
+This will contains Enums , Exception classes , Interfaces and Abstractions (Implementions on above layers) , Setting classes , and Utilities will be used in above layers .
 
 ### Data Layer
 This layer contains Entities , Database config , Migrations and DataProviders (Service layer uses DataProviders for getting proper data) .
+Hints : 
+1) Anything in this layer is about the DATA (Separation of concerns).
+2) Depends on Core but has no dependencies on any other layer.
 
 ### Service Layer
-Service layer contains all application services such as Domain services (Business logic) and other services like Jwt , Email , Sms and etc .
+Service layer contains all application services such as Domain services (Business logic) or other services like Jwt , Email , Sms and etc .
+Hints : 
+1) Depends on Core and Data.
 
-### Presentation Layer (Backend)
-
-Api :
+### Presentation Layer (Backend API)
 
 Api endpoints , Middlewares , FilterActions , Service Registrations are placed in this layer.
 In addition, this layer depends on service layer.
+Hints : 
+1) Depends on Service but has no dependencies on any other layer.
 
 ## Frontend Overview
 Below image demonstrates the essence of the frontend and shows how it works :
