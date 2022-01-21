@@ -5,7 +5,7 @@
 /// </summary>
 public sealed class NotFoundException : BaseWebApiException
 {
-    public NotFoundException(string message = "Not found", object additionalData = null)
+    public NotFoundException(string message = "Not found", object? additionalData = null)
        : base(message, HttpStatusCode.NotFound, ApiResultBodyCode.NotFound, additionalData)
     {
     }

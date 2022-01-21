@@ -5,7 +5,7 @@
 /// </summary>
 public sealed class ForbiddenException : BaseWebApiException
 {
-    public ForbiddenException(string message = "You are unauthorized to access this resource.", object additionalData = null)
+    public ForbiddenException(string message = "You are unauthorized to access this resource.", object? additionalData = null)
       : base(message, HttpStatusCode.Forbidden, ApiResultBodyCode.Forbidden, additionalData)
     {
     }

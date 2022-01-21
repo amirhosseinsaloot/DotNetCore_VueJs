@@ -4,7 +4,7 @@ namespace Core.Utilities;
 
 public static class EnumExtensions
 {
-    public static string GetDisplayName(this Enum enumValue)
+    public static string? GetDisplayName(this Enum enumValue)
     {
         if (enumValue is null)
         {

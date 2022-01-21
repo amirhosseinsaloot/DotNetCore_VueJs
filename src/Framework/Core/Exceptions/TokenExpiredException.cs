@@ -5,7 +5,7 @@
 /// </summary>
 public sealed class TokenExpiredException : BaseWebApiException
 {
-    public TokenExpiredException(string message = "Authenticate failure.", object additionalData = null)
+    public TokenExpiredException(string message = "Authenticate failure.", object? additionalData = null)
       : base(message, HttpStatusCode.Unauthorized, ApiResultBodyCode.ExpiredSecurityToken, additionalData)
     {
     }

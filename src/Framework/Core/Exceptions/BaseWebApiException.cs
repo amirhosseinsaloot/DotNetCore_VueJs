@@ -9,9 +9,9 @@ public abstract class BaseWebApiException : Exception
 
     public ApiResultBodyCode ApiResultBodyCode { get; }
 
-    public object AdditionalData { get; set; }
+    public object? AdditionalData { get; set; }
 
-    public BaseWebApiException(string message = null, HttpStatusCode httpStatusCode = HttpStatusCode.InternalServerError, ApiResultBodyCode apiResultBodyCode = ApiResultBodyCode.ServerError, object additionalData = null)
+    public BaseWebApiException(string? message = null, HttpStatusCode httpStatusCode = HttpStatusCode.InternalServerError, ApiResultBodyCode apiResultBodyCode = ApiResultBodyCode.ServerError, object? additionalData = null)
         : base(message)
     {
         HttpStatusCode = httpStatusCode;

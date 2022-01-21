@@ -5,7 +5,7 @@
 /// </summary>
 public sealed class DuplicateException : BaseWebApiException
 {
-    public DuplicateException(string message = "Duplication", object additionalData = null)
+    public DuplicateException(string message = "Duplication", object? additionalData = null)
        : base(message, HttpStatusCode.Conflict, ApiResultBodyCode.Duplication, additionalData)
     {
     }

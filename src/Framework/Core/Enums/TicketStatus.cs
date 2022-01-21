@@ -6,11 +6,11 @@ public enum TicketStatus : byte
 
     Open = 2,
 
-    OnHold = 4,
+    OnHold = 3,
 
-    Solved = 8,
+    Solved = 4,
 
-    Closed = 16,
+    Closed = 5,
 
-    Assigned = 32
+    Assigned = 6
 }

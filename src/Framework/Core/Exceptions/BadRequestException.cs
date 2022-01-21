@@ -5,7 +5,7 @@
 /// </summary>
 public sealed class BadRequestException : BaseWebApiException
 {
-    public BadRequestException(string message = "Bad Request", object additionalData = null)
+    public BadRequestException(string message = "Bad Request", object? additionalData = null)
        : base(message, HttpStatusCode.BadRequest, ApiResultBodyCode.BadRequest, additionalData)
     {
     }

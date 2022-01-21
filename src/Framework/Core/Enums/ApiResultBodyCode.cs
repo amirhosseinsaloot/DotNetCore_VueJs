@@ -5,26 +5,26 @@ namespace Core.Enums;
 public enum ApiResultBodyCode : byte
 {
     [Display(Name = "Operation done successfully")]
-    Success = 0,
+    Success = 1,
 
     [Display(Name = "Server error occurred")]
-    ServerError = 1,
+    ServerError = 2,
 
     [Display(Name = "Invalid arguments")]
-    BadRequest = 2,
+    BadRequest = 3,
 
     [Display(Name = "Not found")]
-    NotFound = 3,
+    NotFound = 4,
 
     [Display(Name = "Authentication error")]
-    UnAuthorized = 4,
+    UnAuthorized = 5,
 
     [Display(Name = "ExpiredSecurityToken error")]
-    ExpiredSecurityToken = 5,
+    ExpiredSecurityToken = 6,
 
     [Display(Name = "Forbidden error (User does not have permission)")]
-    Forbidden = 6,
+    Forbidden = 7,
 
     [Display(Name = "Duplication error")]
-    Duplication = 7
+    Duplication = 8
 }
