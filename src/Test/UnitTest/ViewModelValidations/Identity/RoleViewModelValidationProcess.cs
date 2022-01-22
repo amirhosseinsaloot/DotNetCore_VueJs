@@ -20,14 +20,18 @@ public class NotValidRoleCreateUpdateViewModel : TheoryData<RoleCreateUpdateView
         // Name
         Add(validModel with { Name = "" });
 
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
         Add(validModel with { Name = null });
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 
         Add(validModel with { Name = new string('0', 16) });
 
         // Description
         Add(validModel with { Description = "" });
 
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
         Add(validModel with { Description = null });
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 
         Add(validModel with { Description = new string('0', 101) });
     }

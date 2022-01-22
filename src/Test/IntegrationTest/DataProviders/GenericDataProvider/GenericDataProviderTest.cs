@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Service.Domain.Tickets.Models;
 using Xunit;
 
-namespace IntegrationTest.DataProviders.GenericDataProvider;
+namespace FunctionalTest.DataProviders.GenericDataProvider;
 
 public class GenericDataProviderTest
 {
@@ -443,7 +443,7 @@ public class GenericDataProviderTest
         var result = await _dbSet.AsNoTracking().Where(p => p.Type == expected.Type).LastOrDefaultAsync();
         var actual = new TicketTypeCreateUpdateViewModel
         {
-            Type = result.Type
+            Type = result!.Type
         };
 
         actual.Should().BeEquivalentTo(expected);
@@ -490,7 +490,7 @@ public class GenericDataProviderTest
         var result = _dbSet.AsNoTracking().Where(p => p.Type == expected.Type).LastOrDefault();
         var actual = new TicketTypeCreateUpdateViewModel
         {
-            Type = result.Type
+            Type = result!.Type
         };
 
         actual.Should().BeEquivalentTo(expected);
@@ -647,7 +647,7 @@ public class GenericDataProviderTest
         // Assert
         expected = await _dbSet.AsNoTracking().Where(p => p.Id == expected.Id).LastOrDefaultAsync();
 
-        actual.Type.Should().BeEquivalentTo(expected.Type);
+        actual.Type.Should().BeEquivalentTo(expected!.Type);
 
         // Delete all inserted records
         DeleteAllRecords();
@@ -699,7 +699,7 @@ public class GenericDataProviderTest
         // Assert
         expected = _dbSet.AsNoTracking().Where(p => p.Id == expected.Id).LastOrDefault();
 
-        actual.Type.Should().BeEquivalentTo(expected.Type);
+        actual.Type.Should().BeEquivalentTo(expected!.Type);
 
         // Delete all inserted records
         DeleteAllRecords();
