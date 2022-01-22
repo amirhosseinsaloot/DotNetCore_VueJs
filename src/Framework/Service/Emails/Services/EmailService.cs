@@ -65,7 +65,7 @@ public class EmailService : IEmailService
 
         // Sending Process
         using var smtp = new SmtpClient();
-        await smtp.ConnectAsync(_mailSetting.SmtpServer, _mailSetting.Port.Value, SecureSocketOptions.StartTls);
+        await smtp.ConnectAsync(_mailSetting.SmtpServer, _mailSetting.Port, SecureSocketOptions.StartTls);
         await smtp.AuthenticateAsync(_mailSetting.EmailAddress, _mailSetting.Password);
         await smtp.SendAsync(email);
         await smtp.DisconnectAsync(true);
@@ -113,7 +113,7 @@ public class EmailService : IEmailService
 
         // Sending Process
         using var smtp = new SmtpClient();
-        await smtp.ConnectAsync(_mailSetting.SmtpServer, _mailSetting.Port.Value, SecureSocketOptions.StartTls);
+        await smtp.ConnectAsync(_mailSetting.SmtpServer, _mailSetting.Port, SecureSocketOptions.StartTls);
         await smtp.AuthenticateAsync(_mailSetting.EmailAddress, _mailSetting.Password);
         await smtp.SendAsync(email);
         await smtp.DisconnectAsync(true);

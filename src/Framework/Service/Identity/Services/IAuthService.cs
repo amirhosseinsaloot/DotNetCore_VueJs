@@ -1,17 +1,14 @@
 ﻿using Service.Domain.Users.Models;
 using Service.Identity.Models;
 using Service.Jwt.Models;
-using System.Security.Claims;
 
 namespace Service.Identity.Services;
 
 public interface IAuthService
 {
-    Task<UserSignInViewModel> SignInAsync(TokenRequest tokenRequest);
+    Task<UserSignInViewModel> SignInAsync(TokenRequest tokenRequest, CancellationToken cancellationToken);
 
-    Task<UserSignInViewModel> RegisterAsync(UserCreateViewModel userDto);
+    Task<UserSignInViewModel> RegisterAsync(UserCreateViewModel userDto, CancellationToken cancellationToken);
 
-    Task LogoutAsync(ClaimsPrincipal claimsPrincipal);
-
-    Task<Token> RefreshTokenAsync(TokenRequest tokenRequest);
+    Task<Token> RefreshTokenAsync(TokenRequest tokenRequest, CancellationToken cancellationToken);
 }

@@ -5,7 +5,6 @@ using Service.Domain.Users.Models;
 using Service.Identity.Models;
 using Service.Jwt.Models;
 using Service.Jwt.Services;
-using System.Security.Claims;
 
 namespace Service.Identity.Services;
 
@@ -37,14 +36,14 @@ public class AuthService : IAuthService
 
     #region Methods
 
-    public async Task<UserSignInViewModel> SignInAsync(TokenRequest tokenRequest)
+    public async Task<UserSignInViewModel> SignInAsync(TokenRequest tokenRequest, CancellationToken cancellationToken)
     {
         if (tokenRequest.GrantType.Equals("password", StringComparison.OrdinalIgnoreCase) is false)
         {
             throw new BadRequestException("Grant type is not valid.");
         }
 
-        var user = await _userManager.FindByNameAsync(tokenRequest.Username ?? string.Empty);
+        var user = await _userManager.FindByNameAsync(tokenRequest.Username);
         if (user is null)
         {
             throw new NotFoundException("Username or Password is incorrect.");
@@ -75,7 +74,7 @@ public class AuthService : IAuthService
             var userViewModel = _mapper.Map<UserViewModel>(user);
             userViewModel.Roles = roles;
 
-            var token = await _jwtService.GenerateTokenAsync(user);
+            var token = await _jwtService.GenerateTokenAsync(user, cancellationToken);
 
             var userSignInViewModel = new UserSignInViewModel
             {
@@ -94,8 +93,13 @@ public class AuthService : IAuthService
         }
     }
 
-    public async Task<UserSignInViewModel> RegisterAsync(UserCreateViewModel userDto)
+    public async Task<UserSignInViewModel> RegisterAsync(UserCreateViewModel userDto, CancellationToken cancellationToken)
     {
+        if (await _userManager.FindByNameAsync(userDto.Username) is not null)
+        {
+            throw new DuplicateException("This user already exists.");
+        }
+
         var user = _mapper.Map<User>(userDto);
         user.LastLoginDate = DateTime.UtcNow;
 
@@ -103,11 +107,11 @@ public class AuthService : IAuthService
         var result = await _userManager.CreateAsync(user, userDto.Password);
         if (result.Succeeded is false)
         {
-            throw new BadRequestException(result.Errors.FirstOrDefault()?.Description);
+            throw new Exception(result.Errors.FirstOrDefault()?.Description ?? "Can not register this user.");
         }
 
         // Create Token
-        var token = await _jwtService.GenerateTokenAsync(user);
+        var token = await _jwtService.GenerateTokenAsync(user, cancellationToken);
         user.RefreshToken = token.RefreshToken;
         user.RefreshTokenExpirationTime = token.RefreshTokenExpiresIn;
 
@@ -125,31 +129,26 @@ public class AuthService : IAuthService
         return userSignInViewModel;
     }
 
-    public async Task LogoutAsync(ClaimsPrincipal claimsPrincipal)
-    {
-        await _signInManager.SignOutAsync();
-
-        var user = await _userManager.FindByNameAsync(claimsPrincipal.Identity.Name);
-        user.RefreshToken = null;
-        user.RefreshTokenExpirationTime = null;
-        await _userManager.UpdateAsync(user);
-    }
-
-    public async Task<Token> RefreshTokenAsync(TokenRequest tokenRequest)
+    public async Task<Token> RefreshTokenAsync(TokenRequest tokenRequest, CancellationToken cancellationToken)
     {
         if (!tokenRequest.GrantType.Equals("refresh_token", StringComparison.OrdinalIgnoreCase))
         {
             throw new BadRequestException("Invalid client request.");
         }
 
-        if (tokenRequest is null)
+        if (tokenRequest.AccessToken is null)
+        {
+            throw new BadRequestException("Invalid client request (AccessToken can not be empty).");
+        }
+
+        var principal = _jwtService.GetPrincipalFromExpiredToken(tokenRequest.AccessToken);
+        var username = principal.Identity?.Name; //this is mapped to the Name claim by default
+        if (username is null)
         {
             throw new BadRequestException("Invalid client request.");
         }
-        var principal = _jwtService.GetPrincipalFromExpiredToken(tokenRequest.AccessToken);
-        var username = principal.Identity.Name; //this is mapped to the Name claim by default
 
-        var user = await _userManager.FindByNameAsync(username ?? string.Empty);
+        var user = await _userManager.FindByNameAsync(username);
         if (user == null || user.RefreshToken != tokenRequest.RefreshToken)
         {
             throw new BadRequestException("Invalid client request.");
@@ -159,7 +158,7 @@ public class AuthService : IAuthService
         {
             throw new TokenExpiredException("Refresh token expired.");
         }
-        var token = await _jwtService.GenerateTokenAsync(user);
+        var token = await _jwtService.GenerateTokenAsync(user, cancellationToken);
         user.RefreshToken = token.RefreshToken;
         user.RefreshTokenExpirationTime = token.RefreshTokenExpiresIn;
         await _userManager.UpdateAsync(user);

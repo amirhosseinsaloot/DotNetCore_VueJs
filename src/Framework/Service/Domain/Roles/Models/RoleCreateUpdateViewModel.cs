@@ -2,9 +2,9 @@
 
 public record class RoleCreateUpdateViewModel : ICreateViewModel, IUpdateViewModel
 {
-    public string Name { get; init; }
+    public string Name { get; init; } = default!;
 
-    public string Description { get; init; }
+    public string Description { get; init; } = default!;
 }
 
 public class RoleCreateUpdateViewModelValidator : BaseValidator<RoleCreateUpdateViewModel>

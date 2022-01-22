@@ -25,6 +25,10 @@ public class NotValidTeamCreateUpdateViewModel : TheoryData<TeamCreateUpdateView
         Add(validModel with { Name = new string('0', 51) });
 
         // Description
+        Add(validModel with { Description = "" });
+
+        Add(validModel with { Description = null });
+
         Add(validModel with { Description = new string('0', 101) });
 
         // ParentId

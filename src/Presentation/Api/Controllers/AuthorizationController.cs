@@ -25,31 +25,24 @@ public class AuthorizationController : BaseController
     #region Action
 
     [HttpPost("Login"), AllowAnonymous]
-    public async Task<ApiResponse<UserSignInViewModel>> Login(TokenRequest tokenRequest)
+    public async Task<ApiResponse<UserSignInViewModel>> Login(TokenRequest tokenRequest, CancellationToken cancellationToken)
     {
-        var token = await _authService.SignInAsync(tokenRequest);
+        var token = await _authService.SignInAsync(tokenRequest, cancellationToken);
         return new ApiResponse<UserSignInViewModel>(true, ApiResultBodyCode.Success, token);
     }
 
     [HttpPost("Register"), AllowAnonymous]
-    public async Task<ApiResponse<UserSignInViewModel>> Register(UserCreateViewModel userDto)
+    public async Task<ApiResponse<UserSignInViewModel>> Register(UserCreateViewModel userDto, CancellationToken cancellationToken)
     {
-        return new ApiResponse<UserSignInViewModel>(true, ApiResultBodyCode.Success, await _authService.RegisterAsync(userDto));
+        return new ApiResponse<UserSignInViewModel>(true, ApiResultBodyCode.Success, await _authService.RegisterAsync(userDto, cancellationToken));
     }
 
     [HttpPost("RefreshToken"), AllowAnonymous]
-    public async Task<ApiResponse<Token>> RefreshToken(TokenRequest tokenRequest)
+    public async Task<ApiResponse<Token>> RefreshToken(TokenRequest tokenRequest, CancellationToken cancellationToken)
     {
-        var token = await _authService.RefreshTokenAsync(tokenRequest);
+        var token = await _authService.RefreshTokenAsync(tokenRequest, cancellationToken);
         return new ApiResponse<Token>(true, ApiResultBodyCode.Success, token);
     }
-
-    // If really you need to implement the logout on jwt
-    //[HttpPost("Logout"), Authorize]
-    //public async Task<ApiResponse> Logout()
-    //{
-    //    // Add Token to blackList
-    //}
 
     #endregion Action
 }

@@ -6,7 +6,7 @@ public class EmailsLog : IBaseEntity, ICreatedOn
 {
     public int Id { get; set; }
 
-    public string ToEmail { get; set; } = default!;
+    public string? ToEmail { get; set; }
 
     public string Subject { get; set; } = default!;
 

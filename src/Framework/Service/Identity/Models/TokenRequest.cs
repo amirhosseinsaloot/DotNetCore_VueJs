@@ -2,15 +2,15 @@
 
 public record class TokenRequest : IDto
 {
-    public string GrantType { get; init; }
+    public string GrantType { get; init; } = default!;
 
-    public string Username { get; init; }
+    public string Username { get; init; } = default!;
 
-    public string Password { get; init; }
+    public string Password { get; init; } = default!;
 
-    public string RefreshToken { get; init; }
+    public string? RefreshToken { get; init; }
 
-    public string AccessToken { get; init; }
+    public string? AccessToken { get; init; }
 }
 
 public class TokenRequestValidator : BaseValidator<TokenRequest>
@@ -21,7 +21,7 @@ public class TokenRequestValidator : BaseValidator<TokenRequest>
 
         RuleFor(p => p.GrantType)
             .NotEmpty().MaximumLength(15)
-            .Must(p => validGrantTypes.Contains(p?.ToLower()))
+            .Must(p => validGrantTypes.Contains(p.ToLower()))
             .WithMessage("Not valid grantType");
 
         RuleFor(p => p.Username).NotEmpty().MaximumLength(40);

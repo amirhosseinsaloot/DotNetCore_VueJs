@@ -2,13 +2,13 @@
 
 public sealed record class MailSetting
 {
-    public string? EmailAddress { get; init; }
+    public string EmailAddress { get; init; } = default!;
 
-    public string? DisplayName { get; init; }
+    public string DisplayName { get; init; } = default!;
 
-    public string? Password { get; init; }
+    public string Password { get; init; } = default!;
 
-    public string? SmtpServer { get; init; }
+    public string SmtpServer { get; init; } = default!;
 
-    public int? Port { get; init; }
+    public int Port { get; init; }
 }

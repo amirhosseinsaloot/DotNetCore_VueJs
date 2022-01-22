@@ -117,7 +117,7 @@ public class FileOnFileSystemService : IFileService
         }
 
         var memory = new MemoryStream();
-        using (var stream = new FileStream(entity.FilePath, FileMode.Open))
+        using (var stream = new FileStream(entity.FilePath!, FileMode.Open))
         {
             await stream.CopyToAsync(memory);
         }

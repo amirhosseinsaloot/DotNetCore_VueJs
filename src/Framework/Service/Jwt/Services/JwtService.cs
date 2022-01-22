@@ -40,7 +40,7 @@ public class JwtService
 
     #region Methods
 
-    public async Task<Token> GenerateTokenAsync(User user)
+    public async Task<Token> GenerateTokenAsync(User user, CancellationToken cancellationToken)
     {
         var secretKey = Encoding.UTF8.GetBytes(_applicationSettings.JwtSetting.SecretKey); // longer than 16 character
         var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256Signature);
@@ -48,7 +48,7 @@ public class JwtService
         var encryptionkey = Encoding.UTF8.GetBytes(_applicationSettings.JwtSetting.EncryptKey); // Must be 16 character
         var encryptingCredentials = new EncryptingCredentials(new SymmetricSecurityKey(encryptionkey), SecurityAlgorithms.Aes128KW, SecurityAlgorithms.Aes128CbcHmacSha256);
 
-        var claims = await CreateClaimsAsync(user);
+        var claims = await CreateClaimsAsync(user, cancellationToken);
 
         var tokenOptions = new SecurityTokenDescriptor
         {
@@ -84,32 +84,26 @@ public class JwtService
         }
     }
 
-    private async Task<IEnumerable<Claim>> CreateClaimsAsync(User user)
+    private async Task<IEnumerable<Claim>> CreateClaimsAsync(User user, CancellationToken cancellationToken)
     {
         var result = await _signInManager.ClaimsFactory.CreateAsync(user);
         var role = await _signInManager.UserManager.GetRolesAsync(user);
-        var tenant = await _tenantDataProvider.GetTenantByUserAsync(user.Id, default);
+        var tenant = await _tenantDataProvider.GetTenantByUserAsync(user.Id, cancellationToken);
 
         // Add custom claims
         var claims = new List<Claim>(result.Claims)
             {
-                //ToDo : InvitationLink
-                //new Claim(ClaimTypes.Name, user.UserName),
-                //new Claim(ClaimTypes.DateOfBirth, user.Birthdate.ToString()),
-                //new Claim(ClaimTypes.Email, user.Email),
-                //new Claim(ClaimTypes.Gender, user.Gender.GetDisplayName()),
-                //new Claim(ClaimTypes.MobilePhone, user.PhoneNumber ?? ""),
-                new Claim("UserId", user.Id.ToString()),
-                new Claim("UserName", user.UserName),
-                new Claim("Firstname", user.Firstname),
-                new Claim("Lastname", user.Lastname),
-                new Claim("Email", user.Email),
-                new Claim("Birthdate", user.Birthdate.ToString()),
-                new Claim("PhoneNumber", user.PhoneNumber ?? ""),
-                new Claim("Gender", user.Gender.ToString()),
-                new Claim("Roles", string.Join(",",role)),
-                new Claim("TeamId", user.TeamId.ToString()),
-                new Claim("TenantId", tenant.Id.ToString()),
+                new Claim(nameof(CurrentUser.Id), user.Id.ToString()),
+                new Claim(nameof(CurrentUser.Username), user.UserName),
+                new Claim(nameof(CurrentUser.Firstname), user.Firstname),
+                new Claim(nameof(CurrentUser.Lastname), user.Lastname),
+                new Claim(nameof(CurrentUser.Email), user.Email),
+                new Claim(nameof(CurrentUser.Birthdate), user.Birthdate.ToString()),
+                new Claim(nameof(CurrentUser.PhoneNumber), user.PhoneNumber ?? ""),
+                new Claim(nameof(CurrentUser.Gender), user.Gender.ToString()),
+                new Claim(nameof(CurrentUser.Roles), string.Join(",",role)),
+                new Claim(nameof(CurrentUser.TeamId), user.TeamId.ToString()),
+                new Claim(nameof(CurrentUser.TenantId), tenant!.Id.ToString()),
             };
 
         return claims;
@@ -142,22 +136,27 @@ public class JwtService
         return principal;
     }
 
-    public CurrentUser GetCurrentUser()
+    public CurrentUser? GetCurrentUser()
     {
-        var user = _httpContextAccessor?.HttpContext?.User;
+        var user = _httpContextAccessor.HttpContext?.User;
+        if (user == null)
+        {
+            return null;
+        }
+
         return new CurrentUser
         {
-            Id = int.Parse(user.FindFirst("UserId").Value),
-            Username = user.FindFirst("Username").Value,
-            Firstname = user.FindFirst("Firstname").Value,
-            Lastname = user.FindFirst("Lastname").Value,
-            Email = user.FindFirst("Email").Value,
-            Birthdate = DateTime.Parse(user.FindFirst("Birthdate").Value),
-            PhoneNumber = user.FindFirst("PhoneNumber").Value,
-            Gender = Enum.Parse<GenderType>(user.FindFirst("Gender").Value),
-            Roles = user.FindFirst("Roles").Value.Split(',').ToList(),
-            TeamId = int.Parse(user.FindFirst("TeamId").Value),
-            TenantId = int.Parse(user.FindFirst("TenantId").Value),
+            Id = int.Parse(user.FindFirst(nameof(CurrentUser.Id))!.Value),
+            Username = user.FindFirst(nameof(CurrentUser.Username))!.Value,
+            Firstname = user.FindFirst(nameof(CurrentUser.Firstname))!.Value,
+            Lastname = user.FindFirst(nameof(CurrentUser.Lastname))!.Value,
+            Email = user.FindFirst(nameof(CurrentUser.Email))!.Value,
+            Birthdate = DateTime.Parse(user.FindFirst(nameof(CurrentUser.Birthdate))!.Value),
+            PhoneNumber = user.FindFirst(nameof(CurrentUser.PhoneNumber))!.Value,
+            Gender = Enum.Parse<GenderType>(user.FindFirst(nameof(CurrentUser.Gender))!.Value),
+            Roles = user.FindFirst(nameof(CurrentUser.Roles))!.Value.Split(',').ToList(),
+            TeamId = int.Parse(user.FindFirst(nameof(CurrentUser.TeamId))!.Value),
+            TenantId = int.Parse(user.FindFirst(nameof(CurrentUser.TenantId))!.Value),
         };
     }
 

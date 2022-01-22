@@ -85,7 +85,7 @@ public class FileOnDatabaseService : IFileService
         var entity = await _fileOnDatabaseDataProvider.GetByIdAsync(id, cancellationToken);
         var fileStreamResultInput = new FileStreamResultInput
         {
-            FileStream = new MemoryStream(entity.Data),
+            FileStream = new MemoryStream(entity.Data!),
             ContentType = entity.FileType,
             FileDownloadName = entity.Name + entity.Extension
         };

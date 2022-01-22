@@ -34,7 +34,6 @@ public class EmailsLogService : IEmailsLogService
 
     public async Task SaveLogAsync(EmailRequest emailRequest, CancellationToken cancellationToken)
     {
-        var fileModelIds = await _fileService.StoreFilesAsync(emailRequest.Attachments, FilesDescription, cancellationToken);
         var emailsLog = new EmailsLog
         {
             ToEmail = emailRequest.ToEmail,
@@ -43,21 +42,24 @@ public class EmailsLogService : IEmailsLogService
             ToUserId = null,
         };
 
-        var emailsLogFileModels = new List<EmailsLogFileModel>();
-
-        foreach (var fileModelId in fileModelIds)
+        if (emailRequest.Attachments is not null)
         {
-            emailsLogFileModels.Add(new EmailsLogFileModel { FileModelId = fileModelId, EmailsLog = emailsLog });
-        }
+            var fileModelIds = await _fileService.StoreFilesAsync(emailRequest.Attachments, FilesDescription, cancellationToken);
+            var emailsLogFileModels = new List<EmailsLogFileModel>();
 
-        emailsLog.EmailsLogFileModels = emailsLogFileModels;
+            foreach (var fileModelId in fileModelIds)
+            {
+                emailsLogFileModels.Add(new EmailsLogFileModel { FileModelId = fileModelId, EmailsLog = emailsLog });
+            }
+
+            emailsLog.EmailsLogFileModels = emailsLogFileModels;
+        }
 
         await _emailsLogDataProvider.AddAsync(emailsLog, cancellationToken);
     }
 
     public async Task SaveLogAsync(EmailRequestToUser emailRequestToUser, CancellationToken cancellationToken)
     {
-        var fileModelIds = await _fileService.StoreFilesAsync(emailRequestToUser.Attachments, FilesDescription, cancellationToken);
         var emailsLog = new EmailsLog
         {
             ToEmail = null,
@@ -66,14 +68,18 @@ public class EmailsLogService : IEmailsLogService
             ToUserId = emailRequestToUser.UserId,
         };
 
-        var emailsLogFileModels = new List<EmailsLogFileModel>();
-
-        foreach (var fileModelId in fileModelIds)
+        if (emailRequestToUser.Attachments is not null)
         {
-            emailsLogFileModels.Add(new EmailsLogFileModel { FileModelId = fileModelId, EmailsLog = emailsLog });
-        }
+            var fileModelIds = await _fileService.StoreFilesAsync(emailRequestToUser.Attachments, FilesDescription, cancellationToken);
+            var emailsLogFileModels = new List<EmailsLogFileModel>();
 
-        emailsLog.EmailsLogFileModels = emailsLogFileModels;
+            foreach (var fileModelId in fileModelIds)
+            {
+                emailsLogFileModels.Add(new EmailsLogFileModel { FileModelId = fileModelId, EmailsLog = emailsLog });
+            }
+
+            emailsLog.EmailsLogFileModels = emailsLogFileModels;
+        }
 
         await _emailsLogDataProvider.AddAsync(emailsLog, cancellationToken);
     }
