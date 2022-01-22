@@ -18,11 +18,11 @@ public static class SerilogExtensions
         switch (databaseSetting.DatabaseProvider)
         {
             case DatabaseProvider.Postgres:
-                PostgresRegistration(logSetting, databaseSetting.ConnectionStrings.Postgres);
+                PostgresRegistration(logSetting, databaseSetting.ConnectionStrings.Postgres!);
                 break;
 
             case DatabaseProvider.SqlServer:
-                SqlServerRegistration(logSetting, databaseSetting.ConnectionStrings.SqlServer);
+                SqlServerRegistration(logSetting, databaseSetting.ConnectionStrings.SqlServer!);
                 break;
 
             default:

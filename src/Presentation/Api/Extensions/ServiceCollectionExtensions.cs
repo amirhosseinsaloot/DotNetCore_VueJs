@@ -34,12 +34,12 @@ public static class ServiceCollectionExtensions
             {
                 case DatabaseProvider.Postgres:
                     options
-                    .UseNpgsql(databaseSetting.ConnectionStrings.Postgres);
+                    .UseNpgsql(databaseSetting.ConnectionStrings.Postgres!);
                     break;
 
                 case DatabaseProvider.SqlServer:
                     options
-                    .UseSqlServer(databaseSetting.ConnectionStrings.SqlServer);
+                    .UseSqlServer(databaseSetting.ConnectionStrings.SqlServer!);
                     break;
 
                 default:
@@ -123,20 +123,20 @@ public static class ServiceCollectionExtensions
                     var signInManager = context.HttpContext.RequestServices.GetRequiredService<SignInManager<User>>();
                     var userManager = context.HttpContext.RequestServices.GetRequiredService<UserManager<User>>();
 
-                    var claimsIdentity = context.Principal.Identity as ClaimsIdentity;
-                    if (claimsIdentity.Claims?.Any() is not true)
+                    var claimsIdentity = context.Principal?.Identity as ClaimsIdentity;
+                    if (claimsIdentity?.Claims?.Any() is not true)
                     {
                         context.Fail("This token has no claims.");
                     }
 
-                    var securityStamp = claimsIdentity.FindFirstValue(new ClaimsIdentityOptions().SecurityStampClaimType);
+                    var securityStamp = claimsIdentity?.FindFirstValue(new ClaimsIdentityOptions().SecurityStampClaimType);
                     if (string.IsNullOrEmpty(securityStamp))
                     {
                         context.Fail("This token has no security stamp");
                     }
 
                     //Find user and token from database and perform your custom validation
-                    var userId = claimsIdentity.GetUserId<int>();
+                    var userId = claimsIdentity?.GetUserId<int>();
                     var user = await userManager.FindByIdAsync(userId.ToString());
 
                     var validatedUser = await signInManager.ValidateSecurityStampAsync(context.Principal);

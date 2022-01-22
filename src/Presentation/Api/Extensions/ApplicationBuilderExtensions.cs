@@ -17,10 +17,10 @@ public static class ApplicationBuilderExtensions
         using var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
         var dbContext = scope.ServiceProvider.GetService<ApplicationDbContext>();
 
-        dbContext.Database.Migrate();
+        dbContext?.Database.Migrate();
 
         var dataInitializer = scope.ServiceProvider.GetService<DataInitializer>();
-        dataInitializer.InstallRequierdData();
+        dataInitializer?.InstallRequierdData();
 
         scope.Dispose();
     }

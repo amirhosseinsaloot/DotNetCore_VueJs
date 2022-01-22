@@ -6,23 +6,23 @@ namespace Api.Extensions;
 
 public static class IdentityExtensions
 {
-    public static string FindFirstValue(this ClaimsIdentity identity, string claimType)
+    public static string? FindFirstValue(this ClaimsIdentity identity, string claimType)
     {
-        return identity?.FindFirst(claimType)?.Value;
+        return identity.FindFirst(claimType)?.Value;
     }
 
-    public static string FindFirstValue(this IIdentity identity, string claimType)
+    public static string? FindFirstValue(this IIdentity identity, string claimType)
     {
         var claimsIdentity = identity as ClaimsIdentity;
         return claimsIdentity?.FindFirstValue(claimType);
     }
 
-    public static string GetUserId(this IIdentity identity)
+    public static string? GetUserId(this IIdentity identity)
     {
-        return identity?.FindFirstValue(ClaimTypes.NameIdentifier);
+        return identity.FindFirstValue(ClaimTypes.NameIdentifier);
     }
 
-    public static T GetUserId<T>(this IIdentity identity) where T : IConvertible
+    public static T? GetUserId<T>(this IIdentity identity) where T : IConvertible
     {
         var userId = identity?.GetUserId();
         return !string.IsNullOrEmpty(userId)
@@ -30,8 +30,8 @@ public static class IdentityExtensions
             : default(T);
     }
 
-    public static string GetUserName(this IIdentity identity)
+    public static string? GetUserName(this IIdentity identity)
     {
-        return identity?.FindFirstValue(ClaimTypes.Name);
+        return identity.FindFirstValue(ClaimTypes.Name);
     }
 }
