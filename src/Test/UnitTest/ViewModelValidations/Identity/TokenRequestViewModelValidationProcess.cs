@@ -25,9 +25,7 @@ public class NotValidTokenRequest : TheoryData<TokenRequest>
         // GrantType
         Add(validModel with { GrantType = "" });
 
-
         Add(validModel with { GrantType = null });
-
 
         Add(validModel with { GrantType = new string('0', 16) });
 
@@ -36,18 +34,14 @@ public class NotValidTokenRequest : TheoryData<TokenRequest>
         // Username
         Add(validModel with { Username = "" });
 
-
         Add(validModel with { Username = null });
-
 
         Add(validModel with { Username = new string('0', 41) });
 
         // Password
         Add(validModel with { Password = "" });
 
-
         Add(validModel with { Password = null });
-
 
         Add(validModel with { Password = "12345" });
 
