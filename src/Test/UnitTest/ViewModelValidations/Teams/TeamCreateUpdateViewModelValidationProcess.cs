@@ -1,7 +1,8 @@
 ﻿using Service.Domain.Teams.Models;
 
-namespace UnitTest.ViewModelValidations.Teams;
+#nullable disable
 
+namespace UnitTest.ViewModelValidations.Teams;
 public class ValidTeamCreateUpdateViewModel : TheoryData<TeamCreateUpdateViewModel>
 {
     public ValidTeamCreateUpdateViewModel()
@@ -20,18 +21,18 @@ public class NotValidTeamCreateUpdateViewModel : TheoryData<TeamCreateUpdateView
         // Name
         Add(validModel with { Name = "" });
 
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+
         Add(validModel with { Name = null });
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+
 
         Add(validModel with { Name = new string('0', 51) });
 
         // Description
         Add(validModel with { Description = "" });
 
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+
         Add(validModel with { Description = null });
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+
 
         Add(validModel with { Description = new string('0', 101) });
 

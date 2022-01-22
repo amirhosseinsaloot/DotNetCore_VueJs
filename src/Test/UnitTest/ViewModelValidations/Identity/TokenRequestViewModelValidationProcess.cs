@@ -1,5 +1,7 @@
 ﻿using Service.Identity.Models;
 
+#nullable disable
+
 namespace UnitTest.ViewModelValidations.Identity;
 
 public class ValidTokenRequest : TheoryData<TokenRequest>
@@ -23,9 +25,9 @@ public class NotValidTokenRequest : TheoryData<TokenRequest>
         // GrantType
         Add(validModel with { GrantType = "" });
 
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+
         Add(validModel with { GrantType = null });
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+
 
         Add(validModel with { GrantType = new string('0', 16) });
 
@@ -34,18 +36,18 @@ public class NotValidTokenRequest : TheoryData<TokenRequest>
         // Username
         Add(validModel with { Username = "" });
 
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+
         Add(validModel with { Username = null });
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+
 
         Add(validModel with { Username = new string('0', 41) });
 
         // Password
         Add(validModel with { Password = "" });
 
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+
         Add(validModel with { Password = null });
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+
 
         Add(validModel with { Password = "12345" });
 

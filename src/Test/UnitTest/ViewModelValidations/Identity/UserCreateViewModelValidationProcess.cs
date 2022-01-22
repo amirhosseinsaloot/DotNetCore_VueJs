@@ -1,5 +1,7 @@
 ﻿using Service.Domain.Users.Models;
 
+#nullable disable
+
 namespace UnitTest.ViewModelValidations.Identity;
 
 public class ValidUserCreateViewModel : TheoryData<UserCreateViewModel>
@@ -20,36 +22,36 @@ public class NotValidUserCreateViewModel : TheoryData<UserCreateViewModel>
         // Username
         Add(validModel with { Username = "" });
 
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+
         Add(validModel with { Username = null });
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+
 
         Add(validModel with { Username = new string('0', 41) });
 
         // Firstname
         Add(validModel with { Firstname = "" });
 
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+
         Add(validModel with { Firstname = null });
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+
 
         Add(validModel with { Firstname = new string('0', 36) });
 
         // Lastname
         Add(validModel with { Lastname = "" });
 
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+
         Add(validModel with { Lastname = null });
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+
 
         Add(validModel with { Lastname = new string('0', 36) });
 
         // Email
         Add(validModel with { Email = "" });
 
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+
         Add(validModel with { Email = null });
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+
 
         Add(validModel with { Email = "AbCC@" });
 
@@ -58,9 +60,9 @@ public class NotValidUserCreateViewModel : TheoryData<UserCreateViewModel>
         // Password
         Add(validModel with { Password = "" });
 
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+
         Add(validModel with { Password = null });
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+
 
         Add(validModel with { Password = "12345" });
 
