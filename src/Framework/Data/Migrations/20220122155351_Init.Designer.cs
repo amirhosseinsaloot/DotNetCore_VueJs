@@ -12,14 +12,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211110210321_Init")]
+    [Migration("20220122155351_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.0")
+                .HasAnnotation("ProductVersion", "6.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -36,6 +36,7 @@ namespace Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
@@ -65,80 +66,7 @@ namespace Data.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("FileModel");
                 });
 
-            modelBuilder.Entity("Data.Entities.Identity.Tenant", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
-
-                    b.ToTable("Tenant");
-                });
-
-            modelBuilder.Entity("Data.Entities.Logging.EmailsLog", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Body")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Subject")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ToEmail")
-                        .HasMaxLength(320)
-                        .HasColumnType("nvarchar(320)");
-
-                    b.Property<int?>("ToUserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ToUserId");
-
-                    b.ToTable("EmailsLog");
-
-                    b.HasCheckConstraint("CHK_EmailsLog", "((ToUserId IS NULL AND ToEmail IS NOT NULL) OR (ToEmail IS NULL AND ToUserId IS NOT NULL))");
-                });
-
-            modelBuilder.Entity("Data.Entities.Logging.EmailsLogFileModel", b =>
-                {
-                    b.Property<int>("EmailsLogId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FileModelId")
-                        .HasColumnType("int");
-
-                    b.HasKey("EmailsLogId", "FileModelId");
-
-                    b.HasIndex("FileModelId")
-                        .IsUnique();
-
-                    b.ToTable("EmailsLogFileModel");
-                });
-
-            modelBuilder.Entity("Data.Entities.Role", b =>
+            modelBuilder.Entity("Data.Entities.Identity.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -177,7 +105,7 @@ namespace Data.Migrations
                     b.ToTable("AspNetRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Data.Entities.Team", b =>
+            modelBuilder.Entity("Data.Entities.Identity.Tenant", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -187,146 +115,21 @@ namespace Data.Migrations
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TenantId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("ParentId");
+                    b.HasIndex("Name")
+                        .IsUnique();
 
-                    b.HasIndex("TenantId");
-
-                    b.ToTable("Team");
-
-                    b.HasCheckConstraint("CHK_Tenant", "((ParentId IS NULL AND TenantId IS NOT NULL) OR (TenantId IS NULL AND ParentId IS NOT NULL))");
+                    b.ToTable("Tenant");
                 });
 
-            modelBuilder.Entity("Data.Entities.Ticket", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<int>("IssuerUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TeamId")
-                        .HasColumnType("int");
-
-                    b.Property<byte>("TicketStatus")
-                        .HasColumnType("tinyint");
-
-                    b.Property<int>("TicketTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IssuerUserId");
-
-                    b.HasIndex("TeamId");
-
-                    b.HasIndex("TicketTypeId");
-
-                    b.ToTable("Ticket");
-                });
-
-            modelBuilder.Entity("Data.Entities.TicketProcess", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("AssignedUserId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<int?>("ParentTicketProcessId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TeamId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TicketId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AssignedUserId");
-
-                    b.HasIndex("ParentTicketProcessId");
-
-                    b.HasIndex("TeamId");
-
-                    b.HasIndex("TicketId");
-
-                    b.ToTable("TicketProcess");
-                });
-
-            modelBuilder.Entity("Data.Entities.TicketType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TicketType");
-                });
-
-            modelBuilder.Entity("Data.Entities.User", b =>
+            modelBuilder.Entity("Data.Entities.Identity.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -442,7 +245,7 @@ namespace Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Data.Entities.UserRole", b =>
+            modelBuilder.Entity("Data.Entities.Identity.UserRole", b =>
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -458,6 +261,206 @@ namespace Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Data.Entities.Logging.EmailsLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ToEmail")
+                        .HasMaxLength(320)
+                        .HasColumnType("nvarchar(320)");
+
+                    b.Property<int?>("ToUserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ToUserId");
+
+                    b.ToTable("EmailsLog");
+
+                    b.HasCheckConstraint("CHK_EmailsLog", "((ToUserId IS NULL AND ToEmail IS NOT NULL) OR (ToEmail IS NULL AND ToUserId IS NOT NULL))");
+                });
+
+            modelBuilder.Entity("Data.Entities.Logging.EmailsLogFileModel", b =>
+                {
+                    b.Property<int>("EmailsLogId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FileModelId")
+                        .HasColumnType("int");
+
+                    b.HasKey("EmailsLogId", "FileModelId");
+
+                    b.HasIndex("FileModelId")
+                        .IsUnique();
+
+                    b.ToTable("EmailsLogFileModel");
+                });
+
+            modelBuilder.Entity("Data.Entities.Teams.Team", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.HasIndex("TenantId");
+
+                    b.ToTable("Team");
+
+                    b.HasCheckConstraint("CHK_Tenant", "((ParentId IS NULL AND TenantId IS NOT NULL) OR (TenantId IS NULL AND ParentId IS NOT NULL))");
+                });
+
+            modelBuilder.Entity("Data.Entities.Tickets.Ticket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("IssuerUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
+                    b.Property<byte>("TicketStatus")
+                        .HasColumnType("tinyint");
+
+                    b.Property<int>("TicketTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IssuerUserId");
+
+                    b.HasIndex("TeamId");
+
+                    b.HasIndex("TicketTypeId");
+
+                    b.ToTable("Ticket");
+                });
+
+            modelBuilder.Entity("Data.Entities.Tickets.TicketProcess", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("AssignedUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int?>("ParentTicketProcessId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TicketId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AssignedUserId");
+
+                    b.HasIndex("ParentTicketProcessId");
+
+                    b.HasIndex("TeamId");
+
+                    b.HasIndex("TicketId");
+
+                    b.ToTable("TicketProcess");
+                });
+
+            modelBuilder.Entity("Data.Entities.Tickets.TicketType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TicketType");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -569,9 +572,45 @@ namespace Data.Migrations
                     b.HasDiscriminator().HasValue("FileOnFileSystem");
                 });
 
+            modelBuilder.Entity("Data.Entities.Identity.User", b =>
+                {
+                    b.HasOne("Data.Entities.Files.FileModel", "ProfilePicture")
+                        .WithOne("User")
+                        .HasForeignKey("Data.Entities.Identity.User", "ProfilePictureId");
+
+                    b.HasOne("Data.Entities.Teams.Team", "Team")
+                        .WithMany("Users")
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("ProfilePicture");
+
+                    b.Navigation("Team");
+                });
+
+            modelBuilder.Entity("Data.Entities.Identity.UserRole", b =>
+                {
+                    b.HasOne("Data.Entities.Identity.Role", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Data.Entities.Identity.User", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Data.Entities.Logging.EmailsLog", b =>
                 {
-                    b.HasOne("Data.Entities.User", "ToUser")
+                    b.HasOne("Data.Entities.Identity.User", "ToUser")
                         .WithMany("EmailsLogs")
                         .HasForeignKey("ToUserId");
 
@@ -597,9 +636,9 @@ namespace Data.Migrations
                     b.Navigation("FileModel");
                 });
 
-            modelBuilder.Entity("Data.Entities.Team", b =>
+            modelBuilder.Entity("Data.Entities.Teams.Team", b =>
                 {
-                    b.HasOne("Data.Entities.Team", "ParentTeam")
+                    b.HasOne("Data.Entities.Teams.Team", "ParentTeam")
                         .WithMany("ChildTeams")
                         .HasForeignKey("ParentId");
 
@@ -612,50 +651,50 @@ namespace Data.Migrations
                     b.Navigation("Tenant");
                 });
 
-            modelBuilder.Entity("Data.Entities.Ticket", b =>
+            modelBuilder.Entity("Data.Entities.Tickets.Ticket", b =>
                 {
-                    b.HasOne("Data.Entities.User", "User")
+                    b.HasOne("Data.Entities.Identity.User", "IssuerUser")
                         .WithMany("Tickets")
                         .HasForeignKey("IssuerUserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Data.Entities.Team", "Team")
+                    b.HasOne("Data.Entities.Teams.Team", "Team")
                         .WithMany("Tickets")
                         .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Data.Entities.TicketType", "TicketType")
+                    b.HasOne("Data.Entities.Tickets.TicketType", "TicketType")
                         .WithMany("Tickets")
                         .HasForeignKey("TicketTypeId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.Navigation("IssuerUser");
+
                     b.Navigation("Team");
 
                     b.Navigation("TicketType");
-
-                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Data.Entities.TicketProcess", b =>
+            modelBuilder.Entity("Data.Entities.Tickets.TicketProcess", b =>
                 {
-                    b.HasOne("Data.Entities.User", "User")
+                    b.HasOne("Data.Entities.Identity.User", "User")
                         .WithMany("TicketProcesses")
                         .HasForeignKey("AssignedUserId");
 
-                    b.HasOne("Data.Entities.TicketProcess", "ParentTicketProcess")
+                    b.HasOne("Data.Entities.Tickets.TicketProcess", "ParentTicketProcess")
                         .WithMany("ChildTicketProcesses")
                         .HasForeignKey("ParentTicketProcessId");
 
-                    b.HasOne("Data.Entities.Team", "Team")
+                    b.HasOne("Data.Entities.Teams.Team", "Team")
                         .WithMany("TicketProcesses")
                         .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Data.Entities.Ticket", "Ticket")
+                    b.HasOne("Data.Entities.Tickets.Ticket", "Ticket")
                         .WithMany("TicketProcesses")
                         .HasForeignKey("TicketId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -670,45 +709,9 @@ namespace Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Data.Entities.User", b =>
-                {
-                    b.HasOne("Data.Entities.Files.FileModel", "ProfilePicture")
-                        .WithOne("User")
-                        .HasForeignKey("Data.Entities.User", "ProfilePictureId");
-
-                    b.HasOne("Data.Entities.Team", "Team")
-                        .WithMany("Users")
-                        .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("ProfilePicture");
-
-                    b.Navigation("Team");
-                });
-
-            modelBuilder.Entity("Data.Entities.UserRole", b =>
-                {
-                    b.HasOne("Data.Entities.Role", "Role")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("Data.Entities.User", "User")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Role");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
-                    b.HasOne("Data.Entities.Role", null)
+                    b.HasOne("Data.Entities.Identity.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -717,7 +720,7 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("Data.Entities.User", null)
+                    b.HasOne("Data.Entities.Identity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -726,7 +729,7 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("Data.Entities.User", null)
+                    b.HasOne("Data.Entities.Identity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -735,7 +738,7 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("Data.Entities.User", null)
+                    b.HasOne("Data.Entities.Identity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -749,9 +752,25 @@ namespace Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Data.Entities.Identity.Role", b =>
+                {
+                    b.Navigation("UserRoles");
+                });
+
             modelBuilder.Entity("Data.Entities.Identity.Tenant", b =>
                 {
                     b.Navigation("Teams");
+                });
+
+            modelBuilder.Entity("Data.Entities.Identity.User", b =>
+                {
+                    b.Navigation("EmailsLogs");
+
+                    b.Navigation("TicketProcesses");
+
+                    b.Navigation("Tickets");
+
+                    b.Navigation("UserRoles");
                 });
 
             modelBuilder.Entity("Data.Entities.Logging.EmailsLog", b =>
@@ -759,12 +778,7 @@ namespace Data.Migrations
                     b.Navigation("EmailsLogFileModels");
                 });
 
-            modelBuilder.Entity("Data.Entities.Role", b =>
-                {
-                    b.Navigation("UserRoles");
-                });
-
-            modelBuilder.Entity("Data.Entities.Team", b =>
+            modelBuilder.Entity("Data.Entities.Teams.Team", b =>
                 {
                     b.Navigation("ChildTeams");
 
@@ -775,30 +789,19 @@ namespace Data.Migrations
                     b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("Data.Entities.Ticket", b =>
+            modelBuilder.Entity("Data.Entities.Tickets.Ticket", b =>
                 {
                     b.Navigation("TicketProcesses");
                 });
 
-            modelBuilder.Entity("Data.Entities.TicketProcess", b =>
+            modelBuilder.Entity("Data.Entities.Tickets.TicketProcess", b =>
                 {
                     b.Navigation("ChildTicketProcesses");
                 });
 
-            modelBuilder.Entity("Data.Entities.TicketType", b =>
+            modelBuilder.Entity("Data.Entities.Tickets.TicketType", b =>
                 {
                     b.Navigation("Tickets");
-                });
-
-            modelBuilder.Entity("Data.Entities.User", b =>
-                {
-                    b.Navigation("EmailsLogs");
-
-                    b.Navigation("TicketProcesses");
-
-                    b.Navigation("Tickets");
-
-                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }

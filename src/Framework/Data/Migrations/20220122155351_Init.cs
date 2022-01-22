@@ -12,21 +12,21 @@ namespace Data.Migrations
             if (ActiveProvider == "Npgsql.EntityFrameworkCore.PostgreSQL")
             {
                 migrationBuilder.CreateTable(
-               name: "asp_net_roles",
-               columns: table => new
-               {
-                   id = table.Column<int>(type: "integer", nullable: false)
-                       .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                   description = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                   created_on = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                   name = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false),
-                   normalized_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                   concurrency_stamp = table.Column<string>(type: "text", nullable: true)
-               },
-               constraints: table =>
-               {
-                   table.PrimaryKey("pk_asp_net_roles", x => x.id);
-               });
+                   name: "asp_net_roles",
+                   columns: table => new
+                   {
+                       id = table.Column<int>(type: "integer", nullable: false)
+                           .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                       description = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                       created_on = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                       name = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false),
+                       normalized_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                       concurrency_stamp = table.Column<string>(type: "text", nullable: true)
+                   },
+                   constraints: table =>
+                   {
+                       table.PrimaryKey("pk_asp_net_roles", x => x.id);
+                   });
 
                 migrationBuilder.CreateTable(
                     name: "file_model",
@@ -37,7 +37,7 @@ namespace Data.Migrations
                         name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                         file_type = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
                         extension = table.Column<string>(type: "character varying(5)", maxLength: 5, nullable: false),
-                        description = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: true),
+                        description = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                         created_on = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                         discriminator = table.Column<string>(type: "text", nullable: false),
                         data = table.Column<byte[]>(type: "bytea", nullable: true),
@@ -259,8 +259,8 @@ namespace Data.Migrations
                         id = table.Column<int>(type: "integer", nullable: false)
                             .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                         to_email = table.Column<string>(type: "character varying(320)", maxLength: 320, nullable: true),
-                        subject = table.Column<string>(type: "text", nullable: true),
-                        body = table.Column<string>(type: "text", nullable: true),
+                        subject = table.Column<string>(type: "text", nullable: false),
+                        body = table.Column<string>(type: "text", nullable: false),
                         to_user_id = table.Column<int>(type: "integer", nullable: true),
                         created_on = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                     },
@@ -484,21 +484,21 @@ namespace Data.Migrations
             if (ActiveProvider == "Microsoft.EntityFrameworkCore.SqlServer")
             {
                 migrationBuilder.CreateTable(
-               name: "AspNetRoles",
-               columns: table => new
-               {
-                   Id = table.Column<int>(type: "int", nullable: false)
-                       .Annotation("SqlServer:Identity", "1, 1"),
-                   Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                   CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                   Name = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                   NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                   ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
-               },
-               constraints: table =>
-               {
-                   table.PrimaryKey("PK_AspNetRoles", x => x.Id);
-               });
+                   name: "AspNetRoles",
+                   columns: table => new
+                   {
+                       Id = table.Column<int>(type: "int", nullable: false)
+                           .Annotation("SqlServer:Identity", "1, 1"),
+                       Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                       CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                       Name = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                       NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                       ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                   },
+                   constraints: table =>
+                   {
+                       table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                   });
 
                 migrationBuilder.CreateTable(
                     name: "FileModel",
@@ -509,7 +509,7 @@ namespace Data.Migrations
                         Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                         FileType = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                         Extension = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
-                        Description = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                        Description = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                         CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                         Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                         Data = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
@@ -731,8 +731,8 @@ namespace Data.Migrations
                         Id = table.Column<int>(type: "int", nullable: false)
                             .Annotation("SqlServer:Identity", "1, 1"),
                         ToEmail = table.Column<string>(type: "nvarchar(320)", maxLength: 320, nullable: true),
-                        Subject = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                        Body = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                        Subject = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                        Body = table.Column<string>(type: "nvarchar(max)", nullable: false),
                         ToUserId = table.Column<int>(type: "int", nullable: true),
                         CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                     },
@@ -962,7 +962,7 @@ namespace Data.Migrations
             if (ActiveProvider == "Npgsql.EntityFrameworkCore.PostgreSQL")
             {
                 migrationBuilder.DropTable(
-                name: "asp_net_role_claims");
+                    name: "asp_net_role_claims");
 
                 migrationBuilder.DropTable(
                     name: "asp_net_user_claims");
@@ -1010,7 +1010,7 @@ namespace Data.Migrations
             if (ActiveProvider == "Microsoft.EntityFrameworkCore.SqlServer")
             {
                 migrationBuilder.DropTable(
-               name: "AspNetRoleClaims");
+                    name: "AspNetRoleClaims");
 
                 migrationBuilder.DropTable(
                     name: "AspNetUserClaims");

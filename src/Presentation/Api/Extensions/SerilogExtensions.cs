@@ -1,4 +1,5 @@
 ﻿using Core.Setting;
+using Core.Utilities;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.MSSqlServer;
@@ -36,7 +37,7 @@ public static class SerilogExtensions
                     .WriteTo
                     .PostgreSQL(
                                 connectionString: connectionString,
-                                tableName: logSetting.TableName,
+                                tableName: logSetting.TableName.ToSnakeCase(),
                                 restrictedToMinimumLevel: (LogEventLevel)logSetting.MinimumLevelSerilog,
                                 needAutoCreateTable: logSetting.AutoCreateSqlTable
                                 )
