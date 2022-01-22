@@ -7,20 +7,20 @@ public class FileModel : IBaseEntity, ICreatedOn
 {
     public int Id { get; set; }
 
-    public string Name { get; set; }
+    public string Name { get; set; } = default!;
 
-    public string FileType { get; set; }
+    public string FileType { get; set; } = default!;
 
-    public string Extension { get; set; }
+    public string Extension { get; set; } = default!;
 
-    public string Description { get; set; }
+    public string Description { get; set; } = default!;
 
     public DateTime CreatedOn { get; set; }
 
     // Navigation properties
-    public User User { get; set; }
+    public User? User { get; set; }
 
-    public ICollection<EmailsLogFileModel> EmailsLogFileModels { get; set; }
+    public ICollection<EmailsLogFileModel> EmailsLogFileModels { get; set; } = default!;
 }
 
 public class FileModelConfiguration : IEntityTypeConfiguration<FileModel>

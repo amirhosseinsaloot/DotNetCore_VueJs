@@ -9,9 +9,9 @@ public class EmailsLogFileModel : IEntity
     public int FileModelId { get; set; }
 
     // Navigation properties
-    public EmailsLog EmailsLog { get; set; }
+    public EmailsLog EmailsLog { get; set; } = default!;
 
-    public FileModel FileModel { get; set; }
+    public FileModel FileModel { get; set; } = default!;
 }
 
 public class EmailsLogFileModelConfiguration : IEntityTypeConfiguration<EmailsLogFileModel>

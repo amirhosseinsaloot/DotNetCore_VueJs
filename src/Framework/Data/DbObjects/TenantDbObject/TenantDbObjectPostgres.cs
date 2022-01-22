@@ -24,7 +24,7 @@ public class TenantDbObjectPostgres : ITenantDbObject
 
     #region Methods
 
-    public async Task<Tenant> GetTenantByUserAsync(int userId, CancellationToken cancellationToken)
+    public async Task<Tenant?> GetTenantByUserAsync(int userId, CancellationToken cancellationToken)
     {
         var result = await _dbSet
                            .FromSqlRaw($"SELECT id , name , created_on FROM get_tenant_by_user({userId})")

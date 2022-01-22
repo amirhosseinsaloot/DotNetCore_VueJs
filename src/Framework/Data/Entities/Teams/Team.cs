@@ -7,9 +7,9 @@ public class Team : IBaseEntity, ICreatedOn
 {
     public int Id { get; set; }
 
-    public string Name { get; set; }
+    public string Name { get; set; } = default!;
 
-    public string Description { get; set; }
+    public string Description { get; set; } = default!;
 
     public int? ParentId { get; set; }
 
@@ -19,17 +19,17 @@ public class Team : IBaseEntity, ICreatedOn
 
 
     // Navigation properties
-    public Team ParentTeam { get; set; }
+    public Team? ParentTeam { get; set; }
 
-    public Tenant Tenant { get; set; }
+    public Tenant? Tenant { get; set; }
 
-    public ICollection<Team> ChildTeams { get; set; }
+    public ICollection<Team>? ChildTeams { get; set; }
 
-    public ICollection<Ticket> Tickets { get; set; }
+    public ICollection<Ticket>? Tickets { get; set; }
 
-    public ICollection<TicketProcess> TicketProcesses { get; set; }
+    public ICollection<TicketProcess>? TicketProcesses { get; set; }
 
-    public ICollection<User> Users { get; set; }
+    public ICollection<User>? Users { get; set; }
 }
 
 public class TeamConfiguration : IEntityTypeConfiguration<Team>

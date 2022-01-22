@@ -7,9 +7,9 @@ public class Ticket : IBaseEntity, ICreatedOn
 {
     public int Id { get; set; }
 
-    public string Title { get; set; }
+    public string Title { get; set; } = default!;
 
-    public string Description { get; set; }
+    public string Description { get; set; } = default!;
 
     public TicketStatus TicketStatus { get; set; }
 
@@ -22,13 +22,13 @@ public class Ticket : IBaseEntity, ICreatedOn
     public DateTime CreatedOn { get; set; }
 
     // Navigation properties
-    public TicketType TicketType { get; set; }
+    public TicketType TicketType { get; set; } = default!;
 
-    public Team Team { get; set; }
+    public Team Team { get; set; } = default!;
 
-    public User User { get; set; }
+    public User IssuerUser { get; set; } = default!;
 
-    public ICollection<TicketProcess> TicketProcesses { get; set; }
+    public ICollection<TicketProcess>? TicketProcesses { get; set; }
 }
 
 public class TicketConfiguration : IEntityTypeConfiguration<Ticket>
@@ -43,7 +43,7 @@ public class TicketConfiguration : IEntityTypeConfiguration<Ticket>
                .WithMany(p => p.Tickets)
                .HasForeignKey(p => p.TicketTypeId);
 
-        builder.HasOne(p => p.User)
+        builder.HasOne(p => p.IssuerUser)
                .WithMany(p => p.Tickets)
                .HasForeignKey(p => p.IssuerUserId);
 

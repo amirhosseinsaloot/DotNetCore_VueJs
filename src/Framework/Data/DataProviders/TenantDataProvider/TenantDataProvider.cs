@@ -23,12 +23,12 @@ public class TenantDataProvider : DataProvider<Tenant>, ITenantDataProvider
 
     #region Methods
 
-    public async Task<Tenant> GetTenantByUserAsync(int userId, CancellationToken cancellationToken)
+    public async Task<Tenant?> GetTenantByUserAsync(int userId, CancellationToken cancellationToken)
     {
         return await _tenantDbObject.GetTenantByUserAsync(userId, cancellationToken);
     }
 
-    public async Task<TDto> GetTenantByUserAsync<TDto>(int userId, CancellationToken cancellationToken) where TDto : class, IViewModel
+    public async Task<TDto?> GetTenantByUserAsync<TDto>(int userId, CancellationToken cancellationToken) where TDto : class, IViewModel
     {
         var entity = await _tenantDbObject.GetTenantByUserAsync(userId, cancellationToken);
         return _mapper.Map<TDto>(entity);

@@ -12,5 +12,5 @@ public interface ITenantDbObject
     /// <returns>A task that represents the asynchronous operation.
     /// The task result is the Tenant entity that user belongs to that mapped to TDto.
     /// </returns>
-    Task<Tenant> GetTenantByUserAsync(int userId, CancellationToken cancellationToken);
+    Task<Tenant?> GetTenantByUserAsync(int userId, CancellationToken cancellationToken);
 }

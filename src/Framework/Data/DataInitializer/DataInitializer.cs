@@ -73,7 +73,7 @@ public class DataInitializer
                             new Team { Name = "Broadway Team", Description = "Broadway Team of Health" },
                             new Team { Name = "Canal Team", Description = "Canal Team of Health" },
                         },
-                        TenantId = _dbContext.Set<Tenant>().FirstOrDefault(p=>p.Name == "Manhattan Tenant").Id,
+                        TenantId = _dbContext.Set<Tenant>().FirstOrDefault(p=>p.Name == "Manhattan Tenant")?.Id,
                     },
                     new Team {
                         Name = "England Team",
@@ -91,7 +91,7 @@ public class DataInitializer
                                                                                                                                                                          }}
                                                                                                  }},
                         },
-                        TenantId = _dbContext.Set<Tenant>().FirstOrDefault(p=>p.Name == "England Tenant").Id,
+                        TenantId = _dbContext.Set<Tenant>().FirstOrDefault(p=>p.Name == "England Tenant")?.Id,
                     }
                };
 
@@ -126,19 +126,28 @@ public class DataInitializer
 
     private void InsertUsers()
     {
+        var manhattanTeam = _dbContext.Set<Team>().FirstOrDefault(p => p.Name == "Manhattan Team");
+        int teamId;
+        if (manhattanTeam is null)
+        {
+            throw new Exception("Error occured in seed sample data.");
+        }
+
+        teamId = manhattanTeam.Id;
+
         var users = new List<User>
                 {
                     new User { Firstname = "TenantAdmin" , Lastname = "New York" , Gender = GenderType.Male , UserName = "TenantAdmin" , Email = "TenantAdmin@site.com" ,
-                               TeamId = _dbContext.Set<Team>().FirstOrDefault(p=>p.Name == "Manhattan Team").Id , Birthdate = DateTime.UtcNow },
+                               TeamId = teamId , Birthdate = DateTime.UtcNow },
 
                     new User { Firstname = "TeamAdmin" , Lastname = "Manhattan Team" , Gender = GenderType.Male , UserName = "TeamAdmin" , Email = "TeamAdmin@site.com" ,
-                               TeamId = _dbContext.Set<Team>().FirstOrDefault(p=>p.Name == "Manhattan Team").Id , Birthdate = DateTime.UtcNow },
+                               TeamId = teamId , Birthdate = DateTime.UtcNow },
 
                     new User { Firstname = "TeamMember1" , Lastname = "Manhattan Team" , Gender = GenderType.Male , UserName = "TeamMember1" , Email = "TeamMember1@site.com" ,
-                               TeamId = _dbContext.Set<Team>().FirstOrDefault(p=>p.Name == "Manhattan Team").Id , Birthdate = DateTime.UtcNow },
+                               TeamId = teamId , Birthdate = DateTime.UtcNow },
 
                     new User { Firstname = "TeamMember2" , Lastname = "Manhattan Team" , Gender = GenderType.Male , UserName = "TeamMember2" , Email = "TeamMember2@site.com" ,
-                               TeamId = _dbContext.Set<Team>().FirstOrDefault(p=>p.Name == "Manhattan Team").Id  , Birthdate = DateTime.UtcNow},
+                               TeamId = teamId , Birthdate = DateTime.UtcNow},
                 };
 
         foreach (var user in users)

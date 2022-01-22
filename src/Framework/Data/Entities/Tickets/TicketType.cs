@@ -4,12 +4,12 @@ public class TicketType : IBaseEntity, ICreatedOn
 {
     public int Id { get; set; }
 
-    public string Type { get; set; }
+    public string Type { get; set; } = default!;
 
     public DateTime CreatedOn { get; set; }
 
     // Navigation properties
-    public ICollection<Ticket> Tickets { get; set; }
+    public ICollection<Ticket>? Tickets { get; set; }
 }
 
 public class TicketTypeConfiguration : IEntityTypeConfiguration<TicketType>

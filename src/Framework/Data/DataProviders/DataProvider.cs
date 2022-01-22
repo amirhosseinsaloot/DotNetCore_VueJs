@@ -310,7 +310,7 @@ public class DataProvider<TEntity> : IDataProvider<TEntity> where TEntity : clas
     /// <exception >AutoMapper exceptions about mapping between TDto and TEntity.</exception>
     public async Task<TDto> GetByConditionAsync<TDto>(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken, bool isFirstOrDefault = true) where TDto : class, IViewModel
     {
-        TDto dto;
+        TDto? dto;
         if (isFirstOrDefault)
         {
             dto = await _dbSet
@@ -354,7 +354,7 @@ public class DataProvider<TEntity> : IDataProvider<TEntity> where TEntity : clas
     /// <exception >AutoMapper exceptions about mapping between TDto and TEntity.</exception>
     public TDto GetByCondition<TDto>(Expression<Func<TEntity, bool>> expression, bool isFirstOrDefault = true) where TDto : class, IViewModel
     {
-        TDto dto;
+        TDto? dto;
         if (isFirstOrDefault)
         {
             dto = _dbSet
@@ -397,7 +397,7 @@ public class DataProvider<TEntity> : IDataProvider<TEntity> where TEntity : clas
     /// <exception cref="ArgumentNullException">Occured when expression is null.</exception>
     public async Task<TEntity> GetByConditionAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken, bool isFirstOrDefault = true)
     {
-        TEntity entity;
+        TEntity? entity;
         if (isFirstOrDefault)
         {
             entity = await _dbSet
@@ -435,7 +435,7 @@ public class DataProvider<TEntity> : IDataProvider<TEntity> where TEntity : clas
     /// <exception cref="ArgumentNullException">Occured when expression is null.</exception>
     public TEntity GetByCondition(Expression<Func<TEntity, bool>> expression, bool isFirstOrDefault = true)
     {
-        TEntity entity;
+        TEntity? entity;
         if (isFirstOrDefault)
         {
             entity = _dbSet

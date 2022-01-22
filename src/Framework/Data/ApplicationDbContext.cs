@@ -39,7 +39,7 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, int, IdentityU
         {
             if (entity is ICreatedOn)
             {
-                var track = entity as ICreatedOn;
+                var track = (ICreatedOn)entity;
                 track.CreatedOn = DateTime.UtcNow;
             }
         }
@@ -58,7 +58,7 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, int, IdentityU
         {
             if (entity is ICreatedOn)
             {
-                var track = entity as ICreatedOn;
+                var track = (ICreatedOn)entity;
                 track.CreatedOn = DateTime.UtcNow;
             }
         }
@@ -77,7 +77,7 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, int, IdentityU
         {
             if (entity is ICreatedOn)
             {
-                var track = entity as ICreatedOn;
+                var track = (ICreatedOn)entity;
                 track.CreatedOn = DateTime.UtcNow;
             }
         }
@@ -96,7 +96,7 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, int, IdentityU
         {
             if (entity is ICreatedOn)
             {
-                var track = entity as ICreatedOn;
+                var track = (ICreatedOn)entity;
                 track.CreatedOn = DateTime.UtcNow;
             }
         }

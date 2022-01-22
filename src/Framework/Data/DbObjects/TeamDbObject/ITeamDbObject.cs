@@ -23,7 +23,7 @@ public interface ITeamDbObject
     /// <returns>A task that represents the asynchronous operation.
     /// The task result is root Team entity of given team in highest level in hierarchy.
     /// </returns>
-    Task<Team> GetRootTeamAsync(int childTeamId, CancellationToken cancellationToken);
+    Task<Team?> GetRootTeamAsync(int childTeamId, CancellationToken cancellationToken);
 
     /// <summary>
     /// Asynchronously find the root team from user team in highest level in hierarchy.
@@ -33,5 +33,5 @@ public interface ITeamDbObject
     /// <returns>A task that represents the asynchronous operation.
     /// The task result is the root Team entity from user team in highest level in hierarchy.
     /// </returns>
-    Task<Team> GetRootTeamByUserAsync(int userId, CancellationToken cancellationToken);
+    Task<Team?> GetRootTeamByUserAsync(int userId, CancellationToken cancellationToken);
 }

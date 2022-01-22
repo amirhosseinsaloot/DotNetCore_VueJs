@@ -4,12 +4,12 @@ namespace Data.Entities.Identity;
 
 public class Role : IdentityRole<int>, IBaseEntity, ICreatedOn
 {
-    public string Description { get; set; }
+    public string Description { get; set; } = default!;
 
     public DateTime CreatedOn { get; set; }
 
     // Navigation Properties
-    public ICollection<UserRole> UserRoles { get; set; }
+    public ICollection<UserRole>? UserRoles { get; set; }
 }
 
 public class RoleConfiguration : IEntityTypeConfiguration<Role>

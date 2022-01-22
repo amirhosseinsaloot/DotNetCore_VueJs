@@ -6,12 +6,12 @@ public class Tenant : IBaseEntity, ICreatedOn
 {
     public int Id { get; set; }
 
-    public string Name { get; set; }
+    public string Name { get; set; } = default!;
 
     public DateTime CreatedOn { get; set; }
 
     // Navigation properties
-    public ICollection<Team> Teams { get; set; }
+    public ICollection<Team>? Teams { get; set; }
 }
 
 public class TenantConfiguration : IEntityTypeConfiguration<Tenant>

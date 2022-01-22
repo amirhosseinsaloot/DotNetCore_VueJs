@@ -32,7 +32,7 @@ public class TeamDbObjectSqlServer : ITeamDbObject
                      .ToListAsync(cancellationToken);
     }
 
-    public async Task<Team> GetRootTeamAsync(int childTeamId, CancellationToken cancellationToken)
+    public async Task<Team?> GetRootTeamAsync(int childTeamId, CancellationToken cancellationToken)
     {
         var result = await _dbSet
                            .FromSqlRaw($"EXEC GetRootTeam @ChildTeamId = {childTeamId}")
@@ -42,7 +42,7 @@ public class TeamDbObjectSqlServer : ITeamDbObject
         return result.FirstOrDefault();
     }
 
-    public async Task<Team> GetRootTeamByUserAsync(int userId, CancellationToken cancellationToken)
+    public async Task<Team?> GetRootTeamByUserAsync(int userId, CancellationToken cancellationToken)
     {
         var result = await _dbSet
                            .FromSqlRaw($"EXEC GetRootTeamByUser @InputUserId = {userId}")

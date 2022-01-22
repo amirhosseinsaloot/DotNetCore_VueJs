@@ -2,7 +2,7 @@
 
 public class FileOnFileSystem : FileModel
 {
-    public string FilePath { get; set; }
+    public string? FilePath { get; set; }
 }
 
 public class FileOnFileSystemConfiguration : IEntityTypeConfiguration<FileOnFileSystem>

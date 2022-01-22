@@ -12,7 +12,7 @@ public interface ITenantDataProvider : IDataProvider<Tenant>
     /// <returns>A task that represents the asynchronous operation.
     /// The task result is the Tenant entity that user belongs to that mapped to TDto.
     /// </returns>
-    Task<Tenant> GetTenantByUserAsync(int userId, CancellationToken cancellationToken);
+    Task<Tenant?> GetTenantByUserAsync(int userId, CancellationToken cancellationToken);
 
     /// <summary>
     /// Asynchronously find the tenant from user that mapped to TDto.
@@ -23,5 +23,5 @@ public interface ITenantDataProvider : IDataProvider<Tenant>
     /// <returns>A task that represents the asynchronous operation.
     /// The task result is the Tenant entity that user belongs to that mapped to TDto.
     /// </returns>
-    Task<TDto> GetTenantByUserAsync<TDto>(int userId, CancellationToken cancellationToken) where TDto : class, IViewModel;
+    Task<TDto?> GetTenantByUserAsync<TDto>(int userId, CancellationToken cancellationToken) where TDto : class, IViewModel;
 }

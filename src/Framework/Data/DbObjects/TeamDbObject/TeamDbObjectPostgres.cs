@@ -32,7 +32,7 @@ public class TeamDbObjectPostgres : ITeamDbObject
                      .ToListAsync(cancellationToken);
     }
 
-    public async Task<Team> GetRootTeamAsync(int childTeamId, CancellationToken cancellationToken)
+    public async Task<Team?> GetRootTeamAsync(int childTeamId, CancellationToken cancellationToken)
     {
         var result = await _dbSet
                            .FromSqlRaw($"SELECT id , name , description , parent_id , tenant_id , created_on FROM get_root_team({childTeamId})")
@@ -42,7 +42,7 @@ public class TeamDbObjectPostgres : ITeamDbObject
         return result.FirstOrDefault();
     }
 
-    public async Task<Team> GetRootTeamByUserAsync(int userId, CancellationToken cancellationToken)
+    public async Task<Team?> GetRootTeamByUserAsync(int userId, CancellationToken cancellationToken)
     {
         var result = await _dbSet
                            .FromSqlRaw($"SELECT id , name , description , parent_id , tenant_id , created_on FROM get_root_team_by_user({userId})")

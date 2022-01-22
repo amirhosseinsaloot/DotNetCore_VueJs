@@ -124,7 +124,11 @@ public static class ModelBuilderExtensions
             // Change table names
             var tableName = entity.GetTableName();
             var schema = entity.GetSchema();
-            entity.SetTableName(tableName.ToSnakeCase());
+
+            if (tableName is not null)
+            {
+                entity.SetTableName(tableName.ToSnakeCase());
+            }
 
             // Change column names            
             foreach (var property in entity.GetProperties())
@@ -133,15 +137,23 @@ public static class ModelBuilderExtensions
             }
 
             // Change primary keys constraint names
-            foreach (var key in entity.GetKeys())
+            foreach (var pk in entity.GetKeys())
             {
-                key.SetName(key.GetName().ToSnakeCase());
+                var pkName = pk.GetName();
+                if (pkName is not null)
+                {
+                    pk.SetName(pkName.ToSnakeCase());
+                }
             }
 
             // Change foreign keys constraint names
-            foreach (var key in entity.GetForeignKeys())
+            foreach (var fk in entity.GetForeignKeys())
             {
-                key.SetConstraintName(key.GetConstraintName().ToSnakeCase());
+                var fkName = fk.GetConstraintName();
+                if (fkName is not null)
+                {
+                    fk.SetConstraintName(fkName.ToSnakeCase());
+                }
             }
 
             // Change index names

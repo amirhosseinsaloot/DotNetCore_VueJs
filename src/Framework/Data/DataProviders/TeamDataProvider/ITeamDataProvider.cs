@@ -35,7 +35,7 @@ public interface ITeamDataProvider : IDataProvider<Team>
     /// <returns>A task that represents the asynchronous operation.
     /// The task result is root Team entity of given team in highest level in hierarchy.
     /// </returns>
-    Task<Team> GetRootTeamAsync(int childTeamId, CancellationToken cancellationToken);
+    Task<Team?> GetRootTeamAsync(int childTeamId, CancellationToken cancellationToken);
 
     /// <summary>
     /// Asynchronously get the root team of given team in highest level in hierarchy that mapped to TDto.
@@ -46,7 +46,7 @@ public interface ITeamDataProvider : IDataProvider<Team>
     /// <returns>A task that represents the asynchronous operation.
     /// The task result is root Team entity of given team in highest level in hierarchy that mapped to TDto.
     /// </returns>
-    Task<TDto> GetRootTeamAsync<TDto>(int childTeamId, CancellationToken cancellationToken) where TDto : class, IViewModel;
+    Task<TDto?> GetRootTeamAsync<TDto>(int childTeamId, CancellationToken cancellationToken) where TDto : class, IViewModel;
 
     /// <summary>
     /// Asynchronously find the root team from user team in highest level in hierarchy.
@@ -56,7 +56,7 @@ public interface ITeamDataProvider : IDataProvider<Team>
     /// <returns>A task that represents the asynchronous operation.
     /// The task result is the root Team entity from user team in highest level in hierarchy.
     /// </returns>
-    Task<Team> GetRootTeamByUserAsync(int userId, CancellationToken cancellationToken);
+    Task<Team?> GetRootTeamByUserAsync(int userId, CancellationToken cancellationToken);
 
     /// <summary>
     /// Asynchronously find the root team user team in highest level in hierarchy that mapped to TDto.
@@ -67,5 +67,5 @@ public interface ITeamDataProvider : IDataProvider<Team>
     /// <returns>A task that represents the asynchronous operation.
     /// The task result is the root Team entity from user team in highest level in hierarchy that mapped to TDto.
     /// </returns>
-    Task<TDto> GetRootTeamByUserAsync<TDto>(int userId, CancellationToken cancellationToken) where TDto : class, IViewModel;
+    Task<TDto?> GetRootTeamByUserAsync<TDto>(int userId, CancellationToken cancellationToken) where TDto : class, IViewModel;
 }

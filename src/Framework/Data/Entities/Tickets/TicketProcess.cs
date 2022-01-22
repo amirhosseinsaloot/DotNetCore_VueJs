@@ -7,9 +7,9 @@ public class TicketProcess : IBaseEntity, ICreatedOn
 {
     public int Id { get; set; }
 
-    public string Title { get; set; }
+    public string Title { get; set; } = default!;
 
-    public string Description { get; set; }
+    public string Description { get; set; } = default!;
 
     public int TicketId { get; set; }
 
@@ -22,15 +22,15 @@ public class TicketProcess : IBaseEntity, ICreatedOn
     public DateTime CreatedOn { get; set; }
 
     // Navigation properties
-    public TicketProcess ParentTicketProcess { get; set; }
+    public TicketProcess? ParentTicketProcess { get; set; }
 
-    public ICollection<TicketProcess> ChildTicketProcesses { get; set; }
+    public ICollection<TicketProcess>? ChildTicketProcesses { get; set; }
 
-    public Ticket Ticket { get; set; }
+    public Ticket Ticket { get; set; } = default!;
 
-    public Team Team { get; set; }
+    public Team Team { get; set; } = default!;
 
-    public User User { get; set; }
+    public User? User { get; set; }
 }
 
 public class TicketProcessConfiguration : IEntityTypeConfiguration<TicketProcess>

@@ -2,7 +2,7 @@
 
 public class FileOnDatabase : FileModel
 {
-    public byte[] Data { get; set; }
+    public byte[]? Data { get; set; }
 }
 
 public class FileOnDatabaseConfiguration : IEntityTypeConfiguration<FileOnDatabase>

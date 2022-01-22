@@ -6,20 +6,20 @@ public class EmailsLog : IBaseEntity, ICreatedOn
 {
     public int Id { get; set; }
 
-    public string ToEmail { get; set; }
+    public string ToEmail { get; set; } = default!;
 
-    public string Subject { get; set; }
+    public string Subject { get; set; } = default!;
 
-    public string Body { get; set; }
+    public string Body { get; set; } = default!;
 
     public int? ToUserId { get; set; }
 
     public DateTime CreatedOn { get; set; }
 
     // Navigation properties
-    public User ToUser { get; set; }
+    public User? ToUser { get; set; }
 
-    public ICollection<EmailsLogFileModel> EmailsLogFileModels { get; set; }
+    public ICollection<EmailsLogFileModel>? EmailsLogFileModels { get; set; }
 }
 
 public class EmailsLogConfiguration : IEntityTypeConfiguration<EmailsLog>
