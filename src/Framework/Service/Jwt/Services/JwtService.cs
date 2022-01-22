@@ -28,7 +28,7 @@ public class JwtService
 
     #region Ctor
 
-    public JwtService(IOptionsSnapshot<ApplicationSettings> settings, SignInManager<User> signInManager, ITenantDataProvider tenantDataProvider, IHttpContextAccessor httpContextAccessor)
+    public JwtService(IOptions<ApplicationSettings> settings, SignInManager<User> signInManager, ITenantDataProvider tenantDataProvider, IHttpContextAccessor httpContextAccessor)
     {
         _applicationSettings = settings.Value;
         _signInManager = signInManager;

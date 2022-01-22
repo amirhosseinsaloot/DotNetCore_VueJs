@@ -21,7 +21,7 @@ public class TokenRequestValidator : BaseValidator<TokenRequest>
 
         RuleFor(p => p.GrantType)
             .NotEmpty().MaximumLength(15)
-            .Must(p => p is not null &&  validGrantTypes.Contains(p.ToLower()))
+            .Must(p => p is not null && validGrantTypes.Contains(p.ToLower()))
             .WithMessage("Not valid grantType");
 
         RuleFor(p => p.Username).NotEmpty().MaximumLength(40);

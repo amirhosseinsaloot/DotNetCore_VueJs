@@ -15,13 +15,13 @@ public class EmailService : IEmailService
 
     private readonly IEmailsLogService _emailsLogService;
 
-    private readonly Lazy<IDataProvider<User>> _userDataProvider;
+    private readonly IDataProvider<User> _userDataProvider;
 
     #endregion
 
     #region Ctor
 
-    public EmailService(IOptionsSnapshot<ApplicationSettings> settings, IEmailsLogService emailsLogService, Lazy<IDataProvider<User>> userDataProvider)
+    public EmailService(IOptions<ApplicationSettings> settings, IEmailsLogService emailsLogService, IDataProvider<User> userDataProvider)
     {
         _mailSetting = settings.Value.MailSetting;
         _emailsLogService = emailsLogService;
@@ -76,7 +76,7 @@ public class EmailService : IEmailService
 
     public async Task SendEmailAsync(EmailRequestToUser emailRequestToUser, CancellationToken cancellationToken)
     {
-        var user = await _userDataProvider.Value.GetByIdAsync(emailRequestToUser.UserId, cancellationToken);
+        var user = await _userDataProvider.GetByIdAsync(emailRequestToUser.UserId, cancellationToken);
         if (user is null)
         {
             throw new NotFoundException("User not found for sending email.");
@@ -100,6 +100,7 @@ public class EmailService : IEmailService
                 }
             }
         }
+
         builder.HtmlBody = emailRequestToUser.Body;
 
         // Filling MimeMessage instance
@@ -109,6 +110,7 @@ public class EmailService : IEmailService
             Subject = emailRequestToUser.Subject,
             Body = builder.ToMessageBody(),
         };
+
         email.To.Add(MailboxAddress.Parse(user.Email));
 
         // Sending Process

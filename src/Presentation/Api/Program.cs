@@ -1,28 +1,96 @@
-using Api.Extensions;
-using Microsoft.AspNetCore;
+﻿using Api.Extensions;
+using Core.Setting;
+using Core.Utilities;
+using FluentValidation.AspNetCore;
 using Serilog;
+using Service.Identity.Models;
 
-namespace Api;
+var builder = WebApplication.CreateBuilder(args);
+builder.Host.UseSerilog();
 
-public class Program
+var services = builder.Services;
+
+var configuration = builder.Configuration;
+ConfigureConfiguration(services, configuration);
+
+var applicationSettings = configuration
+                           .GetSection(nameof(ApplicationSettings))
+                           .Get<ApplicationSettings>();
+applicationSettings.ValidateApplicationSettings();
+
+const string CORS_POLICY = "CorsPolicy";
+SerilogExtensions.Register(configuration);
+
+// Add services to the container.
+ConfigureServices(services);
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+ConfigurePipeline(app);
+
+app.Run();
+
+void ConfigureConfiguration(IServiceCollection services, ConfigurationManager configuration)
 {
-    public static void Main(string[] args)
+    services.AddOptions<ApplicationSettings>()
+            .Bind(configuration.GetSection(nameof(ApplicationSettings)))
+            .ValidateDataAnnotations()
+            .Validate(config => config.ValidateApplicationSettings())
+            .ValidateOnStart();
+}
+
+void ConfigureServices(IServiceCollection services)
+{
+    // Database services
+    services.AddDbContext(applicationSettings.DatabaseSetting);
+
+    services.AddCustomIdentity(applicationSettings.IdentitySetting);
+
+    services.AutoMapperRegistration();
+
+    services.AddJwtAuthentication(applicationSettings.JwtSetting);
+
+    services.AddApplicationDependencyRegistration(applicationSettings);
+
+    services.AddSwagger();
+
+    services.AddHttpContextAccessor();
+
+    // Add service and create Policy with options
+    services.AddCors(options =>
     {
-        IConfigurationRoot configuration =
-        new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-            .Build();
+        options.AddPolicy(name: CORS_POLICY,
+            builder => builder
+                      .AllowAnyMethod()
+                      .AllowAnyHeader()
+                      .SetIsOriginAllowed(origin => true)  // Allow any origin
+                      .AllowCredentials());                // Allow credentials
+    });
 
-        SerilogExtensions.Register(configuration);
+    services.AddMvc();
+    services.AddControllers()
+            .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<TokenRequestValidator>());
+}
 
-        BuildWebHost(args).Run();
-    }
+void ConfigurePipeline(IApplicationBuilder app)
+{
+    app.IntializeDatabase();
 
-    public static IWebHost BuildWebHost(string[] args)
+    app.UseGlobalExceptionHandler();
+
+    app.UseRouting();
+
+    // Enable Cors
+    app.UseCors(CORS_POLICY);
+
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    app.UseEndpoints(endpoints =>
     {
-        return WebHost.CreateDefaultBuilder(args)
-                      .UseStartup<Startup>()
-                      .UseSerilog()
-                      .Build();
-    }
+        endpoints.MapControllers();
+    });
+
+    app.RegisterSwaggerMidlleware();
 }
