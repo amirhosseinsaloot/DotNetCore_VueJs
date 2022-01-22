@@ -31,7 +31,7 @@ public class GlobalExceptionHandlerMiddleware
 
     public async Task Invoke(HttpContext context)
     {
-        string message = null;
+        string? message = null;
         var httpStatusCode = HttpStatusCode.InternalServerError;
         var apiStatusCode = ApiResultBodyCode.ServerError;
         var jsonSerializerSettings = new JsonSerializerSettings
@@ -54,7 +54,7 @@ public class GlobalExceptionHandlerMiddleware
             // Generate message
             if (_env.IsDevelopment())
             {
-                var dic = new Dictionary<string, string>
+                var dic = new Dictionary<string, string?>
                 {
                     ["Exception"] = exception.Message,
                     ["StackTrace"] = exception.StackTrace,
@@ -93,7 +93,7 @@ public class GlobalExceptionHandlerMiddleware
 
             if (_env.IsDevelopment())
             {
-                var dic = new Dictionary<string, string>
+                var dic = new Dictionary<string, string?>
                 {
                     ["Exception"] = exception.Message,
                     ["StackTrace"] = exception.StackTrace,
@@ -103,8 +103,8 @@ public class GlobalExceptionHandlerMiddleware
             await WriteToResponseAsync();
         }
 
-        // Loval function
-        async Task WriteToResponseAsync(object data = null)
+        // Local function
+        async Task WriteToResponseAsync(object? data = null)
         {
             if (context.Response.HasStarted)
             {
