@@ -20,7 +20,7 @@ public class User : IdentityUser<int>, IBaseEntity, ICreatedOn
 
     public DateTime? LastLoginDate { get; set; }
 
-    public string RefreshToken { get; set; } = default!;
+    public string? RefreshToken { get; set; }
 
     public DateTime? RefreshTokenExpirationTime { get; set; }
 
