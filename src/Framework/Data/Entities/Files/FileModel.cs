@@ -13,14 +13,14 @@ public class FileModel : IBaseEntity, ICreatedOn
 
     public string Extension { get; set; } = default!;
 
-    public string Description { get; set; } = default!;
+    public string? Description { get; set; }
 
     public DateTime CreatedOn { get; set; }
 
     // Navigation properties
     public User? User { get; set; }
 
-    public ICollection<EmailsLogFileModel> EmailsLogFileModels { get; set; } = default!;
+    public ICollection<EmailsLogFileModel>? EmailsLogFileModels { get; set; }
 }
 
 public class FileModelConfiguration : IEntityTypeConfiguration<FileModel>

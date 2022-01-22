@@ -10,57 +10,6 @@ namespace Data.Extensions;
 public static class ModelBuilderExtensions
 {
     /// <summary>
-    /// Dynamicaly register all Entities that inherit from specific BaseType.
-    /// </summary>
-    /// <param name="modelBuilder">For access to entities.</param>
-    /// <param name="assemblies">Assemblies contains Entities.</param>
-    public static void RegisterAllEntities<BaseType>(this ModelBuilder modelBuilder, params Assembly[] assemblies)
-    {
-        IEnumerable<Type> types = assemblies
-                                  .SelectMany(p => p.GetExportedTypes())
-                                  .Where(p => p.IsClass && !p.IsAbstract && p.IsPublic && typeof(BaseType).IsAssignableFrom(p));
-
-        foreach (Type type in types)
-        {
-            modelBuilder.Entity(type);
-        }
-    }
-
-    /// <summary>
-    /// Dynamicaly load all IEntityTypeConfiguration with Reflection.
-    /// </summary>
-    /// <param name="modelBuilder">For access to entities.</param>
-    /// <param name="assemblies">Assemblies contains Entities.</param>
-    public static void RegisterEntityTypeConfiguration(this ModelBuilder modelBuilder, params Assembly[] assemblies)
-    {
-        MethodInfo applyGenericMethod =
-            typeof(ModelBuilder)
-            .GetMethods()
-            .First(m => m.Name == nameof(ModelBuilder.ApplyConfiguration));
-
-        IEnumerable<Type> types = assemblies
-                                  .SelectMany(p => p.GetExportedTypes())
-                                  .Where(p => p.IsClass && !p.IsAbstract && p.IsPublic);
-
-        foreach (Type type in types)
-        {
-            foreach (Type iface in type.GetInterfaces())
-            {
-                //if (iface == typeof(IBaseEntity))
-                //{
-                //    modelBuilder.Entity(type).HasKey(nameof(IBaseEntity.Id));
-                //}
-
-                //if (iface.IsConstructedGenericType && iface.GetGenericTypeDefinition() == typeof(IEntityTypeConfiguration<>))
-                //{
-                //    MethodInfo applyConcreteMethod = applyGenericMethod.MakeGenericMethod(iface.GenericTypeArguments[0]);
-                //    applyConcreteMethod.Invoke(modelBuilder, new object[] { Activator.CreateInstance(type) });
-                //}
-            }
-        }
-    }
-
-    /// <summary>
     /// Add delete behavior to entities with reflection.
     /// </summary>
     /// <param name="modelBuilder">For access to entities.</param>

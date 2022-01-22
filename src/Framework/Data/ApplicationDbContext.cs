@@ -17,9 +17,6 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, int, IdentityU
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
         // Using ModelBuilder extension methods
-        //var entitiesAssembly = Assembly.GetExecutingAssembly();
-        //modelBuilder.RegisterAllEntities<IEntity>(entitiesAssembly);
-        //modelBuilder.RegisterEntityTypeConfiguration(entitiesAssembly);
         modelBuilder.AddDeleteBehaviorConvention(DeleteBehavior.NoAction);
         modelBuilder.AddCheckConstraints(Database);
         if (Database.IsNpgsql())
