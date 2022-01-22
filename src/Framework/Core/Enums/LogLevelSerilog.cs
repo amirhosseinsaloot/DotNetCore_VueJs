@@ -2,15 +2,15 @@
 
 public enum LogLevelSerilog : byte
 {
-    Verbose = 1,
+    Verbose = 0,
 
-    Debug = 2,
+    Debug = 1,
 
-    Information = 3,
+    Information = 2,
 
-    Warning = 4,
+    Warning = 3,
 
-    Error = 5,
+    Error = 4,
 
-    Fatal = 6
+    Fatal = 5
 }
