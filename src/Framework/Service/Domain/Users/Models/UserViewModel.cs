@@ -4,13 +4,13 @@ public class UserViewModel : IViewModel
 {
     public int Id { get; set; }
 
-    public string Username { get; set; } = default!;
+    public string Username { get; set; } = null!;
 
-    public string Firstname { get; set; } = default!;
+    public string Firstname { get; set; } = null!;
 
-    public string Lastname { get; set; } = default!;
+    public string Lastname { get; set; } = null!;
 
-    public string Email { get; set; } = default!;
+    public string Email { get; set; } = null!;
 
     public DateTime Birthdate { get; set; }
 
@@ -18,7 +18,7 @@ public class UserViewModel : IViewModel
 
     public GenderType Gender { get; set; }
 
-    public ICollection<string> Roles { get; set; } = default!;
+    public ICollection<string> Roles { get; set; } = null!;
 
     public int TeamId { get; set; }
 

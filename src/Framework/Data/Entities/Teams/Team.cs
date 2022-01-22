@@ -7,9 +7,9 @@ public class Team : IBaseEntity, ICreatedOn
 {
     public int Id { get; set; }
 
-    public string Name { get; set; } = default!;
+    public string Name { get; set; } = null!;
 
-    public string Description { get; set; } = default!;
+    public string Description { get; set; } = null!;
 
     public int? ParentId { get; set; }
 

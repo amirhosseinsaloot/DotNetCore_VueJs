@@ -4,7 +4,7 @@ public record class TicketTypeListViewModel : IListViewModel
 {
     public int Id { get; init; }
 
-    public string Type { get; init; } = default!;
+    public string Type { get; init; } = null!;
 
     public DateTime CreatedOn { get; init; }
 }

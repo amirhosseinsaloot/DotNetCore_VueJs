@@ -4,7 +4,7 @@ namespace Data.Entities.Identity;
 
 public class Role : IdentityRole<int>, IBaseEntity, ICreatedOn
 {
-    public string Description { get; set; } = default!;
+    public string Description { get; set; } = null!;
 
     public DateTime CreatedOn { get; set; }
 

@@ -4,21 +4,21 @@ public record class CurrentUser
 {
     public int Id { get; init; }
 
-    public string Username { get; init; } = default!;
+    public string Username { get; init; } = null!;
 
-    public string Firstname { get; init; } = default!;
+    public string Firstname { get; init; } = null!;
 
-    public string Lastname { get; init; } = default!;
+    public string Lastname { get; init; } = null!;
 
-    public string Email { get; init; } = default!;
+    public string Email { get; init; } = null!;
 
     public DateTime Birthdate { get; init; }
 
-    public string PhoneNumber { get; init; } = default!;
+    public string PhoneNumber { get; init; } = null!;
 
     public GenderType Gender { get; init; }
 
-    public ICollection<string> Roles { get; init; } = default!;
+    public ICollection<string> Roles { get; init; } = null!;
 
     public int TeamId { get; init; }
 

@@ -2,11 +2,11 @@
 
 public record class TokenRequest : IDto
 {
-    public string GrantType { get; init; } = default!;
+    public string GrantType { get; init; } = null!;
 
-    public string Username { get; init; } = default!;
+    public string Username { get; init; } = null!;
 
-    public string Password { get; init; } = default!;
+    public string Password { get; init; } = null!;
 
     public string? RefreshToken { get; init; }
 

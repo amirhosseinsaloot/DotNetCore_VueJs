@@ -7,9 +7,9 @@ public class Ticket : IBaseEntity, ICreatedOn
 {
     public int Id { get; set; }
 
-    public string Title { get; set; } = default!;
+    public string Title { get; set; } = null!;
 
-    public string Description { get; set; } = default!;
+    public string Description { get; set; } = null!;
 
     public TicketStatus TicketStatus { get; set; }
 
@@ -22,11 +22,11 @@ public class Ticket : IBaseEntity, ICreatedOn
     public DateTime CreatedOn { get; set; }
 
     // Navigation properties
-    public TicketType TicketType { get; set; } = default!;
+    public TicketType TicketType { get; set; } = null!;
 
-    public Team Team { get; set; } = default!;
+    public Team Team { get; set; } = null!;
 
-    public User IssuerUser { get; set; } = default!;
+    public User IssuerUser { get; set; } = null!;
 
     public ICollection<TicketProcess>? TicketProcesses { get; set; }
 }

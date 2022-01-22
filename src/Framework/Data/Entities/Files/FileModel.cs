@@ -7,11 +7,11 @@ public class FileModel : IBaseEntity, ICreatedOn
 {
     public int Id { get; set; }
 
-    public string Name { get; set; } = default!;
+    public string Name { get; set; } = null!;
 
-    public string FileType { get; set; } = default!;
+    public string FileType { get; set; } = null!;
 
-    public string Extension { get; set; } = default!;
+    public string Extension { get; set; } = null!;
 
     public string? Description { get; set; }
 

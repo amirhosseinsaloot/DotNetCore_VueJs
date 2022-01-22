@@ -2,13 +2,13 @@
 
 public sealed record class ApplicationSettings
 {
-    public JwtSetting JwtSetting { get; init; } = default!;
+    public JwtSetting JwtSetting { get; init; } = null!;
 
-    public IdentitySetting IdentitySetting { get; init; } = default!;
+    public IdentitySetting IdentitySetting { get; init; } = null!;
 
-    public DatabaseSetting DatabaseSetting { get; init; } = default!;
+    public DatabaseSetting DatabaseSetting { get; init; } = null!;
 
-    public LogSetting LogSetting { get; init; } = default!;
+    public LogSetting LogSetting { get; init; } = null!;
 
-    public MailSetting MailSetting { get; init; } = default!;
+    public MailSetting MailSetting { get; init; } = null!;
 }

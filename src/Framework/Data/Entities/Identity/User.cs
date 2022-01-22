@@ -8,9 +8,9 @@ namespace Data.Entities.Identity;
 
 public class User : IdentityUser<int>, IBaseEntity, ICreatedOn
 {
-    public string Firstname { get; set; } = default!;
+    public string Firstname { get; set; } = null!;
 
-    public string Lastname { get; set; } = default!;
+    public string Lastname { get; set; } = null!;
 
     public DateTime Birthdate { get; set; }
 
@@ -31,7 +31,7 @@ public class User : IdentityUser<int>, IBaseEntity, ICreatedOn
     public DateTime CreatedOn { get; set; }
 
     // Navigation properties
-    public Team Team { get; set; } = default!;
+    public Team Team { get; set; } = null!;
 
     public FileModel? ProfilePicture { get; set; }
 

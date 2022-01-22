@@ -6,7 +6,7 @@ public class Tenant : IBaseEntity, ICreatedOn
 {
     public int Id { get; set; }
 
-    public string Name { get; set; } = default!;
+    public string Name { get; set; } = null!;
 
     public DateTime CreatedOn { get; set; }
 

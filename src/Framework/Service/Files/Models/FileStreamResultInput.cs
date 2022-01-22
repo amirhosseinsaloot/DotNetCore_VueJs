@@ -2,9 +2,9 @@
 
 public class FileStreamResultInput
 {
-    public Stream FileStream { get; set; } = default!;
+    public Stream FileStream { get; set; } = null!;
 
-    public string ContentType { get; set; } = default!;
+    public string ContentType { get; set; } = null!;
 
-    public string FileDownloadName { get; set; } = default!;
+    public string FileDownloadName { get; set; } = null!;
 }

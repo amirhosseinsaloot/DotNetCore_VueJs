@@ -2,7 +2,7 @@
 
 public sealed record class DatabaseSetting
 {
-    public ConnectionStrings ConnectionStrings { get; init; } = default!;
+    public ConnectionStrings ConnectionStrings { get; init; } = null!;
 
     public bool StoreFilesOnDatabase { get; init; } = true;
 

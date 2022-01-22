@@ -8,9 +8,9 @@ public class EmailsLog : IBaseEntity, ICreatedOn
 
     public string? ToEmail { get; set; }
 
-    public string Subject { get; set; } = default!;
+    public string Subject { get; set; } = null!;
 
-    public string Body { get; set; } = default!;
+    public string Body { get; set; } = null!;
 
     public int? ToUserId { get; set; }
 

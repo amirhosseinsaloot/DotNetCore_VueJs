@@ -2,7 +2,7 @@
 
 public record class TicketTypeCreateUpdateViewModel : ICreateViewModel, IUpdateViewModel
 {
-    public string Type { get; init; } = default!;
+    public string Type { get; init; } = null!;
 }
 
 public class TicketTypeCreateUpdateViewModelValidator : BaseValidator<TicketTypeCreateUpdateViewModel>

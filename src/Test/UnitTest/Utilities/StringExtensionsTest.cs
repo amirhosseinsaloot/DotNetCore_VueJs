@@ -6,9 +6,9 @@ public class StringExtensionsTest
 {
     private class ActualExpected
     {
-        public string Actual { get; set; } = default!;
+        public string Actual { get; set; } = null!;
 
-        public string Expected { get; set; } = default!;
+        public string Expected { get; set; } = null!;
     }
 
     [Fact]

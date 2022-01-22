@@ -7,9 +7,9 @@ public class TicketProcess : IBaseEntity, ICreatedOn
 {
     public int Id { get; set; }
 
-    public string Title { get; set; } = default!;
+    public string Title { get; set; } = null!;
 
-    public string Description { get; set; } = default!;
+    public string Description { get; set; } = null!;
 
     public int TicketId { get; set; }
 
@@ -26,9 +26,9 @@ public class TicketProcess : IBaseEntity, ICreatedOn
 
     public ICollection<TicketProcess>? ChildTicketProcesses { get; set; }
 
-    public Ticket Ticket { get; set; } = default!;
+    public Ticket Ticket { get; set; } = null!;
 
-    public Team Team { get; set; } = default!;
+    public Team Team { get; set; } = null!;
 
     public User? User { get; set; }
 }
