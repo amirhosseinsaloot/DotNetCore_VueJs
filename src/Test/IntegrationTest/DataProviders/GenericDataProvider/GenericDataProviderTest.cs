@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Service.Domain.Tickets.Models;
 using Xunit;
 
-namespace FunctionalTest.DataProviders.GenericDataProvider;
+namespace IntegrationTest.DataProviders.GenericDataProvider;
 
 public class GenericDataProviderTest
 {

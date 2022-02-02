@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{63E8FF91-D6EC-4C40-BDF0-B53EB0B058FD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionalTest", "Test\IntegrationTest\FunctionalTest.csproj", "{3697C5BF-A283-4B90-97F7-CA867D93071A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationTest", "Test\IntegrationTest\IntegrationTest.csproj", "{3697C5BF-A283-4B90-97F7-CA867D93071A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest", "Test\UnitTest\UnitTest.csproj", "{C8A4047A-CD9A-40DD-9ADA-51B9E0206B8C}"
 EndProject

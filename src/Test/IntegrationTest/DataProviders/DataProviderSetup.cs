@@ -3,7 +3,7 @@ using AutoMapper;
 using Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace FunctionalTest.DataProviders;
+namespace IntegrationTest.DataProviders;
 
 public static class DataProviderSetup
 {
