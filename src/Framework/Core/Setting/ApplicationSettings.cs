@@ -1,4 +1,8 @@
-﻿namespace Core.Setting;
+﻿using Core.Utilities;
+using Microsoft.Extensions.Options;
+using System.ComponentModel.DataAnnotations;
+
+namespace Core.Setting;
 
 public sealed record class ApplicationSettings
 {
@@ -11,4 +15,12 @@ public sealed record class ApplicationSettings
     public LogSetting LogSetting { get; init; } = null!;
 
     public MailSetting MailSetting { get; init; } = null!;
+}
+
+public class ApplicationSettingsValidation : IValidateOptions<ApplicationSettings>
+{
+    public ValidateOptionsResult Validate(string name, ApplicationSettings options)
+    {
+        return ValidateOptionsResult.Success;
+    }
 }

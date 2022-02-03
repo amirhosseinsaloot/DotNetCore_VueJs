@@ -11,6 +11,8 @@ using Data.Entities.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Service.Domain.Roles.Services;
 using Service.Domain.Teams.Services;
@@ -26,6 +28,51 @@ namespace Api.Extensions;
 
 public static class ServiceCollectionExtensions
 {
+    public static void AddConfiguration(this IServiceCollection services, ConfigurationManager configuration)
+    {
+        services.AddSingleton<IValidateOptions<ApplicationSettings>, ApplicationSettingsValidation>();
+        services.AddOptions<ApplicationSettings>()
+                .Bind(configuration.GetSection(nameof(ApplicationSettings)))
+                .ValidateDataAnnotations()
+                .ValidateOnStart();
+
+        services.AddSingleton<IValidateOptions<DatabaseSetting>, DatabaseSettingValidation>();
+        services.AddOptions<DatabaseSetting>()
+                .Bind(configuration.GetSection($"{nameof(ApplicationSettings)}:{nameof(DatabaseSetting)}"))
+                .ValidateDataAnnotations()
+                .ValidateOnStart();
+
+        services.AddSingleton<IValidateOptions<ConnectionStrings>, ConnectionStringsValidation>();
+        services.AddOptions<ConnectionStrings>()
+                .Bind(configuration.GetSection($"{nameof(ApplicationSettings)}:{nameof(DatabaseSetting)}:{nameof(ConnectionStrings)}"))
+                .ValidateDataAnnotations()
+                .ValidateOnStart();
+
+        services.AddSingleton<IValidateOptions<IdentitySetting>, IdentitySettingValidation>();
+        services.AddOptions<IdentitySetting>()
+                .Bind(configuration.GetSection($"{nameof(ApplicationSettings)}:{nameof(IdentitySetting)}"))
+                .ValidateDataAnnotations()
+                .ValidateOnStart();
+
+        services.AddSingleton<IValidateOptions<JwtSetting>, JwtSettingValidation>();
+        services.AddOptions<JwtSetting>()
+                .Bind(configuration.GetSection($"{nameof(ApplicationSettings)}:{nameof(JwtSetting)}"))
+                .ValidateDataAnnotations()
+                .ValidateOnStart();
+
+        services.AddSingleton<IValidateOptions<LogSetting>, LogSettingValidation>();
+        services.AddOptions<LogSetting>()
+                .Bind(configuration.GetSection($"{nameof(ApplicationSettings)}:{nameof(LogSetting)}"))
+                .ValidateDataAnnotations()
+                .ValidateOnStart();
+
+        services.AddSingleton<IValidateOptions<MailSetting>, MailSettingValidation>();
+        services.AddOptions<MailSetting>()
+                .Bind(configuration.GetSection($"{nameof(ApplicationSettings)}:{nameof(MailSetting)}"))
+                .ValidateDataAnnotations()
+                .ValidateOnStart();
+    }
+
     public static void AddDbContext(this IServiceCollection services, DatabaseSetting databaseSetting)
     {
         services.AddDbContext<ApplicationDbContext>(options =>

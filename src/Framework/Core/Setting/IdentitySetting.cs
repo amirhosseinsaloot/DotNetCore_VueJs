@@ -1,4 +1,6 @@
-﻿namespace Core.Setting;
+﻿using Microsoft.Extensions.Options;
+
+namespace Core.Setting;
 
 public sealed record class IdentitySetting
 {
@@ -13,4 +15,12 @@ public sealed record class IdentitySetting
     public bool PasswordRequireLowercase { get; init; } = false;
 
     public bool RequireUniqueEmail { get; init; } = true;
+}
+
+public class IdentitySettingValidation : IValidateOptions<IdentitySetting>
+{
+    public ValidateOptionsResult Validate(string name, IdentitySetting options)
+    {
+        return ValidateOptionsResult.Success;
+    }
 }

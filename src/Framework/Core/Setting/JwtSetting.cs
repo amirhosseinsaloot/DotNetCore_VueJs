@@ -1,4 +1,6 @@
-﻿namespace Core.Setting;
+﻿using Microsoft.Extensions.Options;
+
+namespace Core.Setting;
 
 public sealed record class JwtSetting
 {
@@ -15,4 +17,12 @@ public sealed record class JwtSetting
     public int AccessTokenExpirationDays { get; init; } = 1;
 
     public int RefreshTokenExpirationDays { get; init; } = 7;
+}
+
+public class JwtSettingValidation : IValidateOptions<JwtSetting>
+{
+    public ValidateOptionsResult Validate(string name, JwtSetting options)
+    {
+        return ValidateOptionsResult.Success;
+    }
 }

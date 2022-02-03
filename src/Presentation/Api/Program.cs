@@ -1,6 +1,5 @@
 ﻿using Api.Extensions;
 using Core.Setting;
-using Core.Utilities;
 using FluentValidation.AspNetCore;
 using Serilog;
 using Service.Identity.Models;
@@ -11,15 +10,13 @@ builder.Host.UseSerilog();
 var services = builder.Services;
 
 var configuration = builder.Configuration;
-ConfigureConfiguration(services, configuration);
 
 var applicationSettings = configuration
-                           .GetSection(nameof(ApplicationSettings))
-                           .Get<ApplicationSettings>();
-applicationSettings.ValidateApplicationSettings();
+                          .GetSection(nameof(ApplicationSettings))
+                          .Get<ApplicationSettings>();
 
 const string CORS_POLICY = "CorsPolicy";
-SerilogExtensions.Register(configuration);
+SerilogExtensions.Register(applicationSettings);
 
 // Add services to the container.
 ConfigureServices(services);
@@ -31,17 +28,11 @@ ConfigurePipeline(app);
 
 app.Run();
 
-void ConfigureConfiguration(IServiceCollection services, ConfigurationManager configuration)
-{
-    services.AddOptions<ApplicationSettings>()
-            .Bind(configuration.GetSection(nameof(ApplicationSettings)))
-            .ValidateDataAnnotations()
-            .Validate(config => config.ValidateApplicationSettings())
-            .ValidateOnStart();
-}
 
 void ConfigureServices(IServiceCollection services)
 {
+    services.AddConfiguration(configuration);
+
     // Database services
     services.AddDbContext(applicationSettings.DatabaseSetting);
 

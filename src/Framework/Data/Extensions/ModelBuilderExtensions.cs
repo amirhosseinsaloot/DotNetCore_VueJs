@@ -3,7 +3,6 @@ using Data.Entities.Logging;
 using Data.Entities.Teams;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using System.Reflection;
 
 namespace Data.Extensions;
 

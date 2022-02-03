@@ -8,11 +8,13 @@ namespace Api.Extensions;
 
 public static class SerilogExtensions
 {
-    public static void Register(IConfigurationRoot configuration)
+    public static void Register(ApplicationSettings? applicationSettings)
     {
-        var applicationSettings = configuration
-                                  .GetSection(nameof(ApplicationSettings))
-                                  .Get<ApplicationSettings>();
+        if (applicationSettings is null)
+        {
+            throw new ArgumentNullException (nameof(applicationSettings));
+        }
+
         var databaseSetting = applicationSettings.DatabaseSetting;
         var logSetting = applicationSettings.LogSetting;
 

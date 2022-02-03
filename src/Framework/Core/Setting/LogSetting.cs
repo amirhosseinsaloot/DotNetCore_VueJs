@@ -1,4 +1,6 @@
-﻿namespace Core.Setting;
+﻿using Microsoft.Extensions.Options;
+
+namespace Core.Setting;
 
 public sealed record class LogSetting
 {
@@ -7,4 +9,12 @@ public sealed record class LogSetting
     public bool AutoCreateSqlTable { get; init; } = true;
 
     public LogLevelSerilog MinimumLevelSerilog { get; init; } = LogLevelSerilog.Error;
+}
+
+public class LogSettingValidation : IValidateOptions<LogSetting>
+{
+    public ValidateOptionsResult Validate(string name, LogSetting options)
+    {
+        return ValidateOptionsResult.Success;
+    }
 }
