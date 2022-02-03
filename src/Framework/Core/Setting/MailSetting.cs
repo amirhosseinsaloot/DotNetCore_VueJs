@@ -1,11 +1,9 @@
 ﻿using Microsoft.Extensions.Options;
-using System.ComponentModel.DataAnnotations;
 
 namespace Core.Setting;
 
 public sealed record class MailSetting
 {
-    [EmailAddress]
     public string EmailAddress { get; init; } = null!;
 
     public string DisplayName { get; init; } = null!;

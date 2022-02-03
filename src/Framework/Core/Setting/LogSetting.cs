@@ -15,6 +15,11 @@ public class LogSettingValidation : IValidateOptions<LogSetting>
 {
     public ValidateOptionsResult Validate(string name, LogSetting options)
     {
+        if (string.IsNullOrEmpty(options.TableName))
+        {
+            return ValidateOptionsResult.Fail($"{nameof(LogSetting.TableName)} can not be empty.");
+        }
+
         return ValidateOptionsResult.Success;
     }
 }
