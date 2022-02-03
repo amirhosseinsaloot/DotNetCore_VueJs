@@ -1,6 +1,4 @@
-﻿using Core.Utilities;
-using Microsoft.Extensions.Options;
-using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.Extensions.Options;
 
 namespace Core.Setting;
 

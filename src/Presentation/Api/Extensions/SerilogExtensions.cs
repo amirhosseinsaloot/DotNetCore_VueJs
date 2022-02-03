@@ -12,7 +12,7 @@ public static class SerilogExtensions
     {
         if (applicationSettings is null)
         {
-            throw new ArgumentNullException (nameof(applicationSettings));
+            throw new ArgumentNullException(nameof(applicationSettings));
         }
 
         var databaseSetting = applicationSettings.DatabaseSetting;

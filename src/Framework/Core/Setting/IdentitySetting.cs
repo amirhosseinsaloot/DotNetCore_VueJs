@@ -21,6 +21,11 @@ public class IdentitySettingValidation : IValidateOptions<IdentitySetting>
 {
     public ValidateOptionsResult Validate(string name, IdentitySetting options)
     {
+        if (options.PasswordRequiredLength < 6)
+        {
+            return ValidateOptionsResult.Fail($"{nameof(IdentitySetting.PasswordRequiredLength)} can not be less than 6.");
+        }
+
         return ValidateOptionsResult.Success;
     }
 }

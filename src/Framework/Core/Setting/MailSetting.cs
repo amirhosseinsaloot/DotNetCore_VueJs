@@ -1,9 +1,11 @@
 ﻿using Microsoft.Extensions.Options;
+using System.ComponentModel.DataAnnotations;
 
 namespace Core.Setting;
 
 public sealed record class MailSetting
 {
+    [EmailAddress]
     public string EmailAddress { get; init; } = null!;
 
     public string DisplayName { get; init; } = null!;
@@ -39,9 +41,9 @@ public class MailSettingValidation : IValidateOptions<MailSetting>
             return ValidateOptionsResult.Fail($"{nameof(MailSetting.SmtpServer)} in mail setting not configured.");
         }
 
-        if (options.Port == default)
+        if (options.Port <= 0)
         {
-            return ValidateOptionsResult.Fail($"{nameof(MailSetting.Port)} in mail setting not configured.");
+            return ValidateOptionsResult.Fail($"{nameof(MailSetting.Port)} in mail setting not valid.");
         }
 
         return ValidateOptionsResult.Success;

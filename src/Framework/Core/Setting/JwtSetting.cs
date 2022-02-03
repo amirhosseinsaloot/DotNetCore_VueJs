@@ -23,6 +23,21 @@ public class JwtSettingValidation : IValidateOptions<JwtSetting>
 {
     public ValidateOptionsResult Validate(string name, JwtSetting options)
     {
+        if (options.NotBeforeMinutes < 0)
+        {
+            return ValidateOptionsResult.Fail($"{nameof(JwtSetting.NotBeforeMinutes)} can not be less than 0.");
+
+        }
+        if (options.AccessTokenExpirationDays < 1)
+        {
+            return ValidateOptionsResult.Fail($"{nameof(JwtSetting.AccessTokenExpirationDays)} can not be less tha 1.");
+        }
+
+        if (options.RefreshTokenExpirationDays < 1)
+        {
+            return ValidateOptionsResult.Fail($"{nameof(JwtSetting.RefreshTokenExpirationDays)} can not be less tha 1.");
+        }
+
         return ValidateOptionsResult.Success;
     }
 }
