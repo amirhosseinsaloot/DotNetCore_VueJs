@@ -82,9 +82,6 @@ This will contains Enums , Exception classes , Interfaces (The Interfaces of gen
 ### Infrastructure Layer
 This layer contains Entities , Database config , Migrations , DataProviders (Presentation layer uses DataProviders for getting proper data) and application services such as Domain services (Business logic) or other services like Email , Sms and etc.
 
-Hints : 
-1) Depends on Core and Data.
-
 ### Presentation Layer (Backend API)
 
 Api endpoints , Middlewares , FilterActions , Service Registrations are placed in this layer.
