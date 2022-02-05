@@ -6,31 +6,17 @@ namespace Service.Emails.Services;
 
 public class EmailsLogService : IEmailsLogService
 {
-    #region Fields
-
     private readonly IDataProvider<EmailsLog> _emailsLogDataProvider;
 
     private readonly IFileService _fileService;
 
-    #endregion
-
-    #region Properties
-
     private string FilesDescription => "Email Attachment";
-
-    #endregion
-
-    #region Ctor
 
     public EmailsLogService(IDataProvider<EmailsLog> emailsLogDataProvider, IFileService fileService)
     {
         _emailsLogDataProvider = emailsLogDataProvider;
         _fileService = fileService;
     }
-
-    #endregion
-
-    #region Methods
 
     public async Task SaveLogAsync(EmailRequest emailRequest, CancellationToken cancellationToken)
     {
@@ -83,6 +69,4 @@ public class EmailsLogService : IEmailsLogService
 
         await _emailsLogDataProvider.AddAsync(emailsLog, cancellationToken);
     }
-
-    #endregion
 }

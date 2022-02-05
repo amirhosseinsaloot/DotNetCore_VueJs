@@ -7,17 +7,11 @@ namespace Data.DataProviders;
 
 public class DataProvider<TEntity> : IDataProvider<TEntity> where TEntity : class, IBaseEntity
 {
-    #region Fields
-
     private readonly ApplicationDbContext _dbContext;
 
     protected readonly DbSet<TEntity> _dbSet;
 
     protected readonly IMapper _mapper;
-
-    #endregion Fields
-
-    #region Ctor
 
     public DataProvider(ApplicationDbContext dbContext, IMapper mapper)
     {
@@ -25,8 +19,6 @@ public class DataProvider<TEntity> : IDataProvider<TEntity> where TEntity : clas
         _dbSet = _dbContext.Set<TEntity>();
         _mapper = mapper;
     }
-
-    #endregion Ctor
 
     #region Methods
 

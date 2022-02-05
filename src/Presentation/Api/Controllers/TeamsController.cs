@@ -6,22 +6,12 @@ namespace Api.Controllers;
 
 public class TeamsController : BaseController
 {
-    #region Fields
-
     private readonly IDataProvider<Team> _teamDataProvider;
-
-    #endregion Fields
-
-    #region Ctor
 
     public TeamsController(IDataProvider<Team> teamDataProvider)
     {
         _teamDataProvider = teamDataProvider;
     }
-
-    #endregion Ctor
-
-    #region Actions
 
     [HttpGet, Authorize(Roles = ApplicationRoles.TeamAdmin_ToTheTop)]
     public async Task<ApiResponse<IList<TeamListDto>>> GetAllTeams(CancellationToken cancellationToken)
@@ -57,6 +47,4 @@ public class TeamsController : BaseController
         await _teamDataProvider.RemoveAsync(id, cancellationToken);
         return new ApiResponse(true, ApiResultBodyCode.Success);
     }
-
-    #endregion Actions
 }

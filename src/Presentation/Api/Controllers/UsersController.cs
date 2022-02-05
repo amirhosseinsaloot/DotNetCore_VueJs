@@ -10,25 +10,15 @@ namespace Api.Controllers;
 
 public class UsersController : BaseController
 {
-    #region Fields
-
     private readonly IMapper _mapper;
 
     private readonly UserManager<User> _userManager;
-
-    #endregion Fields
-
-    #region Ctor
 
     public UsersController(IMapper mapper, UserManager<User> userManager)
     {
         _mapper = mapper;
         _userManager = userManager;
     }
-
-    #endregion Ctor
-
-    #region Actions
 
     [HttpGet, Authorize(Roles = ApplicationRoles.TeamAdmin_ToTheTop)]
     public async Task<ApiResponse<List<UserListDto>>> GetAllUsers()
@@ -101,6 +91,4 @@ public class UsersController : BaseController
         await _userManager.DeleteAsync(user);
         return new ApiResponse(true, ApiResultBodyCode.Success);
     }
-
-    #endregion Actions
 }

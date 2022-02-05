@@ -7,22 +7,12 @@ namespace Api.Controllers;
 
 public class AuthorizationController : BaseController
 {
-    #region Fields
-
     private readonly IAuthService _authService;
-
-    #endregion Fields
-
-    #region Ctor
 
     public AuthorizationController(IAuthService authService)
     {
         _authService = authService;
     }
-
-    #endregion Ctor
-
-    #region Action
 
     [HttpPost("Login"), AllowAnonymous]
     public async Task<ApiResponse<UserSignInDto>> Login(TokenRequest tokenRequest, CancellationToken cancellationToken)
@@ -43,6 +33,4 @@ public class AuthorizationController : BaseController
         var token = await _authService.RefreshTokenAsync(tokenRequest, cancellationToken);
         return new ApiResponse<Token>(true, ApiResultBodyCode.Success, token);
     }
-
-    #endregion Action
 }

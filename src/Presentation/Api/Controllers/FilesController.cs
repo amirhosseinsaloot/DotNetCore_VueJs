@@ -4,22 +4,12 @@ namespace Api.Controllers;
 
 public class FilesController : BaseController
 {
-    #region Fields
-
     private readonly IFileService _fileService;
-
-    #endregion Fields
-
-    #region Ctor
 
     public FilesController(IFileService fileService)
     {
         _fileService = fileService;
     }
-
-    #endregion Ctor
-
-    #region Actions
 
     [HttpPost, Authorize(Roles = ApplicationRoles.TeamMember_ToTheTop)]
     public async Task<ApiResponse<object>> StoreFile(IFormFile formFile, string description, CancellationToken cancellationToken)
@@ -40,6 +30,4 @@ public class FilesController : BaseController
         await _fileService.DeleteFileAsync(id, cancellationToken);
         return new ApiResponse(true, ApiResultBodyCode.Success);
     }
-
-    #endregion Actions
 }

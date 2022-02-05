@@ -6,22 +6,12 @@ namespace Data.DataProviders.TeamDataProvider;
 
 public class TeamDataProvider : DataProvider<Team>, ITeamDataProvider
 {
-    #region Fields
-
     private readonly ITeamDbObject _teamDbObject;
-
-    #endregion
-
-    #region Ctor
 
     public TeamDataProvider(ApplicationDbContext dbContext, IMapper mapper, ITeamDbObject teamDbObject) : base(dbContext, mapper)
     {
         _teamDbObject = teamDbObject;
     }
-
-    #endregion Ctor
-
-    #region Methods
 
     public async Task<IList<Team>> GetChildTeamAsync(int rootTeamId, CancellationToken cancellationToken)
     {
@@ -56,6 +46,4 @@ public class TeamDataProvider : DataProvider<Team>, ITeamDataProvider
         var entity = await _teamDbObject.GetRootTeamByUserAsync(userId, cancellationToken);
         return _mapper.Map<TDto>(entity);
     }
-
-    #endregion Methods
 }

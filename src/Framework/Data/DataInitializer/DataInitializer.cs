@@ -7,17 +7,11 @@ namespace Data.DataInitializer;
 
 public class DataInitializer
 {
-    #region Fields
-
     private readonly UserManager<User> _userManager;
 
     private readonly RoleManager<Role> _roleManager;
 
     private readonly ApplicationDbContext _dbContext;
-
-    #endregion Fields
-
-    #region Ctor
 
     public DataInitializer(UserManager<User> userManager, RoleManager<Role> roleManager, ApplicationDbContext dbContext)
     {
@@ -25,10 +19,6 @@ public class DataInitializer
         _roleManager = roleManager;
         _dbContext = dbContext;
     }
-
-    #endregion Ctor
-
-    #region Methods
 
     public void InstallRequierdData()
     {
@@ -179,6 +169,4 @@ public class DataInitializer
 
         _dbContext.SaveChanges();
     }
-
-    #endregion Methods
 }

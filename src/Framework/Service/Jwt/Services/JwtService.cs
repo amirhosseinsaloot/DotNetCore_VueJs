@@ -14,8 +14,6 @@ namespace Service.Jwt.Services;
 
 public class JwtService
 {
-    #region Fields
-
     private readonly ApplicationSettings _applicationSettings;
 
     private readonly SignInManager<User> _signInManager;
@@ -24,10 +22,6 @@ public class JwtService
 
     private readonly IHttpContextAccessor _httpContextAccessor;
 
-    #endregion Fields
-
-    #region Ctor
-
     public JwtService(IOptions<ApplicationSettings> settings, SignInManager<User> signInManager, ITenantDataProvider tenantDataProvider, IHttpContextAccessor httpContextAccessor)
     {
         _applicationSettings = settings.Value;
@@ -35,10 +29,6 @@ public class JwtService
         _tenantDataProvider = tenantDataProvider;
         _httpContextAccessor = httpContextAccessor;
     }
-
-    #endregion Ctor
-
-    #region Methods
 
     public async Task<Token> GenerateTokenAsync(User user, CancellationToken cancellationToken)
     {
@@ -159,6 +149,4 @@ public class JwtService
             TenantId = int.Parse(user.FindFirst(nameof(CurrentUser.TenantId))!.Value),
         };
     }
-
-    #endregion Methods
 }

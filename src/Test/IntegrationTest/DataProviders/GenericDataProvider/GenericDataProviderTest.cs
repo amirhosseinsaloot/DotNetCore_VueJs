@@ -11,8 +11,6 @@ namespace IntegrationTest.DataProviders.GenericDataProvider;
 
 public class GenericDataProviderTest
 {
-    #region Fields
-
     private readonly IDataProvider<TicketType> _dataProvider;
 
     private readonly ApplicationDbContext _applicationDbContext;
@@ -21,10 +19,6 @@ public class GenericDataProviderTest
 
     private readonly IMapper _mapper;
 
-    #endregion Fields
-
-    #region Ctor
-
     public GenericDataProviderTest()
     {
         _dataProvider = new DataProvider<TicketType>(new ApplicationDbContext(DataProviderSetup.GetDbContextOptions()), DataProviderSetup.GetAutoMapper());
@@ -32,8 +26,6 @@ public class GenericDataProviderTest
         _dbSet = _applicationDbContext.Set<TicketType>();
         _mapper = DataProviderSetup.GetAutoMapper();
     }
-
-    #endregion Ctor
 
     #region Methods
 
@@ -538,7 +530,7 @@ public class GenericDataProviderTest
         var result = await _dbSet.AsNoTracking().Where(p => p.Type.Contains("_AddRangeAsync_WithMapper_")).ToListAsync();
         var actual = new List<TicketTypeCreateUpdateDto>();
 
-        // Mapping TicketTypeListDto to TicketTypeCreateUpdateDto
+        // Mapping TicketTypeListViewModel to TicketTypeCreateUpdateViewModel
         foreach (var item in result)
         {
             actual.Add(new TicketTypeCreateUpdateDto { Type = item.Type });
@@ -589,7 +581,7 @@ public class GenericDataProviderTest
         var result = _dbSet.AsNoTracking().Where(p => p.Type.Contains("_AddRangeAsync_WithMapper_")).ToList();
         var actual = new List<TicketTypeCreateUpdateDto>();
 
-        // Mapping TicketTypeListDto to TicketTypeCreateUpdateDto
+        // Mapping TicketTypeListViewModel to TicketTypeCreateUpdateViewModel
         foreach (var item in result)
         {
             actual.Add(new TicketTypeCreateUpdateDto { Type = item.Type });

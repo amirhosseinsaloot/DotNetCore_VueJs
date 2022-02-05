@@ -10,8 +10,6 @@ namespace Service.Identity.Services;
 
 public class AuthService : IAuthService
 {
-    #region Fields
-
     private readonly IMapper _mapper;
 
     private readonly JwtService _jwtService;
@@ -20,10 +18,6 @@ public class AuthService : IAuthService
 
     private readonly SignInManager<User> _signInManager;
 
-    #endregion Fields
-
-    #region Ctor
-
     public AuthService(IMapper mapper, JwtService jwtService, UserManager<User> userManager, SignInManager<User> signInManager)
     {
         _mapper = mapper;
@@ -31,10 +25,6 @@ public class AuthService : IAuthService
         _userManager = userManager;
         _signInManager = signInManager;
     }
-
-    #endregion Ctor
-
-    #region Methods
 
     public async Task<UserSignInDto> SignInAsync(TokenRequest tokenRequest, CancellationToken cancellationToken)
     {
@@ -165,6 +155,4 @@ public class AuthService : IAuthService
 
         return token;
     }
-
-    #endregion Methods
 }

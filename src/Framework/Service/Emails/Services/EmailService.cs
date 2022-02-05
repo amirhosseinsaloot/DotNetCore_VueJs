@@ -9,17 +9,11 @@ namespace Service.Emails.Services;
 
 public class EmailService : IEmailService
 {
-    #region Fields
-
     private readonly MailSetting _mailSetting;
 
     private readonly IEmailsLogService _emailsLogService;
 
     private readonly IDataProvider<User> _userDataProvider;
-
-    #endregion
-
-    #region Ctor
 
     public EmailService(IOptions<ApplicationSettings> settings, IEmailsLogService emailsLogService, IDataProvider<User> userDataProvider)
     {
@@ -27,10 +21,6 @@ public class EmailService : IEmailService
         _emailsLogService = emailsLogService;
         _userDataProvider = userDataProvider;
     }
-
-    #endregion
-
-    #region Methods
 
     public async Task SendEmailAsync(EmailRequest emailRequest, CancellationToken cancellationToken)
     {
@@ -123,6 +113,4 @@ public class EmailService : IEmailService
         // Save email in database
         await _emailsLogService.SaveLogAsync(emailRequestToUser, cancellationToken);
     }
-
-    #endregion
 }

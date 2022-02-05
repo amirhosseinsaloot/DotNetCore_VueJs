@@ -8,15 +8,9 @@ namespace Api.Middlewares;
 
 public class GlobalExceptionHandlerMiddleware
 {
-    #region Fields
-
     private readonly RequestDelegate _next;
 
     private readonly IWebHostEnvironment _env;
-
-    #endregion Fields
-
-    #region Ctor
 
     public GlobalExceptionHandlerMiddleware(RequestDelegate next,
         IWebHostEnvironment env)
@@ -24,10 +18,6 @@ public class GlobalExceptionHandlerMiddleware
         _next = next;
         _env = env;
     }
-
-    #endregion Ctor
-
-    #region Methods
 
     public async Task Invoke(HttpContext context)
     {
@@ -127,6 +117,4 @@ public class GlobalExceptionHandlerMiddleware
             await context.Response.WriteAsync(json);
         }
     }
-
-    #endregion Methods
 }

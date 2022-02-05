@@ -5,22 +5,12 @@ namespace Service.Files.Services;
 
 public class FileOnFileSystemService : IFileService
 {
-    #region Fields
-
     private readonly IDataProvider<FileOnFileSystem> _fileOnFileSystemDataProvider;
-
-    #endregion
-
-    #region Ctor
 
     public FileOnFileSystemService(IDataProvider<FileOnFileSystem> fileOnFileSystemDataProvider)
     {
         _fileOnFileSystemDataProvider = fileOnFileSystemDataProvider;
     }
-
-    #endregion
-
-    #region Methods
 
     public async Task<int> StoreFileAsync(IFormFile formFile, string description, CancellationToken cancellationToken)
     {
@@ -142,6 +132,4 @@ public class FileOnFileSystemService : IFileService
         }
         await _fileOnFileSystemDataProvider.RemoveAsync(id, cancellationToken);
     }
-
-    #endregion
 }
