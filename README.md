@@ -74,20 +74,13 @@ Frontend :
 
 ## Backend Architecture Overview
 
-This application uses Onion architecture.
+This application uses Clean architecture and also can be used to build projects with Domain-Driven-Design approach.
 
 ### Core Layer
-This will contains Enums , Exception classes , Interfaces and Abstractions (Implementions on above layers) , Setting classes , and Utilities will be used in above layers .
+This will contains Enums , Exception classes , Interfaces (The Interfaces of generic repositories) and Abstractions (Implementions on above layers) , Setting classes , Entities , POCO classes, construction, and model validation , and Utilities will be used in above layers .
 
-### Data Layer
-This layer contains Entities , Database config , Migrations and DataProviders (Service layer uses DataProviders for getting proper data).
-
-Hints : 
-1) Anything in this layer is about the DATA (Separation of concerns).
-2) Depends on Core but has no dependencies on any other layer.
-
-### Service Layer
-Service layer contains all application services such as Domain services (Business logic) or other services like Jwt , Email , Sms and etc.
+### Infrastructure Layer
+This layer contains Entities , Database config , Migrations , DataProviders (Presentation layer uses DataProviders for getting proper data) and application services such as Domain services (Business logic) or other services like Email , Sms and etc.
 
 Hints : 
 1) Depends on Core and Data.
@@ -95,10 +88,7 @@ Hints :
 ### Presentation Layer (Backend API)
 
 Api endpoints , Middlewares , FilterActions , Service Registrations are placed in this layer.
-In addition, this layer depends on service layer.
-
-Hints : 
-1) Depends on Service but has no dependencies on any other layer.
+In addition, this layer depends on Infrastructure layer.
 
 ## Frontend Overview
 Below image demonstrates the essence of the frontend and shows how it works :

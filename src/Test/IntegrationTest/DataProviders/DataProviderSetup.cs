@@ -1,6 +1,6 @@
 ﻿using Api.AutoMapperConfiguration.Profiles.Tickets;
 using AutoMapper;
-using Data;
+using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace IntegrationTest.DataProviders;

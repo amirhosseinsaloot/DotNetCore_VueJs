@@ -1,4 +1,4 @@
-﻿using Service.DomainDto.Team;
+﻿using Infrastructure.Dto.Team;
 
 namespace UnitTest.DtoValidations.Teams;
 

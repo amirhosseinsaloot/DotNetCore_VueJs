@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
-using Data;
-using Data.DataProviders;
-using Data.Entities.Tickets;
+using Core.Entities.Tickets;
+using Core.Interfaces.DataProviders;
 using FluentAssertions;
+using Infrastructure;
+using Infrastructure.Data.DataProviders;
+using Infrastructure.Dto.Ticket;
 using Microsoft.EntityFrameworkCore;
-using Service.DomainDto.Ticket;
 using Xunit;
 
 namespace IntegrationTest.DataProviders.GenericDataProvider;

@@ -1,7 +1,7 @@
-﻿using Service.DomainDto.User;
-using Service.Identity.Models;
-using Service.Identity.Services;
-using Service.Jwt.Models;
+﻿using Infrastructure.Dto.User;
+using Infrastructure.Services.Identity.Models;
+using Infrastructure.Services.Identity.Services;
+using Infrastructure.Services.Jwt.Models;
 
 namespace Api.Controllers;
 

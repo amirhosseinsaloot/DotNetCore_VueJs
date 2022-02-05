@@ -1,6 +1,6 @@
-﻿using Data.DataProviders;
-using Data.Entities.Teams;
-using Service.DomainDto.Team;
+﻿using Core.Entities.Teams;
+using Core.Interfaces.DataProviders;
+using Infrastructure.Dto.Team;
 
 namespace Api.Controllers;
 

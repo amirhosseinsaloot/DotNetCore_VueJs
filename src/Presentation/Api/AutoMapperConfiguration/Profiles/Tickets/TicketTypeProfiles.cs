@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Data.Entities.Tickets;
-using Service.DomainDto.Ticket;
+using Core.Entities.Tickets;
+using Infrastructure.Dto.Ticket;
 
 namespace Api.AutoMapperConfiguration.Profiles.Tickets;
 

@@ -1,6 +1,6 @@
 ﻿using Api.Middlewares;
-using Data;
-using Data.DataInitializer;
+using Infrastructure;
+using Infrastructure.Data.DataInitializer;
 using Microsoft.EntityFrameworkCore;
 
 namespace Api.Extensions;

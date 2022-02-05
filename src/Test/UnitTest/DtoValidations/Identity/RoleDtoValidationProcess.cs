@@ -1,4 +1,4 @@
-﻿using Service.DomainDto.Role;
+﻿using Infrastructure.Dto.Role;
 
 #nullable disable
 

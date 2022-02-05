@@ -1,4 +1,4 @@
-﻿using Service.DomainDto.User;
+﻿using Infrastructure.Dto.User;
 
 #nullable disable
 

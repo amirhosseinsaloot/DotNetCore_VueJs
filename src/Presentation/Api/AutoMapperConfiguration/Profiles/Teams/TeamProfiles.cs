@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Data.Entities.Teams;
-using Service.DomainDto.Team;
+using Core.Entities.Teams;
+using Infrastructure.Dto.Team;
 
 namespace Api.AutoMapperConfiguration.Profiles.Teams;
 

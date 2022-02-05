@@ -1,6 +1,6 @@
-﻿using Service.DomainDto.Role;
-using Service.DomainDto.User;
-using Service.Identity.Models;
+﻿using Infrastructure.Dto.Role;
+using Infrastructure.Dto.User;
+using Infrastructure.Services.Identity.Models;
 
 namespace UnitTest.DtoValidations.Identity;
 

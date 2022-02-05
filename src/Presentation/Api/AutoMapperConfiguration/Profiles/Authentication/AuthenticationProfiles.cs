@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Data.Entities.Identity;
-using Service.DomainDto.Role;
-using Service.DomainDto.User;
+using Core.Entities.Identity;
+using Infrastructure.Dto.Role;
+using Infrastructure.Dto.User;
 
 namespace Api.AutoMapperConfiguration.Profiles.Authentication;
 

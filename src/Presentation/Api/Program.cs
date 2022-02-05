@@ -1,8 +1,8 @@
 ﻿using Api.Extensions;
 using Core.Setting;
 using FluentValidation.AspNetCore;
+using Infrastructure.Services.Identity.Models;
 using Serilog;
-using Service.Identity.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog();

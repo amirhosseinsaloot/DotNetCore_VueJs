@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Data.Entities.Identity;
-using Service.DomainDto.Tenant;
+using Core.Entities.Identity;
+using Infrastructure.Dto.Tenant;
 
 namespace Api.AutoMapperConfiguration.Profiles.Identity;
 

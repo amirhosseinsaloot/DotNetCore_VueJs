@@ -1,6 +1,6 @@
-﻿using Service.Identity.Models;
+﻿#nullable disable
 
-#nullable disable
+using Infrastructure.Services.Identity.Models;
 
 namespace UnitTest.DtoValidations.Identity;
 

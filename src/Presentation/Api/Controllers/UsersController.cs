@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Core.Entities.Identity;
 using Core.Exceptions;
-using Data.Entities.Identity;
+using Infrastructure.Dto.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Service.DomainDto.User;
 
 namespace Api.Controllers;
 
