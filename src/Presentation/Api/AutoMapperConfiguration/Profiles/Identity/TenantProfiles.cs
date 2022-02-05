@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Data.Entities.Identity;
-using Service.Identity.Models;
+using Service.DomainDto.Tenant;
 
 namespace Api.AutoMapperConfiguration.Profiles.Identity;
 
@@ -10,9 +10,9 @@ public class TenantProfiles : Profile
 
     public TenantProfiles()
     {
-        CreateMap<Tenant, TenantViewModel>();
+        CreateMap<Tenant, TenantDto>();
 
-        CreateMap<Tenant, TenantListViewModel>();
+        CreateMap<Tenant, TenantListDto>();
     }
 
     #endregion Ctor

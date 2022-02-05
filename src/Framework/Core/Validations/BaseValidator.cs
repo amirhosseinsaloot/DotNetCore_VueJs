@@ -1,5 +1,5 @@
 ﻿using Core.Exceptions;
-using Core.Interfaces.ViewModels;
+using Core.Interfaces.Dtos;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using FluentValidation.Results;

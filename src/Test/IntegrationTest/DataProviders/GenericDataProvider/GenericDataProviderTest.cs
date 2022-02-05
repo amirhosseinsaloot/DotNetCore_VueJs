@@ -4,7 +4,7 @@ using Data.DataProviders;
 using Data.Entities.Tickets;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using Service.Domain.Tickets.Models;
+using Service.DomainDto.Ticket;
 using Xunit;
 
 namespace IntegrationTest.DataProviders.GenericDataProvider;
@@ -52,10 +52,10 @@ public class GenericDataProviderTest
         await _dbSet.AddRangeAsync(ticketTypes);
         await _applicationDbContext.SaveChangesAsync();
 
-        var expected = _mapper.Map<List<TicketTypeListViewModel>>(await _dbSet.Where(p => p.Type.Contains("_GetAllAsync_WithMapper_")).ToListAsync());
+        var expected = _mapper.Map<List<TicketTypeListDto>>(await _dbSet.Where(p => p.Type.Contains("_GetAllAsync_WithMapper_")).ToListAsync());
 
         // Act
-        var actual = await _dataProvider.GetAllAsync<TicketTypeListViewModel>(default);
+        var actual = await _dataProvider.GetAllAsync<TicketTypeListDto>(default);
 
         // Assert
         actual.Should().BeEquivalentTo(expected);
@@ -77,10 +77,10 @@ public class GenericDataProviderTest
         _dbSet.AddRange(ticketTypes);
         _applicationDbContext.SaveChanges();
 
-        var expected = _mapper.Map<List<TicketTypeListViewModel>>(_dbSet.Where(p => p.Type.Contains("_GetAll_WithMapper_")).ToList());
+        var expected = _mapper.Map<List<TicketTypeListDto>>(_dbSet.Where(p => p.Type.Contains("_GetAll_WithMapper_")).ToList());
 
         // Act
-        var actual = _dataProvider.GetAll<TicketTypeListViewModel>();
+        var actual = _dataProvider.GetAll<TicketTypeListDto>();
 
         // Assert
         actual.Should().BeEquivalentTo(expected);
@@ -152,10 +152,10 @@ public class GenericDataProviderTest
         await _dbSet.AddRangeAsync(ticketTypes);
         await _applicationDbContext.SaveChangesAsync();
 
-        var expected = _mapper.Map<List<TicketTypeListViewModel>>(await _dbSet.Where(p => p.Type.Contains("_GetListByConditionAsync_WithMapper_")).ToListAsync());
+        var expected = _mapper.Map<List<TicketTypeListDto>>(await _dbSet.Where(p => p.Type.Contains("_GetListByConditionAsync_WithMapper_")).ToListAsync());
 
         // Act
-        var actual = await _dataProvider.GetListByConditionAsync<TicketTypeListViewModel>(p => p.Type.Contains("_GetListByConditionAsync_WithMapper_"), default);
+        var actual = await _dataProvider.GetListByConditionAsync<TicketTypeListDto>(p => p.Type.Contains("_GetListByConditionAsync_WithMapper_"), default);
 
         // Assert
         actual.Should().BeEquivalentTo(expected);
@@ -177,10 +177,10 @@ public class GenericDataProviderTest
         _dbSet.AddRange(ticketTypes);
         _applicationDbContext.SaveChanges();
 
-        var expected = _mapper.Map<List<TicketTypeListViewModel>>(_dbSet.Where(p => p.Type.Contains("_GetListByCondition_WithMapper_")).ToList());
+        var expected = _mapper.Map<List<TicketTypeListDto>>(_dbSet.Where(p => p.Type.Contains("_GetListByCondition_WithMapper_")).ToList());
 
         // Act
-        var actual = _dataProvider.GetListByCondition<TicketTypeListViewModel>(p => p.Type.Contains("_GetListByCondition_WithMapper_"));
+        var actual = _dataProvider.GetListByCondition<TicketTypeListDto>(p => p.Type.Contains("_GetListByCondition_WithMapper_"));
 
         // Assert
         actual.Should().BeEquivalentTo(expected);
@@ -251,10 +251,10 @@ public class GenericDataProviderTest
         await _dbSet.AddAsync(ticketType);
         await _applicationDbContext.SaveChangesAsync();
 
-        var expected = _mapper.Map<TicketTypeViewModel>(ticketType);
+        var expected = _mapper.Map<TicketTypeDto>(ticketType);
 
         // Act
-        var actual = await _dataProvider.GetByIdAsync<TicketTypeViewModel>(ticketType.Id, default);
+        var actual = await _dataProvider.GetByIdAsync<TicketTypeDto>(ticketType.Id, default);
 
         // Assert
         actual.Should().BeEquivalentTo(expected);
@@ -275,10 +275,10 @@ public class GenericDataProviderTest
         _dbSet.Add(ticketType);
         _applicationDbContext.SaveChanges();
 
-        var expected = _mapper.Map<TicketTypeViewModel>(ticketType);
+        var expected = _mapper.Map<TicketTypeDto>(ticketType);
 
         // Act
-        var actual = _dataProvider.GetById<TicketTypeViewModel>(ticketType.Id);
+        var actual = _dataProvider.GetById<TicketTypeDto>(ticketType.Id);
 
         // Assert
         actual.Should().BeEquivalentTo(expected);
@@ -343,10 +343,10 @@ public class GenericDataProviderTest
         await _dbSet.AddAsync(ticketType);
         await _applicationDbContext.SaveChangesAsync();
 
-        var expected = _mapper.Map<TicketTypeViewModel>(ticketType);
+        var expected = _mapper.Map<TicketTypeDto>(ticketType);
 
         // Act
-        var actual = await _dataProvider.GetByConditionAsync<TicketTypeViewModel>(p => p.Type == ticketType.Type, default, false);
+        var actual = await _dataProvider.GetByConditionAsync<TicketTypeDto>(p => p.Type == ticketType.Type, default, false);
 
         // Assert
         actual.Should().BeEquivalentTo(expected);
@@ -367,10 +367,10 @@ public class GenericDataProviderTest
         _dbSet.AddAsync(ticketType);
         _applicationDbContext.SaveChanges();
 
-        var expected = _mapper.Map<TicketTypeViewModel>(ticketType);
+        var expected = _mapper.Map<TicketTypeDto>(ticketType);
 
         // Act
-        var actual = _dataProvider.GetByCondition<TicketTypeViewModel>(p => p.Type == ticketType.Type, false);
+        var actual = _dataProvider.GetByCondition<TicketTypeDto>(p => p.Type == ticketType.Type, false);
 
         // Assert
         actual.Should().BeEquivalentTo(expected);
@@ -431,7 +431,7 @@ public class GenericDataProviderTest
     public async Task AddAsync_WithMapper()
     {
         // Arrange
-        var expected = new TicketTypeCreateUpdateViewModel
+        var expected = new TicketTypeCreateUpdateDto
         {
             Type = "_AddAsync_WithMapper_"
         };
@@ -441,7 +441,7 @@ public class GenericDataProviderTest
 
         // Assert
         var result = await _dbSet.AsNoTracking().Where(p => p.Type == expected.Type).LastOrDefaultAsync();
-        var actual = new TicketTypeCreateUpdateViewModel
+        var actual = new TicketTypeCreateUpdateDto
         {
             Type = result!.Type
         };
@@ -478,7 +478,7 @@ public class GenericDataProviderTest
     public void Add_WithMapper()
     {
         // Arrange
-        var expected = new TicketTypeCreateUpdateViewModel
+        var expected = new TicketTypeCreateUpdateDto
         {
             Type = "_Add_WithMapper_"
         };
@@ -488,7 +488,7 @@ public class GenericDataProviderTest
 
         // Assert
         var result = _dbSet.AsNoTracking().Where(p => p.Type == expected.Type).LastOrDefault();
-        var actual = new TicketTypeCreateUpdateViewModel
+        var actual = new TicketTypeCreateUpdateDto
         {
             Type = result!.Type
         };
@@ -525,10 +525,10 @@ public class GenericDataProviderTest
     public async Task AddRangeAsync_WithMapper()
     {
         // Arrange
-        var expected = new List<TicketTypeCreateUpdateViewModel>
+        var expected = new List<TicketTypeCreateUpdateDto>
             {
-                new TicketTypeCreateUpdateViewModel { Type = "_AddRangeAsync_WithMapper_1_"},
-                new TicketTypeCreateUpdateViewModel { Type = "_AddRangeAsync_WithMapper_2_"},
+                new TicketTypeCreateUpdateDto { Type = "_AddRangeAsync_WithMapper_1_"},
+                new TicketTypeCreateUpdateDto { Type = "_AddRangeAsync_WithMapper_2_"},
             };
 
         // Act
@@ -536,12 +536,12 @@ public class GenericDataProviderTest
 
         // Assert
         var result = await _dbSet.AsNoTracking().Where(p => p.Type.Contains("_AddRangeAsync_WithMapper_")).ToListAsync();
-        var actual = new List<TicketTypeCreateUpdateViewModel>();
+        var actual = new List<TicketTypeCreateUpdateDto>();
 
-        // Mapping TicketTypeListViewModel to TicketTypeCreateUpdateViewModel
+        // Mapping TicketTypeListDto to TicketTypeCreateUpdateDto
         foreach (var item in result)
         {
-            actual.Add(new TicketTypeCreateUpdateViewModel { Type = item.Type });
+            actual.Add(new TicketTypeCreateUpdateDto { Type = item.Type });
         }
 
         actual.Should().BeEquivalentTo(expected);
@@ -576,10 +576,10 @@ public class GenericDataProviderTest
     public void AddRange_WithMapper()
     {
         // Arrange
-        var expected = new List<TicketTypeCreateUpdateViewModel>
+        var expected = new List<TicketTypeCreateUpdateDto>
             {
-                new TicketTypeCreateUpdateViewModel { Type = "_AddRangeAsync_WithMapper_1_"},
-                new TicketTypeCreateUpdateViewModel { Type = "_AddRangeAsync_WithMapper_2_"},
+                new TicketTypeCreateUpdateDto { Type = "_AddRangeAsync_WithMapper_1_"},
+                new TicketTypeCreateUpdateDto { Type = "_AddRangeAsync_WithMapper_2_"},
             };
 
         // Act
@@ -587,12 +587,12 @@ public class GenericDataProviderTest
 
         // Assert
         var result = _dbSet.AsNoTracking().Where(p => p.Type.Contains("_AddRangeAsync_WithMapper_")).ToList();
-        var actual = new List<TicketTypeCreateUpdateViewModel>();
+        var actual = new List<TicketTypeCreateUpdateDto>();
 
-        // Mapping TicketTypeListViewModel to TicketTypeCreateUpdateViewModel
+        // Mapping TicketTypeListDto to TicketTypeCreateUpdateDto
         foreach (var item in result)
         {
-            actual.Add(new TicketTypeCreateUpdateViewModel { Type = item.Type });
+            actual.Add(new TicketTypeCreateUpdateDto { Type = item.Type });
         }
 
         actual.Should().BeEquivalentTo(expected);
@@ -641,7 +641,7 @@ public class GenericDataProviderTest
         await _applicationDbContext.SaveChangesAsync();
 
         // Act
-        var actual = new TicketTypeCreateUpdateViewModel { Type = "_UpdateAsync_WithMapper_" };
+        var actual = new TicketTypeCreateUpdateDto { Type = "_UpdateAsync_WithMapper_" };
         await _dataProvider.UpdateAsync(expected.Id, actual, default);
 
         // Assert
@@ -693,7 +693,7 @@ public class GenericDataProviderTest
         _applicationDbContext.SaveChanges();
 
         // Act
-        var actual = new TicketTypeCreateUpdateViewModel { Type = "_Update_WithMapper_" };
+        var actual = new TicketTypeCreateUpdateDto { Type = "_Update_WithMapper_" };
         _dataProvider.Update(expected.Id, actual);
 
         // Assert

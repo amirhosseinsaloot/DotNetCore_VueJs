@@ -1,5 +1,10 @@
-﻿using Service.Domain.Users.Models;
-using Service.Domain.Users.Services;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Core.Exceptions;
+using Data.Entities.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Service.DomainDto.User;
 
 namespace Api.Controllers;
 
@@ -7,15 +12,18 @@ public class UsersController : BaseController
 {
     #region Fields
 
-    private readonly UserService _userService;
+    private readonly IMapper _mapper;
+
+    private readonly UserManager<User> _userManager;
 
     #endregion Fields
 
     #region Ctor
 
-    public UsersController(UserService userService)
+    public UsersController(IMapper mapper, UserManager<User> userManager)
     {
-        _userService = userService;
+        _mapper = mapper;
+        _userManager = userManager;
     }
 
     #endregion Ctor
@@ -23,37 +31,74 @@ public class UsersController : BaseController
     #region Actions
 
     [HttpGet, Authorize(Roles = ApplicationRoles.TeamAdmin_ToTheTop)]
-    public async Task<ApiResponse<List<UserListViewModel>>> GetAllUsers()
+    public async Task<ApiResponse<List<UserListDto>>> GetAllUsers()
     {
-        var userList = await _userService.GetAllUsersAsync();
-        return new ApiResponse<List<UserListViewModel>>(true, ApiResultBodyCode.Success, userList);
+        var userList = await _userManager.Users
+                             .ProjectTo<UserListDto>(_mapper.ConfigurationProvider)
+                             .ToListAsync();
+        return new ApiResponse<List<UserListDto>>(true, ApiResultBodyCode.Success, userList);
     }
 
     [HttpGet("{id:int:min(1)}"), Authorize(Roles = ApplicationRoles.TeamAdmin_ToTheTop)]
-    public async Task<ApiResponse<UserViewModel>> GetUserById(int id)
+    public async Task<ApiResponse<UserDto>> GetUserById(int id)
     {
-        var userViewModel = await _userService.GetByIdAsync(id);
-        return new ApiResponse<UserViewModel>(true, ApiResultBodyCode.Success, userViewModel);
+        var user = await _userManager.FindByIdAsync(id.ToString());
+        if (user is null)
+        {
+            throw new NotFoundException();
+        }
+
+        await _userManager.UpdateSecurityStampAsync(user);
+        var userDto = _mapper.Map<UserDto>(user);
+
+        return new ApiResponse<UserDto>(true, ApiResultBodyCode.Success, userDto);
     }
 
     [HttpPost, Authorize(Roles = ApplicationRoles.TeamAdmin_ToTheTop)]
-    public async Task<ApiResponse<UserViewModel>> CreateUser(UserCreateViewModel userCreateViewModel)
+    public async Task<ApiResponse<UserDto>> CreateUser(UserCreateDto userCreateDto)
     {
-        var userViewModel = await _userService.CreateAsync(userCreateViewModel);
-        return new ApiResponse<UserViewModel>(true, ApiResultBodyCode.Success, userViewModel);
+        var doesExists = await _userManager.Users.AnyAsync(p => p.UserName == userCreateDto.Username);
+        if (doesExists is true)
+        {
+            throw new DuplicateException("This user already exists");
+        }
+
+        var user = _mapper.Map<User>(userCreateDto);
+        var identityResult = await _userManager.CreateAsync(user, userCreateDto.Password);
+        if (identityResult.Succeeded is false)
+        {
+            throw new Exception("Server error");
+        }
+
+        var userDto = _mapper.Map<UserDto>(user);
+        return new ApiResponse<UserDto>(true, ApiResultBodyCode.Success, userDto);
     }
 
     [HttpPut("{id:int:min(1)}"), Authorize]
-    public async Task<ApiResponse> UpdateUser(int id, UserUpdateViewModel userUpdateViewModel)
+    public async Task<ApiResponse> UpdateUser(int id, UserUpdateDto userUpdateDto)
     {
-        await _userService.UpdateAsync(id, userUpdateViewModel);
+        var user = await _userManager.FindByIdAsync(id.ToString());
+        if (user is null)
+        {
+            throw new NotFoundException();
+        }
+
+        _mapper.Map(userUpdateDto, user);
+
+        await _userManager.UpdateAsync(user);
         return new ApiResponse(true, ApiResultBodyCode.Success);
     }
 
     [HttpDelete("{id:int:min(1)}"), Authorize]
     public async Task<ApiResponse> DeleteUser(int id)
     {
-        await _userService.DeleteAsync(id);
+        var user = await _userManager.FindByIdAsync(id.ToString());
+        if (user is null)
+        {
+            throw new NotFoundException();
+        }
+
+        await _userManager.DeleteAsync(user);
         return new ApiResponse(true, ApiResultBodyCode.Success);
     }
 

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Data.Entities.Teams;
-using Service.Domain.Teams.Models;
+using Service.DomainDto.Team;
 
 namespace Api.AutoMapperConfiguration.Profiles.Teams;
 
@@ -19,12 +19,12 @@ public class TeamProfiles : Profile
 
     public void TeamProfile()
     {
-        CreateMap<TeamCreateUpdateViewModel, Team>()
+        CreateMap<TeamCreateUpdateDto, Team>()
             .ForMember(dest => dest.Id, src => src.Ignore());
 
-        CreateMap<Team, TeamViewModel>();
+        CreateMap<Team, TeamDto>();
 
-        CreateMap<Team, TeamListViewModel>();
+        CreateMap<Team, TeamListDto>();
     }
 
     #endregion Methods

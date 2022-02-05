@@ -28,7 +28,7 @@ public class TenantDataProvider : DataProvider<Tenant>, ITenantDataProvider
         return await _tenantDbObject.GetTenantByUserAsync(userId, cancellationToken);
     }
 
-    public async Task<TDto?> GetTenantByUserAsync<TDto>(int userId, CancellationToken cancellationToken) where TDto : class, IViewModel
+    public async Task<TDto?> GetTenantByUserAsync<TDto>(int userId, CancellationToken cancellationToken) where TDto : class, IDto
     {
         var entity = await _tenantDbObject.GetTenantByUserAsync(userId, cancellationToken);
         return _mapper.Map<TDto>(entity);

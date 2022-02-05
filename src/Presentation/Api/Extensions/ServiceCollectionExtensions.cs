@@ -13,9 +13,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Service.Domain.Roles.Services;
-using Service.Domain.Teams.Services;
-using Service.Domain.Users.Services;
 using Service.Emails.Services;
 using Service.Files.Services;
 using Service.Identity.Services;
@@ -231,10 +228,6 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped(typeof(IEmailService), typeof(EmailService));
         services.AddScoped(typeof(IEmailsLogService), typeof(EmailsLogService));
-
-        services.AddScoped(typeof(RoleService));
-        services.AddScoped(typeof(UserService));
-        services.AddScoped(typeof(TeamService));
     }
 
     private static void AddDataProvidersDependencyRegistration(IServiceCollection services)

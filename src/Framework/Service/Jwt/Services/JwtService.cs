@@ -3,7 +3,7 @@ using Data.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Service.Domain.Users.Models;
+using Service.DomainDto.User;
 using Service.Jwt.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;

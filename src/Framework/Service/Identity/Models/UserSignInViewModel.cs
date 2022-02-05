@@ -1,11 +1,11 @@
-﻿using Service.Domain.Users.Models;
+﻿using Service.DomainDto.User;
 using Service.Jwt.Models;
 
 namespace Service.Identity.Models;
 
-public record class UserSignInViewModel
+public record class UserSignInDto
 {
-    public UserViewModel UserViewModel { get; init; } = null!;
+    public UserDto UserDto { get; init; } = null!;
 
     public Token Token { get; init; } = null!;
 }

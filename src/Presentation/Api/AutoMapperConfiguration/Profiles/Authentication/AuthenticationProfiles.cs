@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Data.Entities.Identity;
-using Service.Domain.Roles.Models;
-using Service.Domain.Users.Models;
+using Service.DomainDto.Role;
+using Service.DomainDto.User;
 
 namespace Api.AutoMapperConfiguration.Profiles.Authentication;
 
@@ -21,7 +21,7 @@ public class AuthenticationProfiles : Profile
 
     public void UserProfile()
     {
-        CreateMap<UserCreateViewModel, User>()
+        CreateMap<UserCreateDto, User>()
             .ForMember(dest => dest.Id, src => src.Ignore())
             .ForMember(dest => dest.IsActive, src => src.MapFrom(s => true))
             .ForMember(dest => dest.ConcurrencyStamp, src => src.Ignore())
@@ -39,7 +39,7 @@ public class AuthenticationProfiles : Profile
             .ForMember(dest => dest.RefreshTokenExpirationTime, src => src.Ignore())
             .ForMember(dest => dest.TwoFactorEnabled, src => src.Ignore());
 
-        CreateMap<UserUpdateViewModel, User>()
+        CreateMap<UserUpdateDto, User>()
             .ForMember(dest => dest.Id, src => src.Ignore())
             .ForMember(dest => dest.ConcurrencyStamp, src => src.Ignore())
             .ForMember(dest => dest.SecurityStamp, src => src.Ignore())
@@ -56,21 +56,21 @@ public class AuthenticationProfiles : Profile
             .ForMember(dest => dest.RefreshTokenExpirationTime, src => src.Ignore())
             .ForMember(dest => dest.TwoFactorEnabled, src => src.Ignore());
 
-        CreateMap<User, UserViewModel>();
+        CreateMap<User, UserDto>();
 
-        CreateMap<User, UserListViewModel>();
+        CreateMap<User, UserListDto>();
     }
 
     public void RoleProfile()
     {
-        CreateMap<RoleCreateUpdateViewModel, Role>()
+        CreateMap<RoleCreateUpdateDto, Role>()
             .ForMember(dest => dest.Id, src => src.Ignore())
             .ForMember(dest => dest.ConcurrencyStamp, src => src.Ignore())
             .ForMember(dest => dest.NormalizedName, src => src.Ignore());
 
-        CreateMap<Role, RoleViewModel>();
+        CreateMap<Role, RoleDto>();
 
-        CreateMap<Role, RoleListViewModel>();
+        CreateMap<Role, RoleListDto>();
     }
 
     #endregion Methods

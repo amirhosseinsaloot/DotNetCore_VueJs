@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Data.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
-using Service.Domain.Users.Models;
+using Service.DomainDto.User;
 using Service.Identity.Models;
 using Service.Jwt.Models;
 using Service.Jwt.Services;
@@ -36,7 +36,7 @@ public class AuthService : IAuthService
 
     #region Methods
 
-    public async Task<UserSignInViewModel> SignInAsync(TokenRequest tokenRequest, CancellationToken cancellationToken)
+    public async Task<UserSignInDto> SignInAsync(TokenRequest tokenRequest, CancellationToken cancellationToken)
     {
         if (tokenRequest.GrantType.Equals("password", StringComparison.OrdinalIgnoreCase) is false)
         {
@@ -71,14 +71,14 @@ public class AuthService : IAuthService
                 throw new NotFoundException("Username or Password is incorrect.");
             }
 
-            var userViewModel = _mapper.Map<UserViewModel>(user);
-            userViewModel.Roles = roles;
+            var userDto = _mapper.Map<UserDto>(user);
+            userDto.Roles = roles;
 
             var token = await _jwtService.GenerateTokenAsync(user, cancellationToken);
 
-            var userSignInViewModel = new UserSignInViewModel
+            var userSignInDto = new UserSignInDto
             {
-                UserViewModel = userViewModel,
+                UserDto = userDto,
                 Token = token
             };
 
@@ -89,22 +89,22 @@ public class AuthService : IAuthService
 
             await _userManager.UpdateAsync(user);
 
-            return userSignInViewModel;
+            return userSignInDto;
         }
     }
 
-    public async Task<UserSignInViewModel> RegisterAsync(UserCreateViewModel userDto, CancellationToken cancellationToken)
+    public async Task<UserSignInDto> RegisterAsync(UserCreateDto userCreateDto, CancellationToken cancellationToken)
     {
-        if (await _userManager.FindByNameAsync(userDto.Username) is not null)
+        if (await _userManager.FindByNameAsync(userCreateDto.Username) is not null)
         {
             throw new DuplicateException("This user already exists.");
         }
 
-        var user = _mapper.Map<User>(userDto);
+        var user = _mapper.Map<User>(userCreateDto);
         user.LastLoginDate = DateTime.UtcNow;
 
         // Create User
-        var result = await _userManager.CreateAsync(user, userDto.Password);
+        var result = await _userManager.CreateAsync(user, userCreateDto.Password);
         if (result.Succeeded is false)
         {
             throw new Exception(result.Errors.FirstOrDefault()?.Description ?? "Can not register this user.");
@@ -118,15 +118,15 @@ public class AuthService : IAuthService
         // Add RefreshToken to User entity
         await _userManager.UpdateAsync(user);
 
-        var userViewModel = _mapper.Map<UserViewModel>(user);
+        var userDto = _mapper.Map<UserDto>(user);
 
-        var userSignInViewModel = new UserSignInViewModel
+        var userSignInDto = new UserSignInDto
         {
-            UserViewModel = userViewModel,
+            UserDto = userDto,
             Token = token
         };
 
-        return userSignInViewModel;
+        return userSignInDto;
     }
 
     public async Task<Token> RefreshTokenAsync(TokenRequest tokenRequest, CancellationToken cancellationToken)

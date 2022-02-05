@@ -1,7 +1,7 @@
 ﻿// Core layer
 global using Core.Enums;
 global using Core.Exceptions;
-global using Core.Interfaces.ViewModels;
+global using Core.Interfaces.Dtos;
 global using Core.Setting;
 global using Core.Validations;
 

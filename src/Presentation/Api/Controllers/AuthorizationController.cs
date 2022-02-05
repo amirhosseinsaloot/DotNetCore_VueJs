@@ -1,4 +1,4 @@
-﻿using Service.Domain.Users.Models;
+﻿using Service.DomainDto.User;
 using Service.Identity.Models;
 using Service.Identity.Services;
 using Service.Jwt.Models;
@@ -25,16 +25,16 @@ public class AuthorizationController : BaseController
     #region Action
 
     [HttpPost("Login"), AllowAnonymous]
-    public async Task<ApiResponse<UserSignInViewModel>> Login(TokenRequest tokenRequest, CancellationToken cancellationToken)
+    public async Task<ApiResponse<UserSignInDto>> Login(TokenRequest tokenRequest, CancellationToken cancellationToken)
     {
         var token = await _authService.SignInAsync(tokenRequest, cancellationToken);
-        return new ApiResponse<UserSignInViewModel>(true, ApiResultBodyCode.Success, token);
+        return new ApiResponse<UserSignInDto>(true, ApiResultBodyCode.Success, token);
     }
 
     [HttpPost("Register"), AllowAnonymous]
-    public async Task<ApiResponse<UserSignInViewModel>> Register(UserCreateViewModel userDto, CancellationToken cancellationToken)
+    public async Task<ApiResponse<UserSignInDto>> Register(UserCreateDto userDto, CancellationToken cancellationToken)
     {
-        return new ApiResponse<UserSignInViewModel>(true, ApiResultBodyCode.Success, await _authService.RegisterAsync(userDto, cancellationToken));
+        return new ApiResponse<UserSignInDto>(true, ApiResultBodyCode.Success, await _authService.RegisterAsync(userDto, cancellationToken));
     }
 
     [HttpPost("RefreshToken"), AllowAnonymous]

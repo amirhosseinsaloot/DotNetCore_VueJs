@@ -28,7 +28,7 @@ public class TeamDataProvider : DataProvider<Team>, ITeamDataProvider
         return await _teamDbObject.GetChildTeamAsync(rootTeamId, cancellationToken);
     }
 
-    public async Task<IList<TDto>> GetChildTeamAsync<TDto>(int rootTeamId, CancellationToken cancellationToken) where TDto : class, IListViewModel
+    public async Task<IList<TDto>> GetChildTeamAsync<TDto>(int rootTeamId, CancellationToken cancellationToken) where TDto : class, IDtoList
     {
         var entities = await _teamDbObject.GetChildTeamAsync(rootTeamId, cancellationToken);
         return _mapper.Map<IList<TDto>>(entities);
@@ -39,7 +39,7 @@ public class TeamDataProvider : DataProvider<Team>, ITeamDataProvider
         return await _teamDbObject.GetRootTeamAsync(childTeamId, cancellationToken);
     }
 
-    public async Task<TDto?> GetRootTeamAsync<TDto>(int childTeamId, CancellationToken cancellationToken) where TDto : class, IViewModel
+    public async Task<TDto?> GetRootTeamAsync<TDto>(int childTeamId, CancellationToken cancellationToken) where TDto : class, IDto
     {
         var entity = await _teamDbObject.GetRootTeamAsync(childTeamId, cancellationToken);
         return _mapper.Map<TDto>(entity);
@@ -51,7 +51,7 @@ public class TeamDataProvider : DataProvider<Team>, ITeamDataProvider
     }
 
 
-    public async Task<TDto?> GetRootTeamByUserAsync<TDto>(int userId, CancellationToken cancellationToken) where TDto : class, IViewModel
+    public async Task<TDto?> GetRootTeamByUserAsync<TDto>(int userId, CancellationToken cancellationToken) where TDto : class, IDto
     {
         var entity = await _teamDbObject.GetRootTeamByUserAsync(userId, cancellationToken);
         return _mapper.Map<TDto>(entity);

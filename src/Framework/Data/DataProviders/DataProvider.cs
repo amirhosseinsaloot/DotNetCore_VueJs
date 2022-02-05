@@ -42,7 +42,7 @@ public class DataProvider<TEntity> : IDataProvider<TEntity> where TEntity : clas
     /// that contains all of entity records that mapped to TDto.
     /// </returns>
     /// <exception>AutoMapper exceptions about mapping between TDto and TEntity.</exception>
-    public async Task<IList<TDto>> GetAllAsync<TDto>(CancellationToken cancellationToken) where TDto : class, IListViewModel
+    public async Task<IList<TDto>> GetAllAsync<TDto>(CancellationToken cancellationToken) where TDto : class, IDtoList
     {
         return await _dbSet
                      .AsNoTracking()
@@ -58,7 +58,7 @@ public class DataProvider<TEntity> : IDataProvider<TEntity> where TEntity : clas
     /// that contains all of entity records that mapped to TDto.
     /// </returns>
     /// <exception>AutoMapper exceptions about mapping between TDto and TEntity.</exception>
-    public IList<TDto> GetAll<TDto>() where TDto : class, IListViewModel
+    public IList<TDto> GetAll<TDto>() where TDto : class, IDtoList
     {
         return _dbSet
                .AsNoTracking()
@@ -107,7 +107,7 @@ public class DataProvider<TEntity> : IDataProvider<TEntity> where TEntity : clas
     /// <exception cref="NotFoundException">Occured when does not exists any records with expression.</exception>
     /// <exception cref="ArgumentNullException">Occured when expression is null.</exception>
     /// <exception>AutoMapper exceptions about mapping between TDto and TEntity.</exception>
-    public async Task<IList<TDto>> GetListByConditionAsync<TDto>(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken) where TDto : class, IListViewModel
+    public async Task<IList<TDto>> GetListByConditionAsync<TDto>(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken) where TDto : class, IDtoList
     {
         var dtos = await _dbSet
                          .AsNoTracking()
@@ -131,7 +131,7 @@ public class DataProvider<TEntity> : IDataProvider<TEntity> where TEntity : clas
     /// <exception cref="NotFoundException">Occured when does not exists any records with expression.</exception>
     /// <exception cref="ArgumentNullException">Occured when expression is null.</exception>
     /// <exception>AutoMapper exceptions about mapping between TDto and TEntity.</exception>
-    public IList<TDto> GetListByCondition<TDto>(Expression<Func<TEntity, bool>> expression) where TDto : class, IListViewModel
+    public IList<TDto> GetListByCondition<TDto>(Expression<Func<TEntity, bool>> expression) where TDto : class, IDtoList
     {
         var dtos = _dbSet
                    .AsNoTracking()
@@ -207,7 +207,7 @@ public class DataProvider<TEntity> : IDataProvider<TEntity> where TEntity : clas
     /// </returns>
     /// <exception cref="NotFoundException">Occured when does not exists any records with expression.</exception>
     /// <exception >AutoMapper exceptions about mapping between TDto and TEntity.</exception>
-    public async Task<TDto> GetByIdAsync<TDto>(int id, CancellationToken cancellationToken) where TDto : class, IViewModel
+    public async Task<TDto> GetByIdAsync<TDto>(int id, CancellationToken cancellationToken) where TDto : class, IDto
     {
         var dto = await _dbSet
                         .AsNoTracking()
@@ -231,7 +231,7 @@ public class DataProvider<TEntity> : IDataProvider<TEntity> where TEntity : clas
     /// </returns>
     /// <exception cref="NotFoundException">Occured when does not exists any records with expression.</exception>
     /// <exception >AutoMapper exceptions about mapping between TDto and TEntity.</exception>
-    public TDto GetById<TDto>(int id) where TDto : class, IViewModel
+    public TDto GetById<TDto>(int id) where TDto : class, IDto
     {
         var dto = _dbSet
                   .AsNoTracking()
@@ -308,7 +308,7 @@ public class DataProvider<TEntity> : IDataProvider<TEntity> where TEntity : clas
     /// <exception cref="NotFoundException">Occured when does not exists any records with expression.</exception>
     /// <exception cref="ArgumentNullException">Occured when expression is null.</exception>
     /// <exception >AutoMapper exceptions about mapping between TDto and TEntity.</exception>
-    public async Task<TDto> GetByConditionAsync<TDto>(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken, bool isFirstOrDefault = true) where TDto : class, IViewModel
+    public async Task<TDto> GetByConditionAsync<TDto>(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken, bool isFirstOrDefault = true) where TDto : class, IDto
     {
         TDto? dto;
         if (isFirstOrDefault)
@@ -352,7 +352,7 @@ public class DataProvider<TEntity> : IDataProvider<TEntity> where TEntity : clas
     /// <exception cref="NotFoundException">Occured when does not exists any records with expression.</exception>
     /// <exception cref="ArgumentNullException">Occured when expression is null.</exception>
     /// <exception >AutoMapper exceptions about mapping between TDto and TEntity.</exception>
-    public TDto GetByCondition<TDto>(Expression<Func<TEntity, bool>> expression, bool isFirstOrDefault = true) where TDto : class, IViewModel
+    public TDto GetByCondition<TDto>(Expression<Func<TEntity, bool>> expression, bool isFirstOrDefault = true) where TDto : class, IDto
     {
         TDto? dto;
         if (isFirstOrDefault)
@@ -468,22 +468,22 @@ public class DataProvider<TEntity> : IDataProvider<TEntity> where TEntity : clas
     /// Asynchronously adds given model that its type is TDto to database.
     /// </summary>
     /// <typeparam name="TDto">TDto is a destination type of mapping process that its source type is TEntity.</typeparam>
-    /// <param name="createUpdateViewModel">The TDto to add.</param>
+    /// <param name="createUpdateDto">The TDto to add.</param>
     /// <param name="cancellationToken">A System.Threading.CancellationToken to observe while waiting for the task to complete.</param>
     /// <returns>
     /// A task that represents the asynchronous operation. 
     /// The task result contains a integer named Id of entity that added to database.
     /// </returns>
-    /// <exception cref="ArgumentNullException">Occured when createUpdateViewModel is null.</exception>
+    /// <exception cref="ArgumentNullException">Occured when createUpdateDto is null.</exception>
     /// <exception>AutoMapper exceptions about mapping between TDto and TEntity.</exception>
-    public async Task<int> AddAsync<TDto>(TDto createUpdateViewModel, CancellationToken cancellationToken) where TDto : class, ICreateViewModel
+    public async Task<int> AddAsync<TDto>(TDto createUpdateDto, CancellationToken cancellationToken) where TDto : class, IDtoCreate
     {
-        if (createUpdateViewModel is null)
+        if (createUpdateDto is null)
         {
             throw new ArgumentNullException();
         }
 
-        var entity = _mapper.Map<TDto, TEntity>(createUpdateViewModel);
+        var entity = _mapper.Map<TDto, TEntity>(createUpdateDto);
         await _dbSet.AddAsync(entity, cancellationToken);
         await _dbContext.SaveChangesAsync(cancellationToken);
         return entity.Id;
@@ -493,20 +493,20 @@ public class DataProvider<TEntity> : IDataProvider<TEntity> where TEntity : clas
     /// Adds given model that its type is TDto to database
     /// </summary>
     /// <typeparam name="TDto">TDto is a destination type of mapping process that its source type is TEntity.</typeparam>
-    /// <param name="createUpdateViewModel">The TDto to add.</param>
+    /// <param name="createUpdateDto">The TDto to add.</param>
     /// <returns>
     /// Result contains a integer named Id of entity that added to database.
     /// </returns>
-    /// <exception cref="ArgumentNullException">Occured when createUpdateViewModel is null.</exception>
+    /// <exception cref="ArgumentNullException">Occured when createUpdateDto is null.</exception>
     /// <exception>AutoMapper exceptions about mapping between TDto and TEntity.</exception>
-    public int Add<TDto>(TDto createUpdateViewModel) where TDto : class, ICreateViewModel
+    public int Add<TDto>(TDto createUpdateDto) where TDto : class, IDtoCreate
     {
-        if (createUpdateViewModel is null)
+        if (createUpdateDto is null)
         {
             throw new ArgumentNullException();
         }
 
-        var entity = _mapper.Map<TDto, TEntity>(createUpdateViewModel);
+        var entity = _mapper.Map<TDto, TEntity>(createUpdateDto);
         _dbSet.Add(entity);
         _dbContext.SaveChanges();
         return entity.Id;
@@ -557,19 +557,19 @@ public class DataProvider<TEntity> : IDataProvider<TEntity> where TEntity : clas
     /// Asynchronously adds given models that their type is TDto to database.
     /// </summary>
     /// <typeparam name="TDto">TDto is a destination type of mapping process that its source type is TEntity.</typeparam>
-    /// <param name="createUpdateViewModels">Entities to add that their types is TDto.</param>
+    /// <param name="createUpdateDtos">Entities to add that their types is TDto.</param>
     /// <param name="cancellationToken">A System.Threading.CancellationToken to observe while waiting for the task to complete.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    /// <exception cref="ArgumentNullException">Occured when createUpdateViewModel is null.</exception>
+    /// <exception cref="ArgumentNullException">Occured when createUpdateDto is null.</exception>
     /// <exception>AutoMapper exceptions about mapping between TDto and TEntity.</exception>
-    public async Task AddRangeAsync<TDto>(IEnumerable<TDto> createUpdateViewModels, CancellationToken cancellationToken) where TDto : class, ICreateViewModel
+    public async Task AddRangeAsync<TDto>(IEnumerable<TDto> createUpdateDtos, CancellationToken cancellationToken) where TDto : class, IDtoCreate
     {
-        if (createUpdateViewModels is null)
+        if (createUpdateDtos is null)
         {
             throw new ArgumentNullException();
         }
 
-        var entities = _mapper.Map<IEnumerable<TDto>, IEnumerable<TEntity>>(createUpdateViewModels);
+        var entities = _mapper.Map<IEnumerable<TDto>, IEnumerable<TEntity>>(createUpdateDtos);
         await _dbSet.AddRangeAsync(entities, cancellationToken);
         await _dbContext.SaveChangesAsync(cancellationToken);
     }
@@ -578,17 +578,17 @@ public class DataProvider<TEntity> : IDataProvider<TEntity> where TEntity : clas
     /// Adds given models that their type is TDto to database.
     /// </summary>
     /// <typeparam name="TDto">TDto is a destination type of mapping process that its source type is TEntity.</typeparam>
-    /// <param name="createUpdateViewModels">Entities to add that their types is TDto.</param>
-    /// <exception cref="ArgumentNullException">Occured when createUpdateViewModel is null.</exception>
+    /// <param name="createUpdateDtos">Entities to add that their types is TDto.</param>
+    /// <exception cref="ArgumentNullException">Occured when createUpdateDto is null.</exception>
     /// <exception>AutoMapper exceptions about mapping between TDto and TEntity.</exception>
-    public void AddRange<TDto>(IEnumerable<TDto> createUpdateViewModels) where TDto : class, ICreateViewModel
+    public void AddRange<TDto>(IEnumerable<TDto> createUpdateDtos) where TDto : class, IDtoCreate
     {
-        if (createUpdateViewModels is null)
+        if (createUpdateDtos is null)
         {
             throw new ArgumentNullException();
         }
 
-        var entities = _mapper.Map<IEnumerable<TDto>, IEnumerable<TEntity>>(createUpdateViewModels);
+        var entities = _mapper.Map<IEnumerable<TDto>, IEnumerable<TEntity>>(createUpdateDtos);
         _dbSet.AddRange(entities);
         _dbContext.SaveChanges();
     }
@@ -645,16 +645,16 @@ public class DataProvider<TEntity> : IDataProvider<TEntity> where TEntity : clas
     /// </summary>
     /// <typeparam name="TDto">TDto is a destination type of mapping process that its source type is TEntity.</typeparam>
     /// <param name="id">The value of the primary key for the entity to be updated.</param>
-    /// <param name="createUpdateViewModel">The entity to update that type is TDto.</param>
+    /// <param name="createUpdateDto">The entity to update that type is TDto.</param>
     /// <param name="cancellationToken">A System.Threading.CancellationToken to observe while waiting for the task to complete.</param>
     /// <returns>
     /// A task that represents the asynchronous operation.</returns>
     /// <exception cref="NotFoundException">Does not exists eny records with given Id.</exception>
-    /// <exception cref="ArgumentNullException">Occured when createUpdateViewModel is null.</exception>
+    /// <exception cref="ArgumentNullException">Occured when createUpdateDto is null.</exception>
     /// <exception>AutoMapper exceptions about mapping between TDto and TEntity.</exception>
-    public async Task UpdateAsync<TDto>(int id, TDto createUpdateViewModel, CancellationToken cancellationToken) where TDto : class, IUpdateViewModel
+    public async Task UpdateAsync<TDto>(int id, TDto createUpdateDto, CancellationToken cancellationToken) where TDto : class, IDtoUpdate
     {
-        if (createUpdateViewModel is null)
+        if (createUpdateDto is null)
         {
             throw new ArgumentNullException();
         }
@@ -665,7 +665,7 @@ public class DataProvider<TEntity> : IDataProvider<TEntity> where TEntity : clas
             throw new NotFoundException();
         }
 
-        _dbSet.Update(_mapper.Map(createUpdateViewModel, entity));
+        _dbSet.Update(_mapper.Map(createUpdateDto, entity));
         await _dbContext.SaveChangesAsync(cancellationToken);
     }
 
@@ -674,13 +674,13 @@ public class DataProvider<TEntity> : IDataProvider<TEntity> where TEntity : clas
     /// </summary>
     /// <typeparam name="TDto">TDto is a destination type of mapping process that its source type is TEntity.</typeparam>
     /// <param name="id">The value of the primary key for the entity to be updated.</param>
-    /// <param name="createUpdateViewModel">The entity to update that type is TDto.</param>
+    /// <param name="createUpdateDto">The entity to update that type is TDto.</param>
     /// <exception cref="NotFoundException">Does not exists eny records with given Id.</exception>
-    /// <exception cref="ArgumentNullException">Occured when createUpdateViewModel is null.</exception>
+    /// <exception cref="ArgumentNullException">Occured when createUpdateDto is null.</exception>
     /// <exception>AutoMapper exceptions about mapping between TDto and TEntity.</exception>
-    public void Update<TDto>(int id, TDto createUpdateViewModel) where TDto : class, IUpdateViewModel
+    public void Update<TDto>(int id, TDto createUpdateDto) where TDto : class, IDtoUpdate
     {
-        if (createUpdateViewModel is null)
+        if (createUpdateDto is null)
         {
             throw new ArgumentNullException();
         }
@@ -691,7 +691,7 @@ public class DataProvider<TEntity> : IDataProvider<TEntity> where TEntity : clas
             throw new NotFoundException();
         }
 
-        _dbSet.Update(_mapper.Map(createUpdateViewModel, entity));
+        _dbSet.Update(_mapper.Map(createUpdateDto, entity));
         _dbContext.SaveChanges();
     }
 

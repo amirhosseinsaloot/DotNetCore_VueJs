@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Data.Entities.Tickets;
-using Service.Domain.Tickets.Models;
+using Service.DomainDto.Ticket;
 
 namespace Api.AutoMapperConfiguration.Profiles.Tickets;
 
@@ -19,12 +19,12 @@ public class TicketTypeProfiles : Profile
 
     public void TicketTypeProfile()
     {
-        CreateMap<TicketTypeCreateUpdateViewModel, TicketType>()
+        CreateMap<TicketTypeCreateUpdateDto, TicketType>()
             .ForMember(dest => dest.Id, src => src.Ignore());
 
-        CreateMap<TicketType, TicketTypeViewModel>();
+        CreateMap<TicketType, TicketTypeDto>();
 
-        CreateMap<TicketType, TicketTypeListViewModel>();
+        CreateMap<TicketType, TicketTypeListDto>();
     }
 
     #endregion Methods

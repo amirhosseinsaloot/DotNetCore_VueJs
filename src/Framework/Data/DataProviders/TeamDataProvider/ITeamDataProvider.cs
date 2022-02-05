@@ -25,7 +25,7 @@ public interface ITeamDataProvider : IDataProvider<Team>
     /// The task result contains a IList of Team entity
     /// that contains the child teams of given team in all levels that mapped to TDto.
     /// </returns>
-    Task<IList<TDto>> GetChildTeamAsync<TDto>(int rootTeamId, CancellationToken cancellationToken) where TDto : class, IListViewModel;
+    Task<IList<TDto>> GetChildTeamAsync<TDto>(int rootTeamId, CancellationToken cancellationToken) where TDto : class, IDtoList;
 
     /// <summary>
     /// Asynchronously get the root team of given team in highest level in hierarchy.
@@ -46,7 +46,7 @@ public interface ITeamDataProvider : IDataProvider<Team>
     /// <returns>A task that represents the asynchronous operation.
     /// The task result is root Team entity of given team in highest level in hierarchy that mapped to TDto.
     /// </returns>
-    Task<TDto?> GetRootTeamAsync<TDto>(int childTeamId, CancellationToken cancellationToken) where TDto : class, IViewModel;
+    Task<TDto?> GetRootTeamAsync<TDto>(int childTeamId, CancellationToken cancellationToken) where TDto : class, IDto;
 
     /// <summary>
     /// Asynchronously find the root team from user team in highest level in hierarchy.
@@ -67,5 +67,5 @@ public interface ITeamDataProvider : IDataProvider<Team>
     /// <returns>A task that represents the asynchronous operation.
     /// The task result is the root Team entity from user team in highest level in hierarchy that mapped to TDto.
     /// </returns>
-    Task<TDto?> GetRootTeamByUserAsync<TDto>(int userId, CancellationToken cancellationToken) where TDto : class, IViewModel;
+    Task<TDto?> GetRootTeamByUserAsync<TDto>(int userId, CancellationToken cancellationToken) where TDto : class, IDto;
 }

@@ -1,4 +1,4 @@
-﻿using Service.Domain.Users.Models;
+﻿using Service.DomainDto.User;
 
 namespace Api.Controllers;
 
