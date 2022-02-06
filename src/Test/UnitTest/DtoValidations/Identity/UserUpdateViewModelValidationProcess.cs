@@ -1,4 +1,4 @@
-﻿using Infrastructure.Dto.User;
+﻿using Api.Dtos.User;
 
 #nullable disable
 

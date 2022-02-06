@@ -1,8 +1,4 @@
-﻿using Core.Interfaces.Dtos;
-using Core.Validations;
-using FluentValidation;
-
-namespace Api.Dtos.AuthToken;
+﻿namespace Api.Dtos.AuthToken;
 
 public record class TokenRequest : IDto
 {

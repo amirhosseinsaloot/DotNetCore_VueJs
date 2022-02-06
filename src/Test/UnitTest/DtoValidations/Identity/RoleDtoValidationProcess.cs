@@ -1,4 +1,4 @@
-﻿using Infrastructure.Dto.Role;
+﻿using Api.Dtos.Role;
 
 #nullable disable
 

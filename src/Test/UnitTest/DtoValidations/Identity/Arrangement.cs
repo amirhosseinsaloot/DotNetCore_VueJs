@@ -1,6 +1,6 @@
 ﻿using Api.Dtos.AuthToken;
-using Infrastructure.Dto.Role;
-using Infrastructure.Dto.User;
+using Api.Dtos.Role;
+using Api.Dtos.User;
 
 namespace UnitTest.DtoValidations.Identity;
 

@@ -6,7 +6,6 @@ using Core.Exceptions;
 using Core.Interfaces.DataProviders;
 using Core.Interfaces.Services;
 using Core.Setting;
-using Infrastructure.Dto.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using System.Security.Claims;

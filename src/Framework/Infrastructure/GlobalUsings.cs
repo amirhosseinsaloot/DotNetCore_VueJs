@@ -4,7 +4,6 @@ global using Core.Exceptions;
 global using Core.Interfaces.DataProviders;
 global using Core.Interfaces.Dtos;
 global using Core.Setting;
-global using Core.Validations;
 global using FluentValidation;
 global using Microsoft.AspNetCore.Http;
 global using Microsoft.EntityFrameworkCore;

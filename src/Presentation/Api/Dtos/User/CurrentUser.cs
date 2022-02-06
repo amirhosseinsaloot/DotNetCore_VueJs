@@ -1,6 +1,6 @@
-﻿namespace Infrastructure.Dto.User;
+﻿namespace Api.Dtos.User;
 
-public record class UserListDto : IDtoList
+public record class CurrentUser
 {
     public int Id { get; init; }
 
@@ -14,11 +14,13 @@ public record class UserListDto : IDtoList
 
     public DateTime Birthdate { get; init; }
 
-    public string? PhoneNumber { get; init; }
+    public string PhoneNumber { get; init; } = null!;
 
     public GenderType Gender { get; init; }
 
+    public ICollection<string> Roles { get; init; } = null!;
+
     public int TeamId { get; init; }
 
-    public bool IsActive { get; init; }
+    public int TenantId { get; init; }
 }

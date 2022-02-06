@@ -1,6 +1,6 @@
-﻿namespace Infrastructure.Dto.Team;
+﻿namespace Api.Dtos.Team;
 
-public record class TeamListDto : IDtoList
+public record class TeamDto : IDto
 {
     public int Id { get; init; }
 
@@ -9,8 +9,4 @@ public record class TeamListDto : IDtoList
     public string Description { get; init; } = null!;
 
     public int? ParentId { get; init; }
-
-    public int? TenantId { get; init; }
-
-    public DateTime CreatedOn { get; init; }
 }

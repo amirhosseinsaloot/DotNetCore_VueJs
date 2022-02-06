@@ -1,6 +1,6 @@
-﻿namespace Infrastructure.Dto.Tenant;
+﻿namespace Api.Dtos.Tenant;
 
-public record class TenantDto : IDto
+public record class TenantListDto : IDtoList
 {
     public int Id { get; init; }
 

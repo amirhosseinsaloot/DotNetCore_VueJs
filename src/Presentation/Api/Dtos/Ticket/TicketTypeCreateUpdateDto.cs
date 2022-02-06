@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Dto.Ticket;
+﻿namespace Api.Dtos.Ticket;
 
 public record class TicketTypeCreateUpdateDto : IDtoCreate, IDtoUpdate
 {

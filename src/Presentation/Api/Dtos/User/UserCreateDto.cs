@@ -1,8 +1,10 @@
-﻿namespace Infrastructure.Dto.User;
+﻿namespace Api.Dtos.User;
 
-public record class UserUpdateDto : IDtoUpdate
+public record class UserCreateDto : IDtoCreate
 {
     public string Username { get; init; } = null!;
+
+    public string Password { get; init; } = null!;
 
     public string Firstname { get; init; } = null!;
 
@@ -16,14 +18,12 @@ public record class UserUpdateDto : IDtoUpdate
 
     public GenderType Gender { get; init; }
 
-    public int? ProfilePictureId { get; set; }
-
-    public int? TeamId { get; init; }
+    public int TeamId { get; init; }
 }
 
-public class UserUpdateDtoValidator : BaseValidator<UserUpdateDto>
+public class UserCreateDtoValidator : BaseValidator<UserCreateDto>
 {
-    public UserUpdateDtoValidator()
+    public UserCreateDtoValidator()
     {
         RuleFor(p => p.Username).NotEmpty().MaximumLength(40);
 
@@ -33,10 +33,12 @@ public class UserUpdateDtoValidator : BaseValidator<UserUpdateDto>
 
         RuleFor(p => p.Email).NotEmpty().EmailAddress().MaximumLength(320);
 
+        RuleFor(p => p.Password).NotEmpty().MinimumLength(6).MaximumLength(127);
+
         RuleFor(p => p.PhoneNumber).MaximumLength(15).Matches(@"\(?\d{3}\)?-? *\d{3}-? *-?\d{4}");
 
         RuleFor(p => p.Gender).IsInEnum();
 
-        When(p => p.TeamId.HasValue, () => RuleFor(p => p.TeamId).GreaterThanOrEqualTo(1));
+        RuleFor(p => p.TeamId).GreaterThanOrEqualTo(1);
     }
 }

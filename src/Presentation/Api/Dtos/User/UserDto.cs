@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Dto.User;
+﻿namespace Api.Dtos.User;
 
 public class UserDto : IDto
 {

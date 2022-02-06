@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Dto.Team;
+﻿namespace Api.Dtos.Team;
 
 public record class TeamCreateUpdateDto : IDtoCreate, IDtoUpdate
 {

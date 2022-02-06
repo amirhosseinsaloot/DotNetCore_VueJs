@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Dto.Role;
+﻿namespace Api.Dtos.Role;
 
 public record class RoleCreateUpdateDto : IDtoCreate, IDtoUpdate
 {

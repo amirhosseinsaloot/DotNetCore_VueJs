@@ -1,5 +1,4 @@
 ﻿using Api.Dtos.AuthToken;
-using Infrastructure.Dto.User;
 
 namespace Api.Dtos.User;
 
