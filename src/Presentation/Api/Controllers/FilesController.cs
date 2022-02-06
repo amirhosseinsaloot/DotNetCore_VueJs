@@ -1,4 +1,4 @@
-﻿using Core.Services;
+﻿using Core.Interfaces.Services;
 
 namespace Api.Controllers;
 

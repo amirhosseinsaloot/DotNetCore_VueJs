@@ -1,5 +1,6 @@
 ﻿using Core.Entities.Files;
-using Core.Services;
+using Core.Interfaces.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Infrastructure.Services.Files;
 
@@ -70,17 +71,15 @@ public class FileOnDatabaseService : IFileService
         return await _fileOnDatabaseDataProvider.AddRangeAsync(fileModels, cancellationToken);
     }
 
-    public async Task<FileStreamResultInput> GetFileByIdAsync(int id, CancellationToken cancellationToken)
+    public async Task<FileStreamResult> GetFileByIdAsync(int id, CancellationToken cancellationToken)
     {
         var entity = await _fileOnDatabaseDataProvider.GetByIdAsync(id, cancellationToken);
-        var fileStreamResultInput = new FileStreamResultInput
-        {
-            FileStream = new MemoryStream(entity.Data!),
-            ContentType = entity.FileType,
-            FileDownloadName = entity.Name + entity.Extension
-        };
 
-        return fileStreamResultInput;
+        // Create FileStreamResult
+        var fileStreamResult = new FileStreamResult(new MemoryStream(entity.Data!), entity.FileType);
+        fileStreamResult.FileDownloadName = entity.Name + entity.Extension;
+
+        return fileStreamResult;
     }
 
     public async Task DeleteFileAsync(int id, CancellationToken cancellationToken)

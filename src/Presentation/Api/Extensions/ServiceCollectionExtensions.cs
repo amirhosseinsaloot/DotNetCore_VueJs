@@ -2,7 +2,6 @@
 using Core.Exceptions;
 using Core.Interfaces.DataProviders;
 using Core.Interfaces.Services;
-using Core.Services;
 using Core.Setting;
 using Infrastructure;
 using Infrastructure.Data.DataInitializer;

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Core.Services;
+namespace Core.Interfaces.Services;
 
 public interface IFileService
 {
@@ -8,7 +9,7 @@ public interface IFileService
 
     Task<List<int>> StoreFilesAsync(List<IFormFile> formFiles, string description, CancellationToken cancellationToken);
 
-    Task<FileStreamResultInput> GetFileByIdAsync(int id, CancellationToken cancellationToken);
+    Task<FileStreamResult> GetFileByIdAsync(int id, CancellationToken cancellationToken);
 
     Task DeleteFileAsync(int id, CancellationToken cancellationToken);
 }

@@ -1,6 +1,5 @@
 ﻿using Core.Entities.Logging;
 using Core.Interfaces.Services;
-using Core.Services;
 
 namespace Infrastructure.Services.Emails;
 

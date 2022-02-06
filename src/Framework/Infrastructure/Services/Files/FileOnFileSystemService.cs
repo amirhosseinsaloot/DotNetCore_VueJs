@@ -1,5 +1,6 @@
 ﻿using Core.Entities.Files;
-using Core.Services;
+using Core.Interfaces.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Infrastructure.Services.Files;
 
@@ -19,7 +20,7 @@ public class FileOnFileSystemService : IFileService
             throw new BadRequestException("File is empty object");
         }
 
-        var basePath = Path.Combine("Resources", "Images");
+        var basePath = Path.Combine("Resources");
         var basePathExists = Directory.Exists(basePath);
         if (basePathExists is false)
         {
@@ -62,7 +63,7 @@ public class FileOnFileSystemService : IFileService
 
         foreach (var formFile in formFiles)
         {
-            var basePath = Path.Combine("Resources", "Images");
+            var basePath = Path.Combine("Resources");
             var basePathExists = Directory.Exists(basePath);
             if (basePathExists is false)
             {
@@ -98,13 +99,9 @@ public class FileOnFileSystemService : IFileService
         return await _fileOnFileSystemDataProvider.AddRangeAsync(fileModels, cancellationToken);
     }
 
-    public async Task<FileStreamResultInput> GetFileByIdAsync(int id, CancellationToken cancellationToken)
+    public async Task<FileStreamResult> GetFileByIdAsync(int id, CancellationToken cancellationToken)
     {
         var entity = await _fileOnFileSystemDataProvider.GetByIdAsync(id, cancellationToken);
-        if (entity == null)
-        {
-            throw new NotFoundException("File not found");
-        }
 
         var memory = new MemoryStream();
         using (var stream = new FileStream(entity.FilePath!, FileMode.Open))
@@ -113,13 +110,11 @@ public class FileOnFileSystemService : IFileService
         }
         memory.Position = 0;
 
-        var fileStreamResultInput = new FileStreamResultInput
-        {
-            FileStream = memory,
-            ContentType = entity.FileType,
-            FileDownloadName = entity.Name + entity.Extension
-        };
-        return fileStreamResultInput;
+        // Create FileStreamResult
+        var fileStreamResult = new FileStreamResult(memory, entity.FileType);
+        fileStreamResult.FileDownloadName = entity.Name + entity.Extension;
+
+        return fileStreamResult;
     }
 
     public async Task DeleteFileAsync(int id, CancellationToken cancellationToken)
