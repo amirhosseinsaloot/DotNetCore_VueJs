@@ -6,7 +6,7 @@ using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
 
-namespace Infrastructure.Services;
+namespace Infrastructure.Services.Emails;
 
 public class EmailService : IEmailService
 {

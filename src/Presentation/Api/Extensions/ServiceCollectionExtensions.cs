@@ -12,6 +12,8 @@ using Infrastructure.Data.DataProviders.TenantDataProvider;
 using Infrastructure.Data.DbObjects.TeamDbObject;
 using Infrastructure.Data.DbObjects.TenantDbObject;
 using Infrastructure.Services;
+using Infrastructure.Services.Emails;
+using Infrastructure.Services.Files;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
