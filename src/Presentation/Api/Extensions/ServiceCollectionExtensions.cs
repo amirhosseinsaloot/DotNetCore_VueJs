@@ -11,8 +11,7 @@ using Infrastructure.Data.DbObjects.TeamDbObject;
 using Infrastructure.Data.DbObjects.TenantDbObject;
 using Infrastructure.Services.Emails.Services;
 using Infrastructure.Services.Files.Services;
-using Infrastructure.Services.Identity.Services;
-using Infrastructure.Services.Jwt.Services;
+using Infrastructure.Services.Token;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -215,8 +214,7 @@ public static class ServiceCollectionExtensions
         AddDbObjectsDependencyRegistration(services, applicationSettings);
 
         // Domain Services
-        services.AddScoped(typeof(JwtService));
-        services.AddScoped(typeof(IAuthService), typeof(AuthService));
+        services.AddScoped(typeof(IAuthTokenService), typeof(AuthTokenService));
 
         if (applicationSettings.DatabaseSetting.StoreFilesOnDatabase)
         {

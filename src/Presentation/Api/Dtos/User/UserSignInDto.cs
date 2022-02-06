@@ -1,7 +1,7 @@
-﻿using Infrastructure.Dto.User;
-using Infrastructure.Services.Jwt.Models;
+﻿using Api.Dtos.AuthToken;
+using Infrastructure.Dto.User;
 
-namespace Infrastructure.Services.Identity.Models;
+namespace Api.Dtos.User;
 
 public record class UserSignInDto
 {

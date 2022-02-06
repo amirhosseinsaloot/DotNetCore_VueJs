@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Services.Jwt.Models;
+﻿namespace Api.Dtos.AuthToken;
 
 public class RefreshToken
 {

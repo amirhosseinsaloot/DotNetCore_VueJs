@@ -1,7 +1,7 @@
-﻿using Api.Extensions;
+﻿using Api.Dtos.AuthToken;
+using Api.Extensions;
 using Core.Setting;
 using FluentValidation.AspNetCore;
-using Infrastructure.Services.Identity.Models;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);

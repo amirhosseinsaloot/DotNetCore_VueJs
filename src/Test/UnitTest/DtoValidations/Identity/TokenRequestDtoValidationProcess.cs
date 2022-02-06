@@ -1,6 +1,6 @@
 ﻿#nullable disable
 
-using Infrastructure.Services.Identity.Models;
+using Api.Dtos.AuthToken;
 
 namespace UnitTest.DtoValidations.Identity;
 
