@@ -1,7 +1,7 @@
 ﻿using Core.Entities.Files;
-using Infrastructure.Services.Files.Models;
+using Core.Services;
 
-namespace Infrastructure.Services.Files.Services;
+namespace Infrastructure.Services;
 
 public class FileOnDatabaseService : IFileService
 {

@@ -1,11 +1,12 @@
 ﻿using Core.Entities.Identity;
-using Infrastructure.Services.Emails.Models;
+using Core.Entities.Logging;
+using Core.Interfaces.Services;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
 
-namespace Infrastructure.Services.Emails.Services;
+namespace Infrastructure.Services;
 
 public class EmailService : IEmailService
 {
@@ -22,14 +23,14 @@ public class EmailService : IEmailService
         _userDataProvider = userDataProvider;
     }
 
-    public async Task SendEmailAsync(EmailRequest emailRequest, CancellationToken cancellationToken)
+    public async Task SendEmailAsync(string body, string subject, string toEmail, List<IFormFile>? attachments, CancellationToken cancellationToken)
     {
         // Filling BodyBuilder instance
         var builder = new BodyBuilder();
-        if (emailRequest.Attachments != null)
+        if (attachments != null)
         {
             MemoryStream memoryStream;
-            foreach (var file in emailRequest.Attachments)
+            foreach (var file in attachments)
             {
                 if (file.Length > 0)
                 {
@@ -42,16 +43,16 @@ public class EmailService : IEmailService
                 }
             }
         }
-        builder.HtmlBody = emailRequest.Body;
+        builder.HtmlBody = body;
 
         // Filling MimeMessage instance
         var email = new MimeMessage
         {
             Sender = MailboxAddress.Parse(_mailSetting.EmailAddress),
-            Subject = emailRequest.Subject,
+            Subject = subject,
             Body = builder.ToMessageBody(),
         };
-        email.To.Add(MailboxAddress.Parse(emailRequest.ToEmail));
+        email.To.Add(MailboxAddress.Parse(toEmail));
 
         // Sending Process
         using var smtp = new SmtpClient();
@@ -61,12 +62,19 @@ public class EmailService : IEmailService
         await smtp.DisconnectAsync(true);
 
         // Save email in database
-        await _emailsLogService.SaveLogAsync(emailRequest, cancellationToken);
+        var emailsLog = new EmailsLog
+        {
+            ToEmail = toEmail,
+            Subject = subject,
+            Body = body,
+            ToUserId = null,
+        };
+        await _emailsLogService.SaveLogAsync(emailsLog, attachments, cancellationToken);
     }
 
-    public async Task SendEmailAsync(EmailRequestToUser emailRequestToUser, CancellationToken cancellationToken)
+    public async Task SendEmailAsync(string body, string subject, int toUserId, List<IFormFile>? attachments, CancellationToken cancellationToken)
     {
-        var user = await _userDataProvider.GetByIdAsync(emailRequestToUser.UserId, cancellationToken);
+        var user = await _userDataProvider.GetByIdAsync(toUserId, cancellationToken);
         if (user is null)
         {
             throw new NotFoundException("User not found for sending email.");
@@ -74,10 +82,10 @@ public class EmailService : IEmailService
 
         // Filling BodyBuilder instance
         var builder = new BodyBuilder();
-        if (emailRequestToUser.Attachments != null)
+        if (attachments != null)
         {
             MemoryStream memoryStream;
-            foreach (var file in emailRequestToUser.Attachments)
+            foreach (var file in attachments)
             {
                 if (file.Length > 0)
                 {
@@ -91,13 +99,13 @@ public class EmailService : IEmailService
             }
         }
 
-        builder.HtmlBody = emailRequestToUser.Body;
+        builder.HtmlBody = body;
 
         // Filling MimeMessage instance
         var email = new MimeMessage
         {
             Sender = MailboxAddress.Parse(_mailSetting.EmailAddress),
-            Subject = emailRequestToUser.Subject,
+            Subject = subject,
             Body = builder.ToMessageBody(),
         };
 
@@ -111,6 +119,13 @@ public class EmailService : IEmailService
         await smtp.DisconnectAsync(true);
 
         // Save email in database
-        await _emailsLogService.SaveLogAsync(emailRequestToUser, cancellationToken);
+        var emailsLog = new EmailsLog
+        {
+            ToEmail = null,
+            Subject = subject,
+            Body = body,
+            ToUserId = toUserId,
+        };
+        await _emailsLogService.SaveLogAsync(emailsLog, attachments, cancellationToken);
     }
 }
