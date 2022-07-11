@@ -1,6 +1,6 @@
-﻿using Core.Entities.Logging;
-using Core.Entities.Teams;
-using Core.Utilities;
+﻿using Domain.Entities.Logging;
+using Domain.Entities.Teams;
+using Domain.Utilities;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 

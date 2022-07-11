@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Core.Entities.Identity;
+namespace Domain.Entities.Identity;
 
 public class UserRole : IdentityUserRole<int>, IEntity, ICreatedOn
 {

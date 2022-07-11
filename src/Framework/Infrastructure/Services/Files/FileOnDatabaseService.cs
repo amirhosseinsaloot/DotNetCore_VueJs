@@ -1,5 +1,5 @@
-﻿using Core.Entities.Files;
-using Core.Interfaces.Services;
+﻿using Domain.Entities.Files;
+using Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Infrastructure.Services.Files;
@@ -76,8 +76,10 @@ public class FileOnDatabaseService : IFileService
         var entity = await _fileOnDatabaseDataProvider.GetByIdAsync(id, cancellationToken);
 
         // Create FileStreamResult
-        var fileStreamResult = new FileStreamResult(new MemoryStream(entity.Data!), entity.FileType);
-        fileStreamResult.FileDownloadName = entity.Name + entity.Extension;
+        var fileStreamResult = new FileStreamResult(new MemoryStream(entity.Data!), entity.FileType)
+        {
+            FileDownloadName = entity.Name + entity.Extension
+        };
 
         return fileStreamResult;
     }

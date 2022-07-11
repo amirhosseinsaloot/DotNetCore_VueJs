@@ -1,11 +1,11 @@
-﻿using Core.Exceptions;
-using Core.Interfaces.Dtos;
+﻿using Domain.Exceptions;
+using Domain.Interfaces.Dtos;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Core.Validations;
+namespace Domain.Validations;
 
 public abstract class BaseValidator<TDto> : AbstractValidator<TDto>, IValidatorInterceptor
     where TDto : IDto

@@ -1,4 +1,4 @@
-﻿namespace Core.Enums;
+﻿namespace Domain.Enums;
 
 public enum LogLevelSerilog : byte
 {

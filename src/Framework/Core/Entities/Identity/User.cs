@@ -1,10 +1,10 @@
-﻿using Core.Entities.Files;
-using Core.Entities.Logging;
-using Core.Entities.Teams;
-using Core.Entities.Tickets;
+﻿using Domain.Entities.Files;
+using Domain.Entities.Logging;
+using Domain.Entities.Teams;
+using Domain.Entities.Tickets;
 using Microsoft.AspNetCore.Identity;
 
-namespace Core.Entities.Identity;
+namespace Domain.Entities.Identity;
 
 public class User : IdentityUser<int>, IBaseEntity, ICreatedOn
 {

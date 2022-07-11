@@ -1,7 +1,7 @@
 ﻿using Api.Dtos.Role;
 using Api.Dtos.User;
 using AutoMapper;
-using Core.Entities.Identity;
+using Domain.Entities.Identity;
 
 namespace Api.AutoMapperConfiguration.Profiles.Authentication;
 

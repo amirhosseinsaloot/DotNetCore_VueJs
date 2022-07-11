@@ -1,5 +1,5 @@
-﻿using Core.Entities.Files;
-using Core.Interfaces.Services;
+﻿using Domain.Entities.Files;
+using Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Infrastructure.Services.Files;
@@ -111,8 +111,10 @@ public class FileOnFileSystemService : IFileService
         memory.Position = 0;
 
         // Create FileStreamResult
-        var fileStreamResult = new FileStreamResult(memory, entity.FileType);
-        fileStreamResult.FileDownloadName = entity.Name + entity.Extension;
+        var fileStreamResult = new FileStreamResult(memory, entity.FileType)
+        {
+            FileDownloadName = entity.Name + entity.Extension
+        };
 
         return fileStreamResult;
     }

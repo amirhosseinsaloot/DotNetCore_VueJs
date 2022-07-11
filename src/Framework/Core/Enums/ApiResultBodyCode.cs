@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Core.Enums;
+namespace Domain.Enums;
 
 public enum ApiResultBodyCode : byte
 {

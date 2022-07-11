@@ -1,6 +1,6 @@
 ﻿using Api.Dtos.AuthToken;
 using Api.Extensions;
-using Core.Setting;
+using Domain.Setting;
 using FluentValidation.AspNetCore;
 using Serilog;
 

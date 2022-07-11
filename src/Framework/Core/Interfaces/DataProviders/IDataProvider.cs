@@ -1,7 +1,7 @@
-﻿using Core.Interfaces.Dtos;
+﻿using Domain.Interfaces.Dtos;
 using System.Linq.Expressions;
 
-namespace Core.Interfaces.DataProviders;
+namespace Domain.Interfaces.DataProviders;
 
 public interface IDataProvider<TEntity> where TEntity : IBaseEntity
 {

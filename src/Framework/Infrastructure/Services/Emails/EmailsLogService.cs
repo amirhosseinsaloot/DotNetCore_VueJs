@@ -1,5 +1,5 @@
-﻿using Core.Entities.Logging;
-using Core.Interfaces.Services;
+﻿using Domain.Entities.Logging;
+using Domain.Interfaces.Services;
 
 namespace Infrastructure.Services.Emails;
 

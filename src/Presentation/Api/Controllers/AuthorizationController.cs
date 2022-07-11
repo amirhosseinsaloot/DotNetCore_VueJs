@@ -1,11 +1,11 @@
 ﻿using Api.Dtos.AuthToken;
 using Api.Dtos.User;
 using AutoMapper;
-using Core.Entities.Identity;
-using Core.Exceptions;
-using Core.Interfaces.DataProviders;
-using Core.Interfaces.Services;
-using Core.Setting;
+using Domain.Entities.Identity;
+using Domain.Exceptions;
+using Domain.Interfaces.DataProviders;
+using Domain.Interfaces.Services;
+using Domain.Setting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using System.Security.Claims;

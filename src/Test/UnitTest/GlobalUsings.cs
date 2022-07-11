@@ -1,5 +1,5 @@
-﻿// Core layer
-global using Core.Enums;
+﻿// Domain layer
+global using Domain.Enums;
 
 
 // Libraries

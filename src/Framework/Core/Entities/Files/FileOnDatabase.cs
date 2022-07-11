@@ -1,4 +1,4 @@
-﻿namespace Core.Entities.Files;
+﻿namespace Domain.Entities.Files;
 
 public class FileOnDatabase : FileModel
 {

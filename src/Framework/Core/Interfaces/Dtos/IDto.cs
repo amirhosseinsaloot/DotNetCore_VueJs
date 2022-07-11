@@ -1,4 +1,4 @@
-﻿namespace Core.Interfaces.Dtos;
+﻿namespace Domain.Interfaces.Dtos;
 
 /// <summary>
 ///  Marks a Data Transfer Object.

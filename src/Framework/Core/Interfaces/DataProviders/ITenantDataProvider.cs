@@ -1,7 +1,7 @@
-﻿using Core.Entities.Identity;
-using Core.Interfaces.Dtos;
+﻿using Domain.Entities.Identity;
+using Domain.Interfaces.Dtos;
 
-namespace Core.Interfaces.DataProviders;
+namespace Domain.Interfaces.DataProviders;
 
 public interface ITenantDataProvider : IDataProvider<Tenant>
 {

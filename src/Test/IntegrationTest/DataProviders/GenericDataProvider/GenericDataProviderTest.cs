@@ -1,7 +1,7 @@
 ﻿using Api.Dtos.Ticket;
 using AutoMapper;
-using Core.Entities.Tickets;
-using Core.Interfaces.DataProviders;
+using Domain.Entities.Tickets;
+using Domain.Interfaces.DataProviders;
 using FluentAssertions;
 using Infrastructure;
 using Infrastructure.Data.DataProviders;

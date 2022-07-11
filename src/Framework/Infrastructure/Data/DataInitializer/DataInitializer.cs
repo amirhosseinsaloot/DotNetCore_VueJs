@@ -1,6 +1,6 @@
-﻿using Core.Entities.Identity;
-using Core.Entities.Teams;
-using Core.StaticData;
+﻿using Domain.Entities.Identity;
+using Domain.Entities.Teams;
+using Domain.StaticData;
 using Microsoft.AspNetCore.Identity;
 
 namespace Infrastructure.Data.DataInitializer;

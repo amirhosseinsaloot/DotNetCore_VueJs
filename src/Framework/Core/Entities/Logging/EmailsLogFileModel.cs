@@ -1,6 +1,6 @@
-﻿using Core.Entities.Files;
+﻿using Domain.Entities.Files;
 
-namespace Core.Entities.Logging;
+namespace Domain.Entities.Logging;
 
 public class EmailsLogFileModel : IEntity
 {

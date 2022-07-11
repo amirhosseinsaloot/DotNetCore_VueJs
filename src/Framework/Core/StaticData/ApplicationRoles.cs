@@ -1,4 +1,4 @@
-﻿namespace Core.StaticData;
+﻿namespace Domain.StaticData;
 
 public class ApplicationRoles
 {

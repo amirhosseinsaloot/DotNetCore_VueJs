@@ -1,4 +1,4 @@
-﻿namespace Core.Exceptions;
+﻿namespace Domain.Exceptions;
 
 /// <summary>
 /// Represents errors that occur when an attempt was made to save a duplicate record .

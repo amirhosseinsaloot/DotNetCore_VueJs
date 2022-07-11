@@ -1,4 +1,4 @@
-﻿namespace Core.Exceptions;
+﻿namespace Domain.Exceptions;
 
 /// <summary>
 /// Represents errors that occur when a received Security Token has expiration time in the past.

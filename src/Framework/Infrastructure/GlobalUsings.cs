@@ -1,9 +1,9 @@
 ﻿global using AutoMapper;
-global using Core.Enums;
-global using Core.Exceptions;
-global using Core.Interfaces.DataProviders;
-global using Core.Interfaces.Dtos;
-global using Core.Setting;
+global using Domain.Enums;
+global using Domain.Exceptions;
+global using Domain.Interfaces.DataProviders;
+global using Domain.Interfaces.Dtos;
+global using Domain.Setting;
 global using FluentValidation;
 global using Microsoft.AspNetCore.Http;
 global using Microsoft.EntityFrameworkCore;

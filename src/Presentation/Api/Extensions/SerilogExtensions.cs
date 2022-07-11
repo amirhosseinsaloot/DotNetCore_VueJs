@@ -1,5 +1,5 @@
-﻿using Core.Setting;
-using Core.Utilities;
+﻿using Domain.Setting;
+using Domain.Utilities;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.MSSqlServer;

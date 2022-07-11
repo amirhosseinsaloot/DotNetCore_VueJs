@@ -1,6 +1,6 @@
-﻿using Core.Entities.Teams;
+﻿using Domain.Entities.Teams;
 
-namespace Core.Entities.Identity;
+namespace Domain.Entities.Identity;
 
 public class Tenant : IBaseEntity, ICreatedOn
 {

@@ -1,4 +1,4 @@
-﻿using Core.Entities.Identity;
+﻿using Domain.Entities.Identity;
 using Infrastructure.Data.DbObjects.TenantDbObject;
 
 namespace Infrastructure.Data.DataProviders.TenantDataProvider;

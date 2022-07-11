@@ -1,7 +1,7 @@
-﻿using Core.Entities.Identity;
-using Core.Entities.Logging;
+﻿using Domain.Entities.Identity;
+using Domain.Entities.Logging;
 
-namespace Core.Entities.Files;
+namespace Domain.Entities.Files;
 
 public class FileModel : IBaseEntity, ICreatedOn
 {

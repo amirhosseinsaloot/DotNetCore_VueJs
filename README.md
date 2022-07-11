@@ -76,7 +76,7 @@ Frontend :
 
 This application uses Clean architecture and also can be used to build projects with Domain-Driven-Design approach.
 
-### Core Layer
+### Domain Layer
 This will contains Enums , Exception classes , Interfaces (The Interfaces of generic repositories) and Abstractions (Implementions on above layers) , Setting classes , Entities , POCO classes, construction, and model validation , and Utilities will be used in above layers .
 
 ### Infrastructure Layer

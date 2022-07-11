@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace Core.Interfaces.Services;
+namespace Domain.Interfaces.Services;
 
 public interface IEmailService
 {

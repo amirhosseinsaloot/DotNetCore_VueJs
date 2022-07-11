@@ -1,7 +1,7 @@
-using Core.Entities.Identity;
-using Core.Entities.Tickets;
+using Domain.Entities.Identity;
+using Domain.Entities.Tickets;
 
-namespace Core.Entities.Teams;
+namespace Domain.Entities.Teams;
 
 public class Team : IBaseEntity, ICreatedOn
 {

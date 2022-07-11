@@ -1,4 +1,4 @@
-﻿namespace Core.Response;
+﻿namespace Domain.Response;
 
 public class PaginationFilter
 {

@@ -8,7 +8,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Presentation\Api\Api
 		{6BE2E012-E615-4A38-9AF1-2264BF4C1CB1} = {6BE2E012-E615-4A38-9AF1-2264BF4C1CB1}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Framework\Core\Core.csproj", "{59D44E7B-0DC8-489B-9C01-D48B89FF61FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Framework\Core\Domain.csproj", "{59D44E7B-0DC8-489B-9C01-D48B89FF61FA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Framework\Infrastructure\Infrastructure.csproj", "{6BE2E012-E615-4A38-9AF1-2264BF4C1CB1}"
 EndProject

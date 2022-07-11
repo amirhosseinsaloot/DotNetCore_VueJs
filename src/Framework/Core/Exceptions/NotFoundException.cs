@@ -1,4 +1,4 @@
-﻿namespace Core.Exceptions;
+﻿namespace Domain.Exceptions;
 
 /// <summary>
 /// Represents errors when the requested data could not be found.

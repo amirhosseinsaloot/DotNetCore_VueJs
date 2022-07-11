@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Core.Interfaces.Services;
+namespace Domain.Interfaces.Services;
 
 public interface IFileService
 {

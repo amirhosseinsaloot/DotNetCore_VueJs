@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace Core.Interfaces.Services;
+namespace Domain.Interfaces.Services;
 public interface IAuthTokenService
 {
     string GenerateAccessToken(IEnumerable<Claim> claims);

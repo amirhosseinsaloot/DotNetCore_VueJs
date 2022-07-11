@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 
-namespace Core.Setting;
+namespace Domain.Setting;
 
 public sealed record class JwtSetting
 {

@@ -1,4 +1,4 @@
-namespace Core.Entities.Tickets;
+namespace Domain.Entities.Tickets;
 
 public class TicketType : IBaseEntity, ICreatedOn
 {

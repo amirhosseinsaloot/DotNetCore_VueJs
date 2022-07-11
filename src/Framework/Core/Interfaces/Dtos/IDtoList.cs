@@ -1,4 +1,4 @@
-﻿namespace Core.Interfaces.Dtos;
+﻿namespace Domain.Interfaces.Dtos;
 
 /// <summary>
 /// Marks Data Transfer Objects for Lists.

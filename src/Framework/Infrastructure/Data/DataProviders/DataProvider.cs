@@ -1,5 +1,5 @@
 ﻿using AutoMapper.QueryableExtensions;
-using Core.Interfaces.Entities;
+using Domain.Interfaces.Entities;
 using System.Linq.Expressions;
 
 namespace Infrastructure.Data.DataProviders;

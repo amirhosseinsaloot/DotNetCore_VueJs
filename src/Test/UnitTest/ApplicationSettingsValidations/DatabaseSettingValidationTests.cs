@@ -1,4 +1,4 @@
-﻿using Core.Setting;
+﻿using Domain.Setting;
 
 namespace UnitTest.ApplicationSettingsValidations;
 

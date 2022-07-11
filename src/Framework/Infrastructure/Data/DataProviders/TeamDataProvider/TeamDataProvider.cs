@@ -1,4 +1,4 @@
-﻿using Core.Entities.Teams;
+﻿using Domain.Entities.Teams;
 using Infrastructure.Data.DbObjects.TeamDbObject;
 
 namespace Infrastructure.Data.DataProviders.TeamDataProvider;

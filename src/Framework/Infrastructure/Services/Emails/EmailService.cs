@@ -1,6 +1,6 @@
-﻿using Core.Entities.Identity;
-using Core.Entities.Logging;
-using Core.Interfaces.Services;
+﻿using Domain.Entities.Identity;
+using Domain.Entities.Logging;
+using Domain.Interfaces.Services;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Options;

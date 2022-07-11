@@ -1,4 +1,4 @@
-﻿namespace Core.Exceptions;
+﻿namespace Domain.Exceptions;
 
 /// <summary>
 /// Represents errors that occur during execution of application with appropriate status code.

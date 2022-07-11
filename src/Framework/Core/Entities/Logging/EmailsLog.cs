@@ -1,6 +1,6 @@
-﻿using Core.Entities.Identity;
+﻿using Domain.Entities.Identity;
 
-namespace Core.Entities.Logging;
+namespace Domain.Entities.Logging;
 
 public class EmailsLog : IBaseEntity, ICreatedOn
 {

@@ -1,8 +1,8 @@
 ﻿using Api.Dtos.User;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Core.Entities.Identity;
-using Core.Exceptions;
+using Domain.Entities.Identity;
+using Domain.Exceptions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

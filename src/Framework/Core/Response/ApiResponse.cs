@@ -1,6 +1,6 @@
-﻿using Core.Utilities;
+﻿using Domain.Utilities;
 
-namespace Core.Response;
+namespace Domain.Response;
 
 public class ApiResponse
 {

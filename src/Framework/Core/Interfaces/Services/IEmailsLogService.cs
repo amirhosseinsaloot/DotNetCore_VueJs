@@ -1,7 +1,7 @@
-﻿using Core.Entities.Logging;
+﻿using Domain.Entities.Logging;
 using Microsoft.AspNetCore.Http;
 
-namespace Core.Interfaces.Services;
+namespace Domain.Interfaces.Services;
 
 public interface IEmailsLogService
 {
